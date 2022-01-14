@@ -1,0 +1,147 @@
+@import "main.css";
+
+.button_first_view {
+    background-color: rgba(0, 0, 0, 0.74);
+    color: whitesmoke;
+    font-family: 'Comfortaa', cursive, "Times New Roman";
+
+    padding: 3px 10px;
+    margin: 7px;
+    font-size: calc(1.2vh + 0.6vw);
+
+    border-width: 2px;
+    border-style: solid;
+    border-color: grey;
+    border-radius: 20px/40px;
+
+    box-shadow: 2px 3px 5px grey;
+    transition-duration: 1s;
+}
+
+.button_first_view:hover {
+    box-shadow: 2px 3px 10px SlateBlue, -2px -3px 10px SlateBlue, 2px -3px 10px SlateBlue, -2px 3px 10px SlateBlue;
+    border-color: SlateBlue;
+    transform: scale(1.15);
+}
+
+.button {
+    background-color: rgba(0, 0, 0, 0.74);
+    color: whitesmoke;
+    font-family: 'Comfortaa', cursive, "Times New Roman";
+    font-size: calc(1.2vh + 0.6vw);
+
+    padding: 3px 10px;
+    margin: 7px;
+
+    border-width: 2px;
+    border-style: solid;
+    border-color: grey;
+    border-radius: 20px/40px;
+
+    box-shadow: 2px 3px 5px grey;
+    transition-duration: 0.4s;
+}
+
+.button:hover {
+    box-shadow: 2px 3px 10px SlateBlue, -2px -3px 10px SlateBlue, 2px -3px 10px SlateBlue, -2px 3px 10px SlateBlue;
+    border-color: SlateBlue;
+    transform: scale(1.1);
+}
+
+.input {
+    font-size: calc(1.2vh + 0.6vw);
+    font-family: 'Comfortaa', cursive, "Times New Roman";
+    background: whitesmoke;
+
+    padding: 3px 10px;
+    margin: 7px;
+
+    border-width: 2px;
+    border-style: solid;
+    border-color: grey;
+    border-radius: 20px/40px;
+    transition-duration: 0.4s;
+}
+
+.input:hover {
+    box-shadow: 2px 3px 5px SlateBlue, -2px -3px 5px SlateBlue, 2px -3px 5px SlateBlue, -2px 3px 5px SlateBlue;
+    border-color: SlateBlue;
+}
+
+.radio_button {
+    display: inline-block;
+}
+
+.radio_button input[type=radio] {
+    display: none;
+}
+
+.radio_button label {
+    display: inline-block;
+    cursor: pointer;
+
+    padding: 3px 10px;
+    margin: 7px;
+
+    font-size: calc(1.2vh + 0.6vw);
+    background: whitesmoke;
+
+    border-width: 2px;
+    border-style: solid;
+    border-color: grey;
+    border-radius: 20px/40px;
+
+    transition-duration: 0.4s;
+    user-select: none;
+}
+
+.radio_button input[type=radio]:checked + label {
+    background-color: rgba(0, 0, 0, 0.74);
+    color: whitesmoke;
+    box-shadow: 1px 2px 3px SlateBlue, -1px -2px 3px SlateBlue, 1px -2px 3px SlateBlue, -1px 2px 3px SlateBlue;
+    border-color: SlateBlue;
+}
+
+.radio_button label:hover {
+    box-shadow: 2px 3px 5px SlateBlue, -2px -3px 5px SlateBlue, 2px -3px 5px SlateBlue, -2px 3px 5px SlateBlue;
+    border-color: SlateBlue;
+}
+
+.dropdown_list {
+    position: relative;
+    font-size: calc(1.2vh + 0.6vw);
+    padding: 3px 10px;
+    margin: 7px;
+
+    background: whitesmoke;
+    color: black;
+    font-family: 'Comfortaa', cursive, "Times New Roman";
+    outline: none;
+    cursor: pointer;
+
+    border-width: 2px;
+    border-style: solid;
+    border-color: grey;
+    border-radius: 20px/40px;
+
+    transition-duration: 0.4s;
+
+}
+
+.dropdown_list:hover {
+    box-shadow: 2px 3px 5px SlateBlue, -2px -3px 5px SlateBlue, 2px -3px 5px SlateBlue, -2px 3px 5px SlateBlue;
+    border-color: SlateBlue;
+
+}
+
+.dropdown_list_options {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.74);
+    color: whitesmoke;
+    padding: 3px 5px;
+    margin: 7px;
+}
+
+
+
+
