@@ -1,9 +1,12 @@
 package com.vladgoncharov.dtr_sb.working_with_a_date;
 
+import lombok.Data;
+
 import java.time.LocalTime;
 import java.util.Map;
 
 // Класс прибавляет/отнимает время
+@Data
 public class TimeDifference {
 
     private LocalTime initialTime;
@@ -83,90 +86,6 @@ public class TimeDifference {
         else if (lastDigitSeconds > 1 && lastDigitSeconds < 5 && seconds!=12 && seconds!=13 && seconds!=14) setTextSeconds("секунды");
         else setTextSeconds("секунд");
 
-    }
-
-    public byte getPlusMinus() {
-        return plusMinus;
-    }
-
-    public byte getHMS() {
-        return HMS;
-    }
-
-    public int getAmountOfTime() {
-        return amountOfTime;
-    }
-
-    public byte getHours() {
-        return hours;
-    }
-
-    public byte getMinutes() {
-        return minutes;
-    }
-
-    public byte getSeconds() {
-        return seconds;
-    }
-    
-    public Map<Integer, String> getMapHMS() {
-        return mapHMS;
-    }
-
-    public String getTextHours() {
-        return textHours;
-    }
-
-    public void setTextHours(String textHours) {
-        this.textHours = textHours;
-    }
-
-    public String getTextMinutes() {
-        return textMinutes;
-    }
-
-    public void setTextMinutes(String textMinutes) {
-        this.textMinutes = textMinutes;
-    }
-
-    public String getTextSeconds() {
-        return textSeconds;
-    }
-
-    public void setTextSeconds(String textSeconds) {
-        this.textSeconds = textSeconds;
-    }
-
-    public LocalTime getInitialTime() {
-        return initialTime;
-    }
-
-    public void setInitialTime(LocalTime initialTime) {
-        this.initialTime = initialTime;
-    }
-
-    public void setHours(byte hours) {
-        this.hours = hours;
-    }
-
-    public void setMinutes(byte minutes) {
-        this.minutes = minutes;
-    }
-
-    public void setSeconds(byte seconds) {
-        this.seconds = seconds;
-    }
-
-    public void setPlusMinus(byte plusMinus) {
-        this.plusMinus = plusMinus;
-    }
-
-    public void setHMS(byte HMS) {
-        this.HMS = HMS;
-    }
-
-    public void setAmountOfTime(int amountOfTime) {
-        this.amountOfTime = amountOfTime;
     }
 }
 

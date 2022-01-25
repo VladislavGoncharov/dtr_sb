@@ -1,7 +1,7 @@
 package com.vladgoncharov.dtr_sb.entity;
 
 import javax.persistence.*;
-import java.util.Optional;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "User_Role", //
@@ -22,6 +22,21 @@ public class UserRole {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Role_Id", nullable = false)
     private AppRole appRole;
+
+    @Transient
+    private Long userId;
+
+    @Transient
+    private String userName;
+
+    @Transient
+    private String roleName;
+
+    @Transient
+    private String encrytedPassword;
+
+    @Transient
+    private boolean accountNonLocked;
 
     public UserRole(AppUser appUser,AppRole appRole) {
         this.appUser = appUser;
@@ -53,5 +68,25 @@ public class UserRole {
 
     public void setAppRole(AppRole appRole) {
         this.appRole = appRole;
+    }
+
+    public Long getUserId() {
+        return appUser.getUserId();
+    }
+
+    public String getUserName() {
+        return appUser.getUserName();
+    }
+
+    public String getRoleName() {
+        return appRole.getRoleName();
+    }
+
+    public String getEncrytedPassword() {
+        return appUser.getEncrytedPassword();
+    }
+
+    public boolean isAccountNonLocked() {
+        return appUser.isAccountNonLocked();
     }
 }

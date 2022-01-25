@@ -1,53 +1,50 @@
 package com.vladgoncharov.dtr_sb.controller;
 
 import com.vladgoncharov.dtr_sb.dao.UserDAO;
-import com.vladgoncharov.dtr_sb.entity.AppUser;
-import com.vladgoncharov.dtr_sb.working_with_a_date.DateDifference;
-import com.vladgoncharov.dtr_sb.working_with_a_date.TimeDifference;
-import com.vladgoncharov.dtr_sb.working_with_a_date.TimeUnitConverter;
-import com.vladgoncharov.dtr_sb.working_with_a_date.WorkingDaysAndWeekends;
+import com.vladgoncharov.dtr_sb.entity.Comment;
+import com.vladgoncharov.dtr_sb.service.CommentService;
+import com.vladgoncharov.dtr_sb.working_with_a_date.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.time.DateTimeException;
 import java.util.List;
 
-
 @Controller
-public class MyController {
-
+public class MainController {
 
     @Autowired
     UserDAO userDAO;
 
-    @RequestMapping("/")
+    @Autowired
+    CommentService commentService;
+
+    @GetMapping("/")
     public String firstView(Model model, Principal principal) {
 
-        if (principal == null)
-        model.addAttribute("userName", "Гость");
+        model.addAttribute("currentUsername", principal == null ? "Гость": principal.getName());
+        model.addAttribute("comment", new Comment());
 
-        if (principal != null)
-        model.addAttribute("userName",principal.getName() );
+        List<Comment> allComments = commentService.getAllComments();
+        model.addAttribute("comments", allComments);
+
 
         return "first-view";
     }
 
-    @RequestMapping("changeTheDate")
+    @GetMapping("changeTheDate")
     public String changeTheDate(Model model) {
-
         model.addAttribute("dateDifference", new DateDifference());
-
         return "change-the-date";
     }
 
-    @RequestMapping("changeTheDateResult")
+    @GetMapping("changeTheDateResult")
     public String changeTheDateResult(@Valid @ModelAttribute("dateDifference") DateDifference date, BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
             return "change-the-date";
         } else {
@@ -60,65 +57,90 @@ public class MyController {
         }
     }
 
-    @RequestMapping("changeTheDateException")
+    @PostMapping("changeTheDateException")
     public String changeTheDateException() {
         return "change-the-date-exception";
     }
 
-    @RequestMapping("changeTheTime")
+    @GetMapping("changeTheTime")
     public String changeTheTime(Model model) {
-
         model.addAttribute("timeDifference", new TimeDifference());
-
         return "change-the-time";
     }
 
-//    @RequestMapping("changeTheTimeResult")
-//    public String changeTheTimeResult(@ModelAttribute("timeDifference") TimeDifference time) {
-//        time.theResultOfWorkingWithTime();
-//        return "change-the-time-result";
-//
-//    }
-
-    @RequestMapping("changeTheTimeResult")
+    @GetMapping("changeTheTimeResult")
     public String changeTheTimeResult(@ModelAttribute("timeDifference") TimeDifference time) {
         time.theResultOfWorkingWithTime();
         return "change-the-time-result";
-
     }
 
-    @RequestMapping("timeUnitConverted")
+    @GetMapping("timeUnitConverted")
     public String timeUnitConverted(Model model) {
         model.addAttribute("timeUnitConverted", new TimeUnitConverter());
         return "time-unit-converted";
     }
 
-    @RequestMapping("timeUnitConvertedResult")
+    @GetMapping("timeUnitConvertedResult")
     public String timeUnitConvertedResult(@ModelAttribute("timeUnitConverted") TimeUnitConverter time) {
         time.theResultOfWorkingWithTime();
         return "time-unit-converted-result";
     }
 
-    @RequestMapping("workingDaysAndWeekends")
-    public String workingDaysAndWeekends(Model model){
-        model.addAttribute("workingDaysAndWeekends",new WorkingDaysAndWeekends());
+    @GetMapping("workingDaysAndWeekends")
+    public String workingDaysAndWeekends(Model model) {
+        model.addAttribute("workingDaysAndWeekends", new WorkingDaysAndWeekends());
         return "working-days-and-weekends";
     }
 
-    @RequestMapping("workingDaysAndWeekendsResult")
+    @GetMapping("workingDaysAndWeekendsResult")
     public String workingDaysAndWeekendsResult(@Valid @ModelAttribute("workingDaysAndWeekends")
-           WorkingDaysAndWeekends workingDaysAndWeekends, BindingResult bindingResult){
-
-        if (bindingResult.hasErrors()){
+           WorkingDaysAndWeekends workingDaysAndWeekends, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             return "working-days-and-weekends";
-        }
-        else try{
+        } else try {
             workingDaysAndWeekends.theResultOfWorkingWithTime();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return "change-the-date-exception";
         }
         return "working-days-and-weekends-result";
 
     }
+
+    @GetMapping("zodiacSign")
+    public String zodiacSign(Model model) {
+        model.addAttribute("zodiacSign", new ZodiacSign());
+        return "zodiac-sign";
+    }
+
+    @PostMapping("zodiacSignResult")
+    public String zodiacSignResult(@ModelAttribute("zodiacSign")ZodiacSign zodiacSign) {
+
+        try{
+            zodiacSign.getResult();
+        }catch (DateTimeException e){
+            return "change-the-date-exception";
+        }
+
+        return "zodiac-sign-result";
+    }
+
+    @GetMapping("chineseZodiac")
+    public String chineseZodiac(Model model) {
+        model.addAttribute("chineseZodiac", new ChineseZodiac());
+        return "chinese-zodiac";
+    }
+
+    @PostMapping("chineseZodiacResult")
+    public String chineseZodiacResult(@ModelAttribute("chineseZodiac")ChineseZodiac ChineseZodiac) {
+
+        try{
+            ChineseZodiac.getResult();
+        }catch(Exception e){
+            return "change-the-date-exception";
+        }
+
+        return "chinese-zodiac-result";
+    }
+
 }

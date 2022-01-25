@@ -1,11 +1,15 @@
 package com.vladgoncharov.dtr_sb.working_with_a_date;
 
+import lombok.Data;
+
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.Map;
 
-// Класс конвертирует указанную единицу времени в различные единицы времени (Пример: часы в секунды,минуты,часы,дни,недели,месяца,года)
+// Класс конвертирует указанную единицу времени в различные единицы времени
+// (Пример: часы в секунды,минуты,часы,дни,недели,месяца,года)
+@Data
 public class TimeUnitConverter {
 
     private String years;
@@ -238,81 +242,5 @@ public class TimeUnitConverter {
         symbols.setGroupingSeparator(' ');
         formatter.setDecimalFormatSymbols(symbols);
         return formatter.format(number);
-    }
-
-    public Map<Integer, String> getUnitsOfMeasurement() {
-        return unitsOfMeasurement;
-    }
-
-    public String getYears() {
-        return years;
-    }
-
-    public void setYears(String years) {
-        this.years = years;
-    }
-
-    public String getMonths() {
-        return months;
-    }
-
-    public void setMonths(String months) {
-        this.months = months;
-    }
-
-    public String getWeeks() {
-        return weeks;
-    }
-
-    public void setWeeks(String weeks) {
-        this.weeks = weeks;
-    }
-
-    public String getDays() {
-        return days;
-    }
-
-    public void setDays(String days) {
-        this.days = days;
-    }
-
-    public String getHours() {
-        return hours;
-    }
-
-    public void setHours(String hours) {
-        this.hours = hours;
-    }
-
-    public String getMinutes() {
-        return minutes;
-    }
-
-    public void setMinutes(String minutes) {
-        this.minutes = minutes;
-    }
-
-    public String getSeconds() {
-        return seconds;
-    }
-
-    public void setSeconds(String seconds) {
-        this.seconds = seconds;
-    }
-
-    public double getAmountOfTime() {
-        return amountOfTime;
-    }
-
-    public byte getUOM() {
-        return UOM;
-    }
-
-    public void setAmountOfTime(double amountOfTime) {
-        this.amountOfTime = amountOfTime;
-    }
-
-    public void setUOM(byte UOM) {
-        this.UOM = UOM;
     }
 }

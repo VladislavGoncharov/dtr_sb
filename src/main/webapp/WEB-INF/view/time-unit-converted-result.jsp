@@ -7,7 +7,7 @@
           content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Посчитали :)</title>
-    <link rel="shortcut icon" href="../../resources/images/shortcut-timer.ico"/>
+    <link rel="shortcut icon" href="../../resources/images/clock.ico"/>
     <link rel="stylesheet" href="../../resources/style/style.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet">
     <script src="../../resources/js/current_time.js"></script>
@@ -25,43 +25,84 @@
     </div>
 </header></header>
 <main>
+    <article>
     <br>
-    <dl>
-        <dt>
-            <b>
-                Ваш результат
-            </b>
-        </dt>
-        <dd>
-            В годах: ${timeUnitConverted.years}
-        </dd>
-        <dd>
-            В месяцах: ${timeUnitConverted.months}
-        </dd>
-        <dd>
-            В неделях: ${timeUnitConverted.weeks}
-        </dd>
-        <dd>
-            В днях: ${timeUnitConverted.days}
-        </dd>
-        <dd>
-            В часах: ${timeUnitConverted.hours}
-        </dd>
-        <dd>
-            В минутах: ${timeUnitConverted.minutes}
-        </dd>
-        <dd>
-            В секундах: ${timeUnitConverted.seconds}
-        </dd>
-
-    </dl>
+    <table class="table_result">
+        <tbody>
+        <tr>
+            <td colspan="2">
+                Результат в
+            </td>
+        </tr>
+        <tr>
+            <td>
+                годах:
+            </td>
+            <td>
+                ${timeUnitConverted.years}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                неделях:
+            </td>
+            <td>
+                ${timeUnitConverted.weeks}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                днях:
+            </td>
+            <td>
+                ${timeUnitConverted.days}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                часах:
+            </td>
+            <td>
+                ${timeUnitConverted.hours}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                минутах:
+            </td>
+            <td>
+                ${timeUnitConverted.minutes}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                секундах:
+            </td>
+            <td>
+                ${timeUnitConverted.seconds}
+            </td>
+        </tr>
+        </tbody>
+    </table>
     <br>
-
-    <input class="button" type="button" value="Назад" onclick="window.location.href = 'timeUnitConverted'"/>
-
-    <hr>
-
+    <input class="button" type="button" value="Назад" onclick="history.back();return false;"/>
+    <br>
+    </article>
 </main>
 
 </body>
+<footer>
+    <br>
+    <dl>
+        <dt>
+            Связь с разработчиком:
+        </dt>
+        <dd>
+            <a href="https://vk.com/veyvik87" target="_blank">Вконтакте</a>
+        </dd>
+        <dd>
+            <a href="mailto:veyvik87@gmail.com?subject=Приглашаю вас на работу Junior Java Developer" target="_blank">Gmail</a>
+        </dd>
+    </dl>
+</footer>
 </html>

@@ -1,0 +1,76 @@
+@import "main.css";
+
+.table_result {
+    font-family: 'Comfortaa', cursive, "Times New Roman";
+    text-align: center;
+
+    padding: calc(0.8vh + 0.4vw);
+    margin: 2vh auto;
+
+    height: calc(25 * (1.2vh + 0.6vw));
+    width: calc(35 * (0.6vh + 1.2vw));
+    table-layout: fixed;
+
+    background: linear-gradient(35deg, RoyalBlue 2%, CornflowerBlue 15%, #86aff2 30%, #96b4e4 50%, #86aff2 70%, CornflowerBlue 85%, RoyalBlue 98%);
+    border: 3px solid GhostWhite;
+    border-radius: 30px/60px;
+
+    box-shadow: whitesmoke 10px 10px 10px, whitesmoke -10px 10px 10px, whitesmoke -10px -10px 10px, whitesmoke 10px -10px 10px;
+}
+.table_result_time{
+    height: calc(10 * (1.2vh + 0.6vw));
+}
+.table_result_user{
+    width: auto;
+}
+.table_forms_working_with_a_date{
+    margin:auto;
+}
+.table_login {
+    font-family: 'Comfortaa', cursive, "Times New Roman";
+    text-align: center;
+
+    padding: calc(0.5vh + 0.2vw);
+    margin: auto;
+
+    height: calc(3 * (1.2vh + 0.6vw));
+    width: calc(30 * (0.6vh + 1.2vw));
+    table-layout: fixed;
+
+    background:linear-gradient(35deg, RoyalBlue 2%, CornflowerBlue 15%, #87a8fa 30%, #a2b9f0 50%, #87a8fa 70%, CornflowerBlue 85%, RoyalBlue 98%);
+    border-radius: 20px/70px;
+    border: 3px solid GhostWhite;
+
+    box-shadow: whitesmoke 5px 5px 10px, whitesmoke -5px 5px 10px, whitesmoke -5px -5px 10px, whitesmoke 5px -5px 10px;
+}
+
+th {
+     background: transparent;
+     color: whitesmoke;
+     font-size: calc(1.4 * (1.2vh + 0.6vw));
+     padding: calc(1.2vh + 0.6vw) calc(0.8vh + 0.6vw);
+     text-shadow: 2px 2px 4px black;
+ }
+
+.td_1 {
+    color: #2a3aa5;
+    text-shadow: -2px 2px 6px whitesmoke, 2px 2px 6px whitesmoke, -2px -2px 6px whitesmoke, 2px -2px 6px whitesmoke;
+
+    background: transparent;
+    background: repeating-linear-gradient(30deg, transparent 3%, rgba(42, 100, 204, 0.8) 6%, transparent 9%);
+
+    border-radius: 30px/60px;
+    box-shadow: rgba(36, 46, 96, 0.7) 2px 2px 4px, rgba(36, 46, 96, 0.7) -2px 2px 4px, rgba(36, 46, 96, 0.7) 2px -2px 4px, rgba(36, 46, 96, 0.7) -2px -2px 4px;
+}
+
+.td_0 {
+    background: transparent;
+    color: whitesmoke;
+    text-shadow: 2px 2px 6px black;
+}
+
+.td_0, .td_1 {
+    padding: 0 calc(0.8vh + 0.4vw);
+    font-size: calc(1.2vh + 0.6vw);
+}
+

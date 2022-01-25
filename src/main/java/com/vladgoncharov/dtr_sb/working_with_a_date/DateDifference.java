@@ -1,5 +1,7 @@
 package com.vladgoncharov.dtr_sb.working_with_a_date;
 
+import lombok.Data;
+
 import javax.validation.constraints.Pattern;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -8,6 +10,7 @@ import java.time.LocalDate;
 import java.time.Period;
 
 // Класс высчитывает разницу в датах
+@Data
 public class DateDifference {
 
     @Pattern(regexp = "\\d{2}.\\d{2}.\\d{4}", message = "Обрати внимание на формат ===> дд.мм.гггг")
@@ -77,7 +80,6 @@ public class DateDifference {
 
     // Метод преобразования даты из String в LocalDate
     public LocalDate dateConversionInLocalDate(String newDate) {
-        System.out.println(newDate);
         int day = Integer.parseInt(newDate.substring(0, 2));
         int month = Integer.parseInt(newDate.substring(3, 5));
         int year = Integer.parseInt(newDate.substring(6, 10));
@@ -134,123 +136,4 @@ public class DateDifference {
         return formatter.format(number);
     }
 
-    public String getFirstDateString() {
-        return firstDateString;
-    }
-
-    public String getSecondDateString() {
-        return secondDateString;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public int getDay() {
-        return day;
-    }
-
-    public String getResultInMonths() {
-        return resultInMonths;
-    }
-
-    public String getResultInDays() {
-        return resultInDays;
-    }
-
-    public String getResultInHours() {
-        return resultInHours;
-    }
-
-    public String getResultInMinutes() {
-        return resultInMinutes;
-    }
-
-    public String getResultInSeconds() {
-        return resultInSeconds;
-    }
-
-    public String getTextYear() {
-        return textYear;
-    }
-
-    public void setTextYear(String textYear) {
-        this.textYear = textYear;
-    }
-
-    public String getTextMonth() {
-        return textMonth;
-    }
-
-    public void setTextMonth(String textMonth) {
-        this.textMonth = textMonth;
-    }
-
-    public String getTextDay() {
-        return textDay;
-    }
-
-    public void setTextDay(String textDay) {
-        this.textDay = textDay;
-    }
-
-    public void setFirstDateString(String firstDateString) {
-        this.firstDateString = firstDateString;
-    }
-
-    public void setSecondDateString(String secondDateString) {
-        this.secondDateString = secondDateString;
-    }
-
-    public LocalDate getFirstLocalDate() {
-        return firstLocalDate;
-    }
-
-    public void setFirstLocalDate(LocalDate firstLocalDate) {
-        this.firstLocalDate = firstLocalDate;
-    }
-
-    public LocalDate getSecondLocalDate() {
-        return secondLocalDate;
-    }
-
-    public void setSecondLocalDate(LocalDate secondLocalDate) {
-        this.secondLocalDate = secondLocalDate;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
-
-    public void setResultInMonths(String resultInMonths) {
-        this.resultInMonths = resultInMonths;
-    }
-
-    public void setResultInDays(String resultInDays) {
-        this.resultInDays = resultInDays;
-    }
-
-    public void setResultInHours(String resultInHours) {
-        this.resultInHours = resultInHours;
-    }
-
-    public void setResultInMinutes(String resultInMinutes) {
-        this.resultInMinutes = resultInMinutes;
-    }
-
-    public void setResultInSeconds(String resultInSeconds) {
-        this.resultInSeconds = resultInSeconds;
-    }
 }

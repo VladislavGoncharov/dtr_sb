@@ -11,13 +11,13 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserServiceInterface {
 
     @Autowired
@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserServiceInterface {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        AppUser user = this.userDAO.findUserAccount(userName);
+        AppUser user = userDAO.findUserAccount(userName);
         if (user == null){
             System.out.println("User not found! "+userName);
             throw new UsernameNotFoundException("User "+userName+
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserServiceInterface {
 
         System.out.println("Found User: "+user);
 
-        List<String> roleNames = this.roleDAO.getRoleName(user.getUserId());
+        List<String> roleNames = roleDAO.getRoleName(user.getUserId());
 
         List<GrantedAuthority> grantList = new ArrayList<>();
         if (roleNames != null) {
@@ -58,11 +58,29 @@ public class UserServiceImpl implements UserServiceInterface {
         return userDAO.findUserAccount(userName);
     }
 
+    @Override
     public void saveUser(AppUser user){
-
         userDAO.saveUser(user);
-
     }
 
+    @Override
+    public List<UserRole> getAllUsers() {
+        return userDAO.getAllUsers();
+    }
+
+    @Override
+    public void deleteUser(long id) {
+        userDAO.deleteUser(id);
+    }
+
+    @Override
+    public void saveModerator(AppUser user) {
+        userDAO.saveModerator(user);
+    }
+
+    @Override
+    public void blockUser(long id) {
+        userDAO.blockUser(id);
+    }
 
 }

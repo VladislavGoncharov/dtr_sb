@@ -7,15 +7,13 @@ public class CheckPasswordValidator implements ConstraintValidator<CheckPassword
 
     private String passwordCheck;
 
-
     @Override
     public void initialize(CheckPassword constraintAnnotation) {
         passwordCheck = constraintAnnotation.value();
     }
 
     @Override
-    public boolean isValid(String password
-            , ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(String password, ConstraintValidatorContext constraintValidatorContext) {
 
         if (password.equals(passwordCheck)) {
             return true;

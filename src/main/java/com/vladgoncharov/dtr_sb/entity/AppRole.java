@@ -1,5 +1,6 @@
 package com.vladgoncharov.dtr_sb.entity;
 
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
@@ -8,7 +9,7 @@ import javax.persistence.*;
 uniqueConstraints = {
         @UniqueConstraint(name = "APP_ROLE_UK",columnNames = "Role_Name")
 })
-public class AppRole {
+public class AppRole implements GrantedAuthority {
 
     @Id
     @GeneratedValue
@@ -35,5 +36,10 @@ public class AppRole {
 
     public void setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+
+    @Override
+    public String getAuthority() {
+        return getRoleName();
     }
 }

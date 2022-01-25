@@ -8,7 +8,7 @@
           content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Считаем рабочие и выходные дни</title>
-    <link rel="shortcut icon" href="../../resources/images/shortcut-timer.ico"/>
+    <link rel="shortcut icon" href="../../resources/images/clock.ico"/>
     <link rel="stylesheet" href="../../resources/style/style.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet">
     <script src="../../resources/js/current_time.js"></script>
@@ -25,6 +25,7 @@
     </div>
 </header>
 <main>
+    <article>
     <span class="header_2">
        <h2>Тут мы будем считать рабочие и выходные дни</h2>
     <p>Формат даты должен быть такой:
@@ -34,12 +35,12 @@
 
     <br>
     <%--@elvariable id="workingDaysAndWeekends" type="com.vladgoncharov.dtr_sb.working_with_a_date.WorkingDaysAndWeekends"--%>
-    <form:form action="workingDaysAndWeekendsResult" modelAttribute="workingDaysAndWeekends">
+    <form:form action="workingDaysAndWeekendsResult" method="get" modelAttribute="workingDaysAndWeekends">
 
         <fieldset>
             <legend>Заполните формы по шаблону</legend>
             <br>
-            <label>Введите дату начала отчета:
+            <label>Введите первый рабочий день:
                 <form:input class="input" path="dateString" placeholder="30.12.2020" maxlength="10"/>
                 <form:errors path="dateString"/>
             </label>
@@ -62,10 +63,24 @@
 
     </form:form>
     <br><br>
-    <input class="button" type="button" value="Назад" onclick="window.location.href = '/'"/>
-    <hr>
-
+    <input class="button" type="button" value="Назад" onclick="history.back();return false;"/>
+    <br>
+    </article>
 </main>
 
 </body>
+<footer>
+    <br>
+    <dl>
+        <dt>
+            Связь с разработчиком:
+        </dt>
+        <dd>
+            <a href="https://vk.com/veyvik87" target="_blank">Вконтакте</a>
+        </dd>
+        <dd>
+            <a href="mailto:veyvik87@gmail.com?subject=Приглашаю вас на работу Junior Java Developer" target="_blank">Gmail</a>
+        </dd>
+    </dl>
+</footer>
 </html>

@@ -1,12 +1,16 @@
 package com.vladgoncharov.dtr_sb.working_with_a_date;
 
+import lombok.Data;
+
 import javax.validation.constraints.Pattern;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-// Класс подсчитывает количество нестандартных (2 через 2) рабочий и выходных дней и показывает таблицу из 8 недель
+// Класс подсчитывает количество нестандартных (2 через 2)
+// рабочий и выходных дней и показывает таблицу из 8 недель
+@Data
 public class WorkingDaysAndWeekends extends DateDifference {
 
     @Pattern(regexp = "\\d{2}.\\d{2}.\\d{4}", message = "Обрати внимание на формат ===> дд.мм.гггг")
@@ -84,71 +88,5 @@ public class WorkingDaysAndWeekends extends DateDifference {
         Integer day = listWorkingDaysAndWeekends.get(0);
         listWorkingDaysAndWeekends.remove(0);
         return day;
-    }
-
-    public Integer[] getNumbersFromOneToFifteen_1() {
-        return numbersFromOneToFifteen_1;
-    }
-
-    public Integer[] getNumbersFromOneToFifteen_2() {
-        return numbersFromOneToFifteen_2;
-    }
-
-    public int getNumberOfWorkingDays() {
-        return numberOfWorkingDays;
-    }
-
-
-    public int getNumberOfWeekends() {
-        return numberOfWeekends;
-    }
-
-
-    public String getDateString() {
-        return dateString;
-    }
-
-    public void setDateString(String dateString) {
-        this.dateString = dateString;
-    }
-
-    public static LocalDate getLocalDate() {
-        return localDate;
-    }
-
-    public static void setLocalDate(LocalDate localDate) {
-        WorkingDaysAndWeekends.localDate = localDate;
-    }
-
-    public static LocalDate getMondayDate() {
-        return mondayDate;
-    }
-
-    public static void setMondayDate(LocalDate mondayDate) {
-        WorkingDaysAndWeekends.mondayDate = mondayDate;
-    }
-
-    public void setNumberOfWorkingDays(int numberOfWorkingDays) {
-        this.numberOfWorkingDays = numberOfWorkingDays;
-    }
-
-    public void setNumberOfWeekends(int numberOfWeekends) {
-        this.numberOfWeekends = numberOfWeekends;
-    }
-
-    public List<Integer> getListWorkingDaysAndWeekends() {
-        return listWorkingDaysAndWeekends;
-    }
-
-    public void setListWorkingDaysAndWeekends(List<Integer> listWorkingDaysAndWeekends) {
-        this.listWorkingDaysAndWeekends = listWorkingDaysAndWeekends;
-    }
-
-    public void setNumbersFromOneToFifteen_1(Integer[] numbersFromOneToFifteen_1) {
-        this.numbersFromOneToFifteen_1 = numbersFromOneToFifteen_1;
-    }
-
-    public void setNumbersFromOneToFifteen_2(Integer[] numbersFromOneToFifteen_2) {
-        this.numbersFromOneToFifteen_2 = numbersFromOneToFifteen_2;
     }
 }

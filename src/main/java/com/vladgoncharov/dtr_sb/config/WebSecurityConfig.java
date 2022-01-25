@@ -1,10 +1,10 @@
 package com.vladgoncharov.dtr_sb.config;
 
-
 import com.vladgoncharov.dtr_sb.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserServiceImpl userDetailsService;
+    private UserServiceImpl UserServiceImpl;
 
     @Autowired
     private DataSource dataSource;
@@ -30,10 +30,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     //Настройка сервиса для поиска пользователя в базе данных и настройка пароля
 
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(UserServiceImpl).passwordEncoder(passwordEncoder());
 
     }
 
@@ -47,8 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                     .authorizeRequests()
-                        .antMatchers("/changeTheDate").access("hasRole('ROLE_USER')")
-                        .antMatchers("/changeTheTime").access("hasRole('ROLE_ADMIN')")
+                        .antMatchers("/admin/**").access("hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR')")
                         .antMatchers("/**").permitAll()
                     .and()
                         .exceptionHandling().accessDeniedPage("/403")
@@ -62,27 +60,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .passwordParameter("password")
                     .and()
                         .logout()
-                        .logoutSuccessUrl("/")
-                    .and()
-                        .rememberMe()
-                        .tokenRepository(this.persistentTokenRepository())
-                        .tokenValiditySeconds(1*24*60*60);
+                        .logoutSuccessUrl("/");
+
+        http.authorizeRequests().and() //
+                .rememberMe().tokenRepository(this.persistentTokenRepository()) //
+                .tokenValiditySeconds(1 * 24 * 60 * 60);
     }
 
     @Bean
-    public PersistentTokenRepository persistentTokenRepository(){
+    public PersistentTokenRepository persistentTokenRepository() {
         JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
-        db.setDataSource(this.dataSource);
+        db.setDataSource(dataSource);
         return db;
     }
 
-
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//
-//
-//        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder())
-//
-////        auth.inMemoryAuthentication().withUser("q").password(passwordEncoder().encode("1")).roles("USER");
-//    }
 }

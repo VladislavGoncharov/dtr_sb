@@ -1,34 +1,51 @@
 package com.vladgoncharov.dtr_sb.entity;
 
 
+import com.vladgoncharov.dtr_sb.validation.CheckPassword;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.provisioning.UserDetailsManager;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.List;
+import java.util.Collection;
 
 @Entity
-@Table(name = "app_user",
-        uniqueConstraints = { //
-                @UniqueConstraint(name = "APP_USER_UK", columnNames = "User_Name") })
-public class AppUser {
+@Table(name = "app_user", uniqueConstraints = { //
+        @UniqueConstraint(name = "APP_USER_UK", columnNames = "User_Name")})
+public class AppUser implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "User_Id", nullable = false)
     private Long userId;
 
-    @Size(min = 2,max = 36,message = "от 2 до 36 символов")
+    @NotBlank(message = "не допустимые символы")
+    @Size(min = 2, max = 36, message = "от 2 до 36 символов")
     @Column(name = "User_Name", length = 36, nullable = false)
     private String userName;
 
-    @Size(min = 2,message = "от 2 символов")
+    @Size(min = 2, message = "от 2 символов")
     @Column(name = "Encryted_Password", length = 128, nullable = false)
     private String encrytedPassword;
 
+    @Transient
+    private String encrytedPasswordCheck;
+
+
     @Column(name = "Enabled", length = 1, nullable = false)
-    private boolean enabled;
+    private boolean accountNonLocked;
+
+    @Transient
+    private String role;
 
     public AppUser() {
     }
+
 
 
     public Long getUserId() {
@@ -55,12 +72,58 @@ public class AppUser {
         this.encrytedPassword = encrytedPassword;
     }
 
-    public boolean isEnabled() {
-        return enabled;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    @Override
+    public String getPassword() {
+        return encrytedPassword;
+    }
+
+    @Override
+    public String getUsername() {
+        return userName;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    public boolean isAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getEncrytedPasswordCheck() {
+        return encrytedPasswordCheck;
+    }
+
+    public void setEncrytedPasswordCheck(String encrytedPasswordCheck) {
+        this.encrytedPasswordCheck = encrytedPasswordCheck;
     }
 
 }

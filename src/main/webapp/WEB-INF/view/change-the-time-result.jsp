@@ -7,7 +7,7 @@
           content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Посчитали :)</title>
-    <link rel="shortcut icon" href="../../resources/images/shortcut-timer.ico"/>
+    <link rel="shortcut icon" href="../../resources/images/clock.ico"/>
     <link rel="stylesheet" href="../../resources/style/style.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet">
     <script src="../../resources/js/current_time.js"></script>
@@ -24,15 +24,35 @@
     </div>
 </header>
 <main>
+    <article>
+    <br>
+    <br>
+    <table class="table_result table_result_time">
+        <tr>
+            <td colspan="2">
+                ${timeDifference.hours} ${timeDifference.textHours} ${timeDifference.minutes} ${timeDifference.textMinutes}
+                ${timeDifference.seconds} ${timeDifference.textSeconds}
+            </td>
+        </tr>
+    </table>
+    <br>
+    <input class="button" type="button" value="Назад" onclick="history.back();return false;"/>
+    <br>
+    </article>
+</main>
+</body>
+<footer>
     <br>
     <dl>
-        <p>Ваш результат: ${timeDifference.hours} ${timeDifference.textHours}, ${timeDifference.minutes} ${timeDifference.textMinutes},
-            ${timeDifference.seconds} ${timeDifference.textSeconds}
-        </p>
-        <br>
-        <input class="button" type="button" value="Назад" onclick="window.location.href = 'changeTheTime'"/>
-        <hr>
-</main>
-
-</body>
+        <dt>
+            Связь с разработчиком:
+        </dt>
+        <dd>
+            <a href="https://vk.com/veyvik87" target="_blank">Вконтакте</a>
+        </dd>
+        <dd>
+            <a href="mailto:veyvik87@gmail.com?subject=Приглашаю вас на работу Junior Java Developer" target="_blank">Gmail</a>
+        </dd>
+    </dl>
+</footer>
 </html>

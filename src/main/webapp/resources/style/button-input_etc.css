@@ -1,37 +1,66 @@
-@import "main.css";
+@import "table.css";
 
 .button_first_view {
-    background-color: rgba(0, 0, 0, 0.74);
+    background: linear-gradient(5deg, Beige 2%, #cecece 30%, #b2b2b2 40%, #9f9f9f 50%, #b2b2b2 60%, silver 70%, Beige 98%);
+    color: black;
+    font-family: 'Comfortaa', cursive, "Times New Roman";
+    font-size: calc(1vh + 0.5vw);
+    text-align:left;
+
+    padding: 3px 10px;
+    margin: 7px;
+
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 20px/40px;
+
+    box-shadow: -2px -2px 5px whitesmoke;
+    transition-duration: 1s;
+}
+
+.button_first_view:hover {
+    color: black;
+    /*background: linear-gradient(35deg,#005e93 5%, #358fe8 30%, #4db2ff 50%, #358fe8 70%, #005e93 95%);*/
+    background: linear-gradient(35deg, RoyalBlue 2%, CornflowerBlue 15%, #87a8fa 30%, #a2b9f0 50%, #87a8fa 70%, CornflowerBlue 85%, RoyalBlue 98%);
+
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px -4px black;
+}
+
+.button_first_view_login {
+    background-color: rgba(0, 0, 0, 0.75);
     color: whitesmoke;
     font-family: 'Comfortaa', cursive, "Times New Roman";
 
     padding: 3px 10px;
-    margin: 7px;
-    font-size: calc(1.2vh + 0.6vw);
+    margin: 7px 0 7px 0;
+    font-size: calc(0.8vh + 0.4vw);
 
-    border-width: 2px;
+    border-width: 3px;
     border-style: solid;
-    border-color: grey;
+    border-color: transparent;
     border-radius: 20px/40px;
 
     box-shadow: 2px 3px 5px grey;
     transition-duration: 1s;
 }
 
-.button_first_view:hover {
-    box-shadow: 2px 3px 10px SlateBlue, -2px -3px 10px SlateBlue, 2px -3px 10px SlateBlue, -2px 3px 10px SlateBlue;
-    border-color: SlateBlue;
-    transform: scale(1.15);
+.button_first_view_login:hover {
+    box-shadow: 3px 4px 10px whitesmoke, -3px -4px 10px whitesmoke, 3px -4px 10px whitesmoke, -3px 4px 10px whitesmoke;
+
+    border-color: whitesmoke;
+    transform: scale(1.1);
 }
 
 .button {
-    background-color: rgba(0, 0, 0, 0.74);
-    color: whitesmoke;
+    background: linear-gradient(5deg, Beige 2%, #cecece 30%, #b2b2b2 40%, #9f9f9f 50%, #b2b2b2 60%, silver 70%, Beige 98%);
+    color: black;
     font-family: 'Comfortaa', cursive, "Times New Roman";
     font-size: calc(1.2vh + 0.6vw);
 
     padding: 3px 10px;
-    margin: 7px;
+    margin: 20px;
 
     border-width: 2px;
     border-style: solid;
@@ -43,13 +72,83 @@
 }
 
 .button:hover {
-    box-shadow: 2px 3px 10px SlateBlue, -2px -3px 10px SlateBlue, 2px -3px 10px SlateBlue, -2px 3px 10px SlateBlue;
-    border-color: SlateBlue;
+    /*background: linear-gradient(35deg,#005e93 5%, #358fe8 30%, #4db2ff 50%, #358fe8 70%, #005e93 95%);*/
+    background: linear-gradient(35deg, RoyalBlue 2%, CornflowerBlue 15%, LightSkyBlue 30%, LightBlue 50%, LightSkyBlue 70%, CornflowerBlue 85%, RoyalBlue 98%);
+
+    color: black;
+
+    box-shadow: 2px 3px 10px whitesmoke, -2px -3px 10px whitesmoke, 2px -3px 10px whitesmoke, -2px 3px 10px whitesmoke;
+
+    border-color: whitesmoke;
     transform: scale(1.1);
 }
 
+.button_comment_delete {
+    background: rgba(178, 34, 34, 0.45);
+
+    font-size: calc(0.7vh + 0.3vw);
+
+    padding: 0 5px;
+
+    border: 1px solid black;
+    border-radius: 5px;
+
+    transition-duration: 0.2s;
+}
+
+.button_comment_delete:hover {
+    background: rgba(178, 34, 34, 0.8);
+}
+
+.button_comment_add {
+    background: linear-gradient(5deg, Beige 2%, #cecece 30%, #b2b2b2 40%, #9f9f9f 50%, #b2b2b2 60%, silver 70%, Beige 98%);
+    color: black;
+    font-family: 'Comfortaa', cursive, "Times New Roman";
+    font-size: calc(0.5vh + 0.3vw);
+
+    padding: 3px 10px;
+    margin: 0 auto 2vw;
+
+    border: 2px solid grey;
+    border-radius: 20px/40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 2px 3px 5px grey;
+    transition-duration: 1s;
+}
+
+.button_comment_add:hover {
+    background: linear-gradient(-5deg, Beige 2%, #cecece 30%, #b2b2b2 40%, #9f9f9f 50%, #b2b2b2 60%, silver 70%, Beige 98%);
+
+    box-shadow: -2px 3px 5px grey;
+}
+
+.button_admin_page {
+    font-size: calc(1vh + 0.5vw);
+
+    padding: 3px;
+    margin: 2px;
+
+    border-radius: 20px/40px;
+
+    transition-duration: 0.5s;
+}
+
+.button_admin_page:hover {
+box-shadow: 2px 2px 8px black ,-2px 2px 8px black ,-2px -2px 8px black ,2px -2px 8px black}
+.block {
+    background: darkorange;
+}
+
+.delete {
+    background: red;
+}
+
 .input {
-    font-size: calc(1.2vh + 0.6vw);
+    font-size: calc(0.6vh + 0.6vw);
     font-family: 'Comfortaa', cursive, "Times New Roman";
     background: whitesmoke;
 
@@ -64,8 +163,8 @@
 }
 
 .input:hover {
-    box-shadow: 2px 3px 5px SlateBlue, -2px -3px 5px SlateBlue, 2px -3px 5px SlateBlue, -2px 3px 5px SlateBlue;
-    border-color: SlateBlue;
+    box-shadow: 2px 3px 5px whitesmoke, -2px -3px 5px whitesmoke, 2px -3px 5px whitesmoke, -2px 3px 5px whitesmoke;
+    border-color: lightgray;
 }
 
 .radio_button {
@@ -96,15 +195,15 @@
 }
 
 .radio_button input[type=radio]:checked + label {
-    background-color: rgba(0, 0, 0, 0.74);
-    color: whitesmoke;
-    box-shadow: 1px 2px 3px SlateBlue, -1px -2px 3px SlateBlue, 1px -2px 3px SlateBlue, -1px 2px 3px SlateBlue;
-    border-color: SlateBlue;
+    background: linear-gradient(5deg, Beige 2%, #cecece 30%, #b2b2b2 40%, #9f9f9f 50%, #b2b2b2 60%, silver 70%, Beige 98%);
+    color: black;
+    box-shadow: 1px 2px 3px whitesmoke, -1px -2px 3px whitesmoke, 1px -2px 3px whitesmoke, -1px 2px 3px whitesmoke;
+    border-color: whitesmoke;
 }
 
 .radio_button label:hover {
-    box-shadow: 2px 3px 5px SlateBlue, -2px -3px 5px SlateBlue, 2px -3px 5px SlateBlue, -2px 3px 5px SlateBlue;
-    border-color: SlateBlue;
+    box-shadow: 2px 3px 5px whitesmoke, -2px -3px 5px whitesmoke, 2px -3px 5px whitesmoke, -2px 3px 5px whitesmoke;
+    border-color: lightgray;
 }
 
 .dropdown_list {
@@ -129,8 +228,8 @@
 }
 
 .dropdown_list:hover {
-    box-shadow: 2px 3px 5px SlateBlue, -2px -3px 5px SlateBlue, 2px -3px 5px SlateBlue, -2px 3px 5px SlateBlue;
-    border-color: SlateBlue;
+    box-shadow: 2px 3px 5px whitesmoke, -2px -3px 5px whitesmoke, 2px -3px 5px whitesmoke, -2px 3px 5px whitesmoke;
+    border-color: lightgray;
 
 }
 
@@ -142,6 +241,36 @@
     margin: 7px;
 }
 
+.checkbox {
+    height: calc(1.2vh + 0.6vw);
+    width: calc(1.2vh + 0.6vw);
+}
+
+.textarea2 {
+    background: rgba(0, 0, 0, 0.25);
+
+    box-sizing: border-box;
+
+    max-width: 100%;
+    min-width: 100%;
+    min-height: 10vh;
+    max-height: 10vh;
+
+    padding: 1vh 1.5vw;
+
+    font-size: calc(1vh + 0.5vw);
+
+    border: rgba(0, 0, 0, 0.5) solid 2px;
+    border-radius: 10px;
+}
+
+.textarea2:hover {
+    cursor: pointer;
+}
+
+.textarea2::-webkit-input-placeholder {
+    color: whitesmoke;
+}
 
 
 
