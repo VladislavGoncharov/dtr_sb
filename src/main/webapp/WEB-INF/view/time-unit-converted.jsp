@@ -20,9 +20,7 @@
     <div>
         <a  class="header_1" href="/" >Добро пожаловать на DateTimeResult.ru</a>
     </div>
-    <div id="current_date_time_block"
-         style="color:black;font-weight: bolder; font-size: calc(1em + 1vh);margin: 1.5% 4%;
-                text-shadow: 2px 3px 10px white,-2px -3px 10px white,2px -3px 10px white,-2px 3px 10px white">
+    <div id="current_date_time_block">
     </div>
 </header>
 <main>

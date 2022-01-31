@@ -3,6 +3,7 @@ package com.vladgoncharov.dtr_sb.working_with_a_date;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Data
@@ -18,29 +19,30 @@ public class ZodiacSign {
     private int imgName;
 
 
-    private Integer[] daysOfMonth =
-            {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
-                    17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
-    private Map<Integer, String> monthMap = Map.ofEntries(
-            Map.entry(12, "Декабрь"),
-            Map.entry(11, "Ноябрь"),
-            Map.entry(10, "Октябрь"),
-            Map.entry(9, "Сентябрь"),
-            Map.entry(8, "Август"),
-            Map.entry(7, "Июль"),
-            Map.entry(6, "Июнь"),
-            Map.entry(5, "Май"),
-            Map.entry(4, "Апрель"),
-            Map.entry(3, "Март"),
-            Map.entry(2, "Февраль"),
-            Map.entry(1, "Январь")
-    );
+    private final Integer[] daysOfMonth =
+            {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
+             18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
+
+    private final Map<Integer, String> monthMap = new LinkedHashMap<>() {{
+        put(1, "Январь");
+        put(2, "Февраль");
+        put(3, "Март");
+        put(4, "Апрель");
+        put(5, "Май");
+        put(6, "Июнь");
+        put(7, "Июль");
+        put(8, "Август");
+        put(9, "Сентябрь");
+        put(10, "Октябрь");
+        put(11, "Ноябрь");
+        put(12, "Декабрь");
+    }};
 
     public ZodiacSign() {
     }
 
     public void getResult() {
-        LocalDate checkingTheDate = LocalDate.of(2020, month, day);
+        LocalDate.of(2020, month, day);
         zodiacSign = searchZodiacSing();
     }
 

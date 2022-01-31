@@ -2,10 +2,11 @@ package com.vladgoncharov.dtr_sb.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
-@Table(name = "User_Role", //
-        uniqueConstraints = { //
+@Table(name = "User_Role",
+        uniqueConstraints = {
                 @UniqueConstraint(name = "USER_ROLE_UK", columnNames = { "User_Id", "Role_Id" }) })
 public class UserRole {
 
@@ -22,21 +23,6 @@ public class UserRole {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Role_Id", nullable = false)
     private AppRole appRole;
-
-    @Transient
-    private Long userId;
-
-    @Transient
-    private String userName;
-
-    @Transient
-    private String roleName;
-
-    @Transient
-    private String encrytedPassword;
-
-    @Transient
-    private boolean accountNonLocked;
 
     public UserRole(AppUser appUser,AppRole appRole) {
         this.appUser = appUser;
@@ -88,5 +74,18 @@ public class UserRole {
 
     public boolean isAccountNonLocked() {
         return appUser.isAccountNonLocked();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserRole userRole = (UserRole) o;
+        return Objects.equals(id, userRole.id) && Objects.equals(appUser, userRole.appUser) && Objects.equals(appRole, userRole.appRole);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, appUser, appRole);
     }
 }

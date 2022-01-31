@@ -6,7 +6,9 @@ import javax.validation.constraints.Pattern;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 // Класс подсчитывает количество нестандартных (2 через 2)
 // рабочий и выходных дней и показывает таблицу из 8 недель
@@ -20,8 +22,9 @@ public class WorkingDaysAndWeekends extends DateDifference {
 
     private int numberOfWorkingDays;
     private int numberOfWeekends;
+    private int[] numberOfWeeks = {1,2,3,4,5,6,7,8};
 
-    List<Integer> listWorkingDaysAndWeekends = new ArrayList<Integer>();
+    Queue<Integer> listWorkingDaysAndWeekends = new LinkedList<>();
 
     Integer[] numbersFromOneToFifteen_1 = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
     Integer[] numbersFromOneToFifteen_2 = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
@@ -85,8 +88,6 @@ public class WorkingDaysAndWeekends extends DateDifference {
     }
     // Метод преобразования таблицы в массив
     public int getDayFromList() {
-        Integer day = listWorkingDaysAndWeekends.get(0);
-        listWorkingDaysAndWeekends.remove(0);
-        return day;
+        return listWorkingDaysAndWeekends.remove();
     }
 }

@@ -16,18 +16,14 @@ public class TimeDifference {
     private byte seconds;
 
     private byte plusMinus;
-    private byte HMS;
+    private String HMS;
     private int amountOfTime;
 
     private String textHours;
     private String textMinutes;
     private String textSeconds;
 
-    private final Map<Integer, String> mapHMS = Map.of(
-            0, "час",
-            1, "минута",
-            2, "секунда"
-    );
+    private final String[] arrayHMS = {"час","минута","секунда"};
 
     public TimeDifference() {
 
@@ -37,24 +33,24 @@ public class TimeDifference {
         initialTime = LocalTime.of(hours, minutes, seconds);
 
         if (plusMinus == 0) {
-            if (HMS == 0) {
+            if (HMS.equals("час")) {
                 initialTime = initialTime.plusHours(amountOfTime);
                 addResultInAVariables(initialTime);
-            } else if (HMS == 1) {
+            } else if (HMS.equals("минута")) {
                 initialTime = initialTime.plusMinutes(amountOfTime);
                 addResultInAVariables(initialTime);
-            } else if (HMS == 2) {
+            } else if (HMS.equals("секунда")) {
                 initialTime = initialTime.plusSeconds(amountOfTime);
                 addResultInAVariables(initialTime);
             }
         } else if (plusMinus == 1) {
-            if (HMS == 0) {
+            if (HMS.equals("час")) {
                 initialTime = initialTime.minusHours(amountOfTime);
                 addResultInAVariables(initialTime);
-            } else if (HMS == 1) {
+            } else if (HMS.equals("минута")) {
                 initialTime = initialTime.minusMinutes(amountOfTime);
                 addResultInAVariables(initialTime);
-            } else if (HMS == 2) {
+            } else if (HMS.equals("секунда")) {
                 initialTime = initialTime.minusSeconds(amountOfTime);
                 addResultInAVariables(initialTime);
             }

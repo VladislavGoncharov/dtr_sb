@@ -3,6 +3,7 @@ package com.vladgoncharov.dtr_sb.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity
 @Table(name = "comments")
@@ -62,5 +63,18 @@ public class Comment {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Comment comment1 = (Comment) o;
+        return Objects.equals(id, comment1.id) && Objects.equals(username, comment1.username) && Objects.equals(role, comment1.role) && Objects.equals(comment, comment1.comment) && Objects.equals(time, comment1.time);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, time);
     }
 }

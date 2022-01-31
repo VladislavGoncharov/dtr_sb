@@ -73,6 +73,12 @@
             <version>5.6.1</version>
         </dependency>
 
+<!--        CheckEmail-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

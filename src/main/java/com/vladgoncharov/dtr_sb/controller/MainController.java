@@ -1,8 +1,10 @@
 package com.vladgoncharov.dtr_sb.controller;
 
 import com.vladgoncharov.dtr_sb.dao.UserDAO;
+import com.vladgoncharov.dtr_sb.entity.AppUser;
 import com.vladgoncharov.dtr_sb.entity.Comment;
 import com.vladgoncharov.dtr_sb.service.CommentService;
+import com.vladgoncharov.dtr_sb.service.UserServiceInterface;
 import com.vladgoncharov.dtr_sb.working_with_a_date.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +21,7 @@ import java.util.List;
 public class MainController {
 
     @Autowired
-    UserDAO userDAO;
+    UserServiceInterface userServiceInterface;
 
     @Autowired
     CommentService commentService;
@@ -27,12 +29,21 @@ public class MainController {
     @GetMapping("/")
     public String firstView(Model model, Principal principal) {
 
-        model.addAttribute("currentUsername", principal == null ? "Гость": principal.getName());
-        model.addAttribute("comment", new Comment());
+        String currentUsername = "Гость";
+
+        if (principal!=null){
+            currentUsername = principal.getName();
+            AppUser user =
+                    (AppUser) userServiceInterface.findUserAccount(currentUsername);
+
+            model.addAttribute("theUserIsReadyToCheckEmail",user.getAppUserInfo().theUserIsReadyToCheckEmail());
+            model.addAttribute("comment", new Comment());
+        }
+
+        model.addAttribute("currentUsername", currentUsername);
 
         List<Comment> allComments = commentService.getAllComments();
         model.addAttribute("comments", allComments);
-
 
         return "first-view";
     }

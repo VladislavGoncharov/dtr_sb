@@ -19,11 +19,14 @@ public class AdminController {
     @Autowired
     private UserServiceInterface userDetailsService;
 
-    @PostMapping(value = "/adminPage")
+    @GetMapping(value = "/adminPage")
     public String adminPage(Model model) {
 
-        List<UserRole> allUsers = userDetailsService.getAllUsers();
-        model.addAttribute("users", allUsers);
+        long NOM = userDetailsService.getNumberOfUser("MODERATOR");
+        long NOU = userDetailsService.getNumberOfUser("USER");
+
+        model.addAttribute("numberOfModerators",NOM);
+        model.addAttribute("numberOfUsers",NOU);
 
         return "admin_page";
     }
@@ -38,7 +41,7 @@ public class AdminController {
     public String saveModerator(@Valid @ModelAttribute("user") AppUser user
             , BindingResult bindingResult, Model model) {
 
-        AppUser appUser = userDetailsService.findUserAccount(user.getUserName());
+        AppUser appUser = (AppUser) userDetailsService.findUserAccount(user.getUserName());
 
         if (bindingResult.hasErrors()) {
             return "registration_moderator";
@@ -56,15 +59,41 @@ public class AdminController {
         return "redirect:/admin/adminPage";
     }
 
-    @PostMapping("/deleteUser")
-    public String deleteUser(@RequestParam("userId") long id) {
-        userDetailsService.deleteUser(id);
-        return "redirect:/admin/adminPage";
+    @GetMapping("/showUSER")
+    public String showUser(Model model) {
+
+        List<UserRole> allUsers = userDetailsService.getAllUsers("USER");
+        model.addAttribute("users", allUsers);
+        model.addAttribute("text", "Количество пользователей: "+allUsers.size());
+
+        return "show-user";
     }
 
-    @PostMapping("/blockUser")
-    public String blockUser(@RequestParam("userId") long id) {
+    @GetMapping("/showMODERATOR")
+    public String showModerator(Model model) {
+
+        List<UserRole> allUsers = userDetailsService.getAllUsers("MODERATOR");
+        model.addAttribute("users", allUsers);
+        model.addAttribute("text", "Количество модераторов: "+allUsers.size());
+
+        return "show-user";
+    }
+
+    @RequestMapping("/showUser/deleteUser/{id}")
+    public String deleteUser(@PathVariable long id) {
+        UserRole user = userDetailsService.findUserById(id);
+
+        userDetailsService.deleteUser(id);
+
+        return "redirect:/admin/show"+ user.getRoleName().substring(5);
+    }
+
+    @RequestMapping("/showUser/blockUser/{id}")
+    public String blockUser(@PathVariable long id) {
+        UserRole user = userDetailsService.findUserById(id);
+
         userDetailsService.blockUser(id);
-        return "redirect:/admin/adminPage";
+
+        return "redirect:/admin/show"+ user.getRoleName().substring(5);
     }
 }

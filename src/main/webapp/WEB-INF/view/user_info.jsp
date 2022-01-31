@@ -2,7 +2,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="date" uri="http://www.springframework.org/tags/form" %>
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -10,7 +9,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Узнаем знак зодиака</title>
+    <title>Новый пользователь</title>
     <link rel="shortcut icon" href="../../resources/images/clock.ico"/>
     <link rel="stylesheet" href="../../resources/style/style.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet">
@@ -28,57 +27,75 @@
 </header>
 <main>
     <article>
-    <span class="header_2">
-        <h2>Кто я по знаку зодиака?!</h2>
-    </span>
-    <br>
-    <%--@elvariable id="zodiacSign" type="com.vladgoncharov.dtr_sb.working_with_a_date.ZodiacSign"--%>
-    <form:form action="zodiacSignResult" method="post" modelAttribute="zodiacSign">
-
         <fieldset>
-            <legend>Заполните формы по шаблону</legend>
+            <legend>User info ${currentUsername}</legend>
             <br>
-            <table class="table_forms_working_with_a_date">
-                <tbody>
+            <table>
                 <tr>
                     <td>
-                        <label for="day">Выберите день:</label>
+                        age
                     </td>
                     <td>
-                        <form:select class="dropdown_list" name="day" path="day">
-                            <form:options class="dropdown_list_options" items="${zodiacSign.daysOfMonth}"/>
-                        </form:select>
+                        ${userInfo.age}
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label for="month">Выберите месяц:</label>
+                        name
                     </td>
                     <td>
-                        <form:select class="dropdown_list" name="month" path="month">
-                            <form:options class="dropdown_list_options" items="${zodiacSign.monthMap}"/>
-                        </form:select>
+                        ${userInfo.name}
                     </td>
                 </tr>
-                </tbody>
-                <tfoot>
                 <tr>
-                    <td colspan="2">
-                        <input class="button" type="submit" value="Посчитать">
-                        <input class="button" type="reset" value="Очистить"
-                               onclick="window.location.href = 'zodiacSign'">
+                    <td>
+                        surname
+                    </td>
+                    <td>
+                        ${userInfo.surname}
                     </td>
                 </tr>
-                </tfoot>
+                <tr>
+                    <td>
+                        email
+                    </td>
+                    <td>
+                        ${userInfo.email}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        city
+                    </td>
 
+                    <td>
+                        ${userInfo.city}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        phone
+                    </td>
+
+                    <td>
+                        ${userInfo.phone}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        img
+                    </td>
+                    <td>
+                        ${userInfo.img}
+                    </td>
+                </tr>
             </table>
-            <br>
         </fieldset>
+        <input class="button" type="button" value="update" onclick="window.location.href='/updateUserInfo'"/>
 
-    </form:form>
-    <br><br>
-    <input class="button" type="button" value="Назад" onclick="history.back();return false;"/>
-    <br>
+        <br><br>
+        <input class="button" type="button" value="Назад" onclick="history.back();return false;"/>
+        <br>
     </article>
 </main>
 </body>

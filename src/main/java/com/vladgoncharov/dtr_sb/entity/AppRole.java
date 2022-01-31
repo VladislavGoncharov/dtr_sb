@@ -3,6 +3,7 @@ package com.vladgoncharov.dtr_sb.entity;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "app_role",
@@ -41,5 +42,18 @@ public class AppRole implements GrantedAuthority {
     @Override
     public String getAuthority() {
         return getRoleName();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AppRole role = (AppRole) o;
+        return Objects.equals(roleId, role.roleId) && Objects.equals(roleName, role.roleName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(roleId, roleName);
     }
 }

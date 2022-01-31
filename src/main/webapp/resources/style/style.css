@@ -1,29 +1,43 @@
 @import "button-input_etc.css";
 
+#current_date_time_block{
+    color:black;
+    font-weight: bolder;
+    font-size: calc(1.6vh + 0.8vw);
+
+    margin: 1.5% 4%;
+    text-shadow: 2px 3px 10px whitesmoke,-2px -3px 10px whitesmoke
+    ,2px -3px 10px whitesmoke,-2px 3px 10px whitesmoke;
+}
+
 h1, .header_1 {
-    text-shadow: 2px 3px 10px black, -2px -3px 10px black, 2px -3px 10px black, -2px 3px 10px black;
     color: #dfdfe7;
     font-size: calc(1em + 1.5vw) !important;
-    margin: 0.5em 1.5%;
+    text-shadow: 2px 3px 10px black, -2px -3px 10px black, 2px -3px 10px black, -2px 3px 10px black;
     text-decoration: none;
+
+    margin: 0.5em 1.5%;
     margin-block-start: unset;
     margin-block-end: unset;
-    display: inline-block;
 
+    display: inline-block;
 }
 
 .header_2 {
-    text-align: center;
+    color:whitesmoke;
     font-weight: bold !important;
+    text-align: center;
 }
 
 legend {
     background: #bcb9d6;
-    border-radius: 20px/40px;
-    box-shadow: 2px 3px 10px #484b63, -2px -3px 10px #484b63, 2px -3px 10px #484b63, -2px 3px 10px #484b63;
-    padding: 7px;
     font-size: calc(1.5vh + 1vw);
     text-align: center;
+
+    padding: 7px;
+
+    border-radius: 20px/40px;
+    box-shadow: 2px 3px 10px #484b63, -2px -3px 10px #484b63, 2px -3px 10px #484b63, -2px 3px 10px #484b63;
 }
 
 label {
@@ -32,38 +46,37 @@ label {
 
 fieldset {
     background: #999bc2;
-    padding: 0 5vw;
-    border: 15px ridge #999bc2;
     text-align: center;
+
+    padding: 0 5vw;
+
+    border: 15px ridge #999bc2;
 }
 
 form {
+    text-align: center;
     width: fit-content;
     margin: auto;
-    text-align: center;
 }
 .textError{
-    font-size: calc(1vh + 0.6vw);
     color: firebrick;
+    font-size: calc(1vh + 0.6vw);
     text-shadow: black 0 0 8px;
 }
 
 mark {
     background-color: unset;
-    line-height: 50px;
-    font-size: 170%;
     color: whitesmoke;
+    font-size: 170%;
     text-shadow: 2px 3px 10px black, -2px -3px 10px black, 2px -3px 10px black, -2px 3px 10px black;
+    line-height: 50px;
 }
-
-
 
 caption {
-    padding: calc(1.2vh + 0.6vw);
     font-size: calc(1.3 * (1.2vh + 0.6vw));
+    color:whitesmoke;
+    padding: calc(1.2vh + 0.6vw);
 }
-
-
 
 footer a {
     color: black;
@@ -78,86 +91,109 @@ footer a:hover {
     margin: 5px auto 5px;
 }
 
-
 .header_comment{
     background: #4e5c97;
+    font-size: calc(1vh + 0.5vw);
 
-    border-radius: 10px 10px 0 0;
     padding: 1vh 1.5vw 0.5vh 1.5vw;
 
-    font-size: calc(1vh + 0.5vw);
+    border-radius: 10px 10px 0 0;
 }
+
 .body_comment{
     background: linear-gradient(#4e5c97 5%, #b3b1d1 30%) ;
+    font-size: calc(0.8vh + 0.4vw);
+
+    padding: 2vh 4vw 1vh 4vw;
 
     border: 1px solid #4e5c97;
     border-radius: 0 0 20px 20px;
-    padding: 2vh 4vw 1vh 4vw;
-
-    font-size: calc(0.8vh + 0.4vw);
 }
+
 .div_comment{
     margin: 5px;
 }
-.sup_comment_admin{
-    padding: 4px;
-    background: rgba(220, 20, 60, 0.25);
-    border-radius: 5px;
-}
-.sup_comment_moderator{
-    padding: 4px;
-    background: rgba(0, 0, 255, 0.25);
-    border-radius: 5px;
 
+.sup_comment_admin{
+    background: rgba(220, 20, 60, 0.25);
+
+    padding: 4px;
+
+    border-radius: 5px;
 }
+
+.sup_comment_moderator{
+    background: rgba(0, 0, 255, 0.25);
+
+    padding: 4px;
+
+    border-radius: 5px;
+}
+
 .sup_comment_user{
     color: transparent;
 }
+
 .span_comment{
     font-size: calc(0.7vh + 0.3vw);
     float: right;
 }
+
 .textarea{
     background: transparent;
 
+    margin: 2vh 0;
+
     width: inherit;
     min-height: 15vh;
-
-    margin: 2vh 0;
 }
+
 .right{
     float: right;
 }
+
 .img_chinese_zodiac {
     height: calc(16vh + 8vw);
-    float: left;
     margin: 2px 15px 5px 20px;
+    float: left;
 }
+
 .img_zodiac_sign {
     height: calc(16vh + 8vw);
-    float: left;
+
     margin: 2px 15px 5px 20px;
+
+    float: left;
+
     border-radius: 25px;
     box-shadow: whitesmoke 3px 3px 5px, whitesmoke -3px 3px 5px, whitesmoke -3px -3px 5px, whitesmoke 3px -3px 5px;
 }
+
 .text_zodiacSing{
     text-align: justify;
     text-indent: 20px;
     padding: 0 20px 0 20px;
 }
+
 .text_zodiacSing::first-letter{
     font-size: calc(2vh + 1vw);
 }
+
 .date_zodiacSing{
-    padding: 0 20px 0 20px;
+    color: black;
     font-size: 1.5em;
+    padding: 0 20px 0 20px;
 }
+
 ul{
     padding: 0 0 0 5%;
 }
+
 ::marker{
     color: whitesmoke;
 }
-
+dt{
+    text-align: center;
+}
 
 

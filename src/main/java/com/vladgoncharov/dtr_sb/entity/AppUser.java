@@ -1,18 +1,14 @@
 package com.vladgoncharov.dtr_sb.entity;
 
 
-import com.vladgoncharov.dtr_sb.validation.CheckPassword;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.provisioning.UserDetailsManager;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 @Table(name = "app_user", uniqueConstraints = { //
@@ -39,6 +35,10 @@ public class AppUser implements UserDetails{
 
     @Column(name = "Enabled", length = 1, nullable = false)
     private boolean accountNonLocked;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_info")
+    private AppUserInfo appUserInfo;
 
     @Transient
     private String role;
@@ -126,4 +126,30 @@ public class AppUser implements UserDetails{
         this.encrytedPasswordCheck = encrytedPasswordCheck;
     }
 
+    public AppUserInfo getAppUserInfo() {
+        return appUserInfo;
+    }
+
+    public void setAppUserInfo(AppUserInfo appUserInfo) {
+        this.appUserInfo = appUserInfo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AppUser appUser = (AppUser) o;
+        return accountNonLocked == appUser.accountNonLocked
+                && Objects.equals(userId, appUser.userId)
+                && Objects.equals(userName, appUser.userName)
+                && Objects.equals(encrytedPassword, appUser.encrytedPassword)
+                && Objects.equals(encrytedPasswordCheck, appUser.encrytedPasswordCheck)
+                && Objects.equals(appUserInfo, appUser.appUserInfo)
+                && Objects.equals(role, appUser.role);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId) * 31 * 7 * 33;
+    }
 }

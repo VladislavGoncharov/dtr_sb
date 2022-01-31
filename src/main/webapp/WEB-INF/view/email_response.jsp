@@ -2,6 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="date" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -9,8 +10,15 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Новый пользователь</title>
+    <c:if test="${!isSuccessful}">
+        <title>Так делать нельзя</title>
+    </c:if>
+    <c:if test="${!isSuccessful}">
+        <title>Превосходно</title>
+    </c:if>
+
     <link rel="shortcut icon" href="../../resources/images/clock.ico"/>
+    <link rel="stylesheet" href="../../resources/style/style.css"/>
     <link rel="stylesheet" href="../../resources/style/style.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet">
     <script src="../../resources/js/current_time.js"></script>
@@ -20,26 +28,31 @@
 <header>
     <br>
     <div>
-        <a  class="header_1" href="/" >Добро пожаловать на DateTimeResult.ru</a>
+        <a class="header_1" href="/">Добро пожаловать на DateTimeResult.ru</a>
     </div>
-    <div id="current_date_time_block"
-         style="color:black;font-weight: bolder; font-size: calc(1em + 1vh);margin: 1.5% 4%;
-                text-shadow: 2px 3px 10px white,-2px -3px 10px white,2px -3px 10px white,-2px 3px 10px white">
+    <div id="current_date_time_block">
     </div>
 </header>
 <main>
     <article>
-    <span class="header_2">
-        <h2>User info ${userName}</h2>
-    </span>
-
-    <br>
-
-
-
-    <br><br>
-    <input class="button" type="button" value="Назад" onclick="history.back();return false;"/>
-    <br>
+        <c:if test="${!isSuccessful}">
+            <span class="header_2">
+            <h2>Видимо ваш email был введен некорректно, но есть возможность все исправить</h2>
+                <button class="button_first_view "
+                        type="button" onclick="window.location.href = 'userInfo_${currentUsername}'">
+                info
+            </button>
+            </span>
+        </c:if>
+        <c:if test="${isSuccessful}">
+            <span class="header_2">
+            <h2>Все прошло успешно</h2>
+                <button class="button_first_view " type="button" onclick="window.location.href = '/'">
+                На главную
+            </button>
+            </span>
+        </c:if>
+        <br>
     </article>
 </main>
 </body>

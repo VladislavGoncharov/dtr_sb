@@ -24,9 +24,7 @@
     <div>
         <a  class="header_1" href="/" >Добро пожаловать на DateTimeResult.ru</a>
     </div>
-    <div id="current_date_time_block"
-         style="color:black;font-weight: bolder; font-size: calc(1em + 1vh);margin: 1.5% 4%;
-                text-shadow: 2px 3px 10px white,-2px -3px 10px white,2px -3px 10px white,-2px 3px 10px white">
+    <div id="current_date_time_block">
     </div>
 </header>
 <main>
@@ -69,6 +67,16 @@
     </div>
     <br>
     <ul>
+        <c:if test="${theUserIsReadyToCheckEmail}">
+            <li>
+                <button class="button_first_view " type="button" onclick="window.location.href
+                        = 'checkingEmail_${currentUsername}'">
+                    Подтвердить емаил
+                </button>
+                <br>
+            </li>
+        </c:if>
+
         <li>
             <button class="button_first_view " type="button" onclick="window.location.href = 'changeTheDate'">
                 Посчитать количество дней в промежутке
@@ -105,14 +113,22 @@
             </button>
             <br>
         </li>
-        <security:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR')">
+        <li>
+            <button class="button_first_view " type="button" onclick="window.location.href = 'userInfo_${currentUsername}'">
+                info
+            </button>
+            <br>
+        </li>
+        <input class="button" type="button" value="email" onclick="window.location.href='checkingEmail'"/>
+
+    <%--        <security:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR')">--%>
             <li>
                 <button class="button_first_view " type="button" onclick="window.location.href = 'admin/adminPage'">
                 admin
                 </button>
                 <br>
             </li>
-        </security:authorize>
+<%--        </security:authorize>--%>
     </ul>
     <section>
         <table>
@@ -124,7 +140,7 @@
                             <form:textarea class="textarea2"  path="comment" maxlength="255" placeholder="не более 255 символов"/>
                             <form:errors path="comment"/>
                             <div class="right">
-                                <input class="button" type="submit" value="Add"/>
+                                <input class="button bca" type="submit" value="Отправить"/>
                             </div>
                         </form:form>
                         </div>

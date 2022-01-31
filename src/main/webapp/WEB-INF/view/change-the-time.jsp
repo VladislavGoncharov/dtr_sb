@@ -21,9 +21,7 @@
     <div>
         <a class="header_1" href="/">Добро пожаловать на DateTimeResult.ru</a>
     </div>
-    <div id="current_date_time_block"
-         style="color:black;font-weight: bolder; font-size: calc(1em + 1vh);margin: 1.5% 4%;
-                text-shadow: 2px 3px 10px white,-2px -3px 10px white,2px -3px 10px white,-2px 3px 10px white">
+    <div id="current_date_time_block">
     </div>
 </header>
 <main>
@@ -62,13 +60,13 @@
             <br>
             <br>
             <label for="for_div">Введите число и выберите единицу измерения:</label>
-            <div id="for_div">
+            <div class="dropdown_list_div" id="for_div">
                 <form:input class="input" type="number" path="amountOfTime" min="0"
                             max="1000000000"/>
                 <form:errors path="amountOfTime"/>
 
                 <form:select class="dropdown_list" path="HMS">
-                    <form:options class="dropdown_list_options" items="${timeDifference.mapHMS}"/>
+                    <form:options class="dropdown_list_options" items="${timeDifference.arrayHMS}"/>
                 </form:select>
             </div>
             <br>

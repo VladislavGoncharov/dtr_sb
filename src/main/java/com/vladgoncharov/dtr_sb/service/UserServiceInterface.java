@@ -1,6 +1,7 @@
 package com.vladgoncharov.dtr_sb.service;
 
 import com.vladgoncharov.dtr_sb.entity.AppUser;
+import com.vladgoncharov.dtr_sb.entity.AppUserInfo;
 import com.vladgoncharov.dtr_sb.entity.UserRole;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -8,15 +9,17 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;
 
-public interface UserServiceInterface extends UserDetailsService {
+public interface UserServiceInterface extends UserDetailsService{
 
     UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException;
 
-    AppUser findUserAccount(String userName);
+    Object findUserAccount(String userName);
+
+    UserRole findUserById(long id);
 
     void saveUser(AppUser user);
 
-    List<UserRole> getAllUsers();
+    List<UserRole> getAllUsers(String roleName);
 
     void deleteUser(long id);
 
@@ -24,4 +27,7 @@ public interface UserServiceInterface extends UserDetailsService {
 
     void blockUser(long id);
 
+    long getNumberOfUser(String roleName);
+
+    void updateInfo(AppUserInfo userInfo);
 }

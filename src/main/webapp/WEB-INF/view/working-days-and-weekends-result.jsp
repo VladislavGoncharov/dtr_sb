@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -17,19 +18,17 @@
 <header>
     <br>
     <div>
-        <a  class="header_1" href="/" >Добро пожаловать на DateTimeResult.ru</a>
+        <a class="header_1" href="/">Добро пожаловать на DateTimeResult.ru</a>
     </div>
-    <div id="current_date_time_block"
-         style="color:black;font-weight: bolder; font-size: calc(1em + 1vh);margin: 1.5% 4%;
-                text-shadow: 2px 3px 10px white,-2px -3px 10px white,2px -3px 10px white,-2px 3px 10px white">
+    <div id="current_date_time_block">
     </div>
 </header>
 <main>
     <article>
-    <br>
-    <table class="table_result">
-        <caption><h2>Календарь рабочих и выходных дней</h2></caption>
-        <thead>
+        <br>
+        <table class="table_result">
+            <caption><h2>Календарь рабочих и выходных дней</h2></caption>
+            <thead>
             <th>
                 Пн
             </th>
@@ -51,203 +50,44 @@
             <th>
                 Вс
             </th>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="td_${workingDaysAndWeekends.dayFromList}" >
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-            </tr>
-            <tr>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-            </tr>
-            <tr>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-            </tr>
-            <tr>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-            </tr>
-            <tr>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-            </tr>
-            <tr>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-            </tr>
-            <tr>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-            </tr>
-            <tr>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-                <td class="td_${workingDaysAndWeekends.dayFromList}">
-                    ${workingDaysAndWeekends.dayFromList}
-                </td>
-            </tr>
-        </tbody>
-        <tfoot>
+            </thead>
+            <tbody>
+            <c:forEach items="${workingDaysAndWeekends.numberOfWeeks}">
+                <tr>
+                    <td class="td_${workingDaysAndWeekends.dayFromList}">
+                            ${workingDaysAndWeekends.dayFromList}
+                    </td>
+                    <td class="td_${workingDaysAndWeekends.dayFromList}">
+                            ${workingDaysAndWeekends.dayFromList}
+                    </td>
+                    <td class="td_${workingDaysAndWeekends.dayFromList}">
+                            ${workingDaysAndWeekends.dayFromList}
+                    </td>
+                    <td class="td_${workingDaysAndWeekends.dayFromList}">
+                            ${workingDaysAndWeekends.dayFromList}
+                    </td>
+                    <td class="td_${workingDaysAndWeekends.dayFromList}">
+                            ${workingDaysAndWeekends.dayFromList}
+                    </td>
+                    <td class="td_${workingDaysAndWeekends.dayFromList}">
+                            ${workingDaysAndWeekends.dayFromList}
+                    </td>
+                    <td class="td_${workingDaysAndWeekends.dayFromList}">
+                            ${workingDaysAndWeekends.dayFromList}
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+            <tfoot>
             <tr>
                 <th colspan="7">Закрашенные ячейки означают ваши трудовые будни</th>
             </tr>
-        </tfoot>
-    </table>
-    <br>
-    <br>
-    <input class="button" type="button" value="Назад" onclick="history.back();return false;"/>
-    <br>
+            </tfoot>
+        </table>
+        <br>
+        <br>
+        <input class="button" type="button" value="Назад" onclick="history.back();return false;"/>
+        <br>
     </article>
 </main>
 </body>

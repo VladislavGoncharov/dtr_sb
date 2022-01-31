@@ -3,6 +3,7 @@ package com.vladgoncharov.dtr_sb.service;
 import com.vladgoncharov.dtr_sb.dao.RoleDAO;
 import com.vladgoncharov.dtr_sb.dao.UserDAO;
 import com.vladgoncharov.dtr_sb.entity.AppUser;
+import com.vladgoncharov.dtr_sb.entity.AppUserInfo;
 import com.vladgoncharov.dtr_sb.entity.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,7 +29,7 @@ public class UserServiceImpl implements UserServiceInterface {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        AppUser user = userDAO.findUserAccount(userName);
+        AppUser user = (AppUser) userDAO.findUserAccount(userName);
         if (user == null){
             System.out.println("User not found! "+userName);
             throw new UsernameNotFoundException("User "+userName+
@@ -54,8 +55,13 @@ public class UserServiceImpl implements UserServiceInterface {
     }
 
     @Override
-    public AppUser findUserAccount(String userName) {
+    public Object findUserAccount(String userName) {
         return userDAO.findUserAccount(userName);
+    }
+
+    @Override
+    public UserRole findUserById(long id) {
+        return userDAO.findUserById(id);
     }
 
     @Override
@@ -64,8 +70,8 @@ public class UserServiceImpl implements UserServiceInterface {
     }
 
     @Override
-    public List<UserRole> getAllUsers() {
-        return userDAO.getAllUsers();
+    public List<UserRole> getAllUsers(String roleName) {
+        return userDAO.getAllUsers(roleName);
     }
 
     @Override
@@ -81,6 +87,16 @@ public class UserServiceImpl implements UserServiceInterface {
     @Override
     public void blockUser(long id) {
         userDAO.blockUser(id);
+    }
+
+    @Override
+    public long getNumberOfUser(String roleName) {
+        return userDAO.getNumberOfUser(roleName);
+    }
+
+    @Override
+    public void updateInfo(AppUserInfo userInfo) {
+        userDAO.updateInfo(userInfo);
     }
 
 }
