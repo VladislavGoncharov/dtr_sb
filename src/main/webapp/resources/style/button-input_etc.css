@@ -49,7 +49,7 @@
     font-size: calc(1.2vh + 0.6vw);
 
     padding: 5px 15px;
-    margin: 20px;
+    margin: 7px 20px;
 
     border: 1px solid #56586e;
     border-radius: 20px/40px;
@@ -184,8 +184,31 @@
     border-color: whitesmoke;
 }
 
-.radio_button label:hover {
-    box-shadow: 1px 2px 3px whitesmoke, -1px -2px 3px whitesmoke, 1px -2px 3px whitesmoke, -1px 2px 3px whitesmoke;
+.radio_button_smail {
+    display: inline-block;
+    margin: 5px 2px;
+}
+
+.radio_button_smail input[type=radio] {
+    display: none;
+}
+
+.radio_button_smail label {
+    display: inline-block;
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+    user-select: none;
+}
+
+.radio_button_smail input[type=radio]:checked + label {
+    border-radius: 10px;
+    box-shadow: 0 3px 2px #56586e;
+}
+
+.radio_button_smail label:hover {
+    border-radius: 10px;
+    box-shadow: 0 3px 4px whitesmoke;
 }
 
 .dropdown_list {
@@ -215,6 +238,15 @@
     width: calc(1.2vh + 0.6vw);
 }
 
+.textarea{
+    background: transparent;
+
+    margin: 2vh 0 4vh;
+
+    width: inherit;
+    min-height: 15vh;
+}
+
 .textarea2 {
     background: #b3b1d1;
     font-size: calc(1vh + 0.5vw);
@@ -236,5 +268,26 @@
     cursor: pointer;
 }
 
+
+.a_user_info_login{
+    color: whitesmoke;
+    text-shadow: 1px -1px 2px black, -1px -1px 3px whitesmoke, 1px 1px 3px black, -1px 1px 2px black;
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+
+.a_user_info_login:hover{
+    font-size: calc(1.3vh + 0.9vw);
+    text-shadow: 1px -1px 3px black, -1px -1px 3px black, 1px 1px 3px whitesmoke, -1px 1px 3px black;
+}
+
+.a_user_info{
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+
+.a_user_info:hover{
+    color: whitesmoke;
+}
 
 

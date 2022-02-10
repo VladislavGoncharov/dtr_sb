@@ -1,0 +1,76 @@
+@import "button-input_etc.css";
+
+
+
+.smail_small_1{
+    height: 50px;
+    width: 51px;
+    padding: 0;
+
+    background-image: url("../../resources/images/smail/smail_small_1.png");
+}
+
+.smail_small_2{
+    height: 50px;
+    width: 51px;
+    padding: 0;
+
+    background-image: url("../../resources/images/smail/smail_small_2.png");
+}
+
+.smail_small_3{
+    height: 50px;
+    width: 51px;
+    padding: 0;
+    background-image: url("../../resources/images/smail/smail_small_3.png");
+}
+
+.smail_small_4{
+    height: 50px;
+    width: 51px;
+    padding: 0;
+    background-image: url("../../resources/images/smail/smail_small_4.png");
+}
+
+.smail_small_5{
+    height: 50px;
+    width: 51px;
+    padding: 0;
+    background-image: url("../../resources/images/smail/smail_small_5.png");
+}
+
+.smail_small_6{
+    height: 50px;
+    width: 51px;
+    padding: 0;
+    background-image: url("../../resources/images/smail/smail_small_6.png");
+}
+
+.img_user {
+    height: calc(6vh + 6vw);
+    margin: 5px;
+}
+
+.img_user_comment{
+    height: calc(2vh + 2vw);
+    margin: 1px;
+}
+
+.img_user_dropdown_list {
+    height: calc(1vh + 1vw);
+    margin: 1px;
+}
+.img_chinese_zodiac {
+    height: calc(16vh + 8vw);
+    margin: 2px 15px 5px 20px;
+    float: left;
+}
+
+.img_zodiac_sign {
+    height: calc(16vh + 8vw);
+    margin: 2px 15px 5px 20px;
+    float: left;
+
+    border-radius: 25px;
+    box-shadow: whitesmoke 3px 3px 5px, whitesmoke -3px 3px 5px, whitesmoke -3px -3px 5px, whitesmoke 3px -3px 5px;
+}

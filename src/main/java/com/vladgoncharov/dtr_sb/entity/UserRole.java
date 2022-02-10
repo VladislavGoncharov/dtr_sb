@@ -1,13 +1,12 @@
 package com.vladgoncharov.dtr_sb.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
 @Table(name = "User_Role",
         uniqueConstraints = {
-                @UniqueConstraint(name = "USER_ROLE_UK", columnNames = { "User_Id", "Role_Id" }) })
+                @UniqueConstraint(name = "USER_ROLE_UK", columnNames = {"User_Id", "Role_Id"})})
 public class UserRole {
 
     @Id
@@ -16,7 +15,7 @@ public class UserRole {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY
-            ,cascade = CascadeType.ALL)
+            , cascade = CascadeType.ALL)
     @JoinColumn(name = "User_Id", nullable = false)
     private AppUser appUser;
 
@@ -24,7 +23,7 @@ public class UserRole {
     @JoinColumn(name = "Role_Id", nullable = false)
     private AppRole appRole;
 
-    public UserRole(AppUser appUser,AppRole appRole) {
+    public UserRole(AppUser appUser, AppRole appRole) {
         this.appUser = appUser;
         this.appRole = appRole;
     }
@@ -61,7 +60,7 @@ public class UserRole {
     }
 
     public String getUserName() {
-        return appUser.getUserName();
+        return appUser.getUsername();
     }
 
     public String getRoleName() {

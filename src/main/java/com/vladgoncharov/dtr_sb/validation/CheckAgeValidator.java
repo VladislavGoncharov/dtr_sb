@@ -3,14 +3,24 @@ package com.vladgoncharov.dtr_sb.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class CheckAgeValidator implements ConstraintValidator<CheckAge, Integer> {
+public class CheckAgeValidator implements ConstraintValidator<CheckAge, String> {
 
     @Override
-    public boolean isValid(Integer checkAge, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(String checkAge, ConstraintValidatorContext constraintValidatorContext) {
 
-        if (checkAge == 0) return true;
+        if (checkAge.isEmpty()) {
+            return true;
+        }
 
-        return checkAge >= 5 && checkAge <= 100;
+        int checkAgeInt;
+
+        try{
+           checkAgeInt = Integer.parseInt(checkAge);
+        } catch (Exception e){
+            return false;
+        }
+
+        return checkAgeInt >= 5 && checkAgeInt <= 100;
     }
 }
 

@@ -8,7 +8,9 @@ public class CheckPhoneNumberValidator implements ConstraintValidator<CheckPhone
     @Override
     public boolean isValid(String checkPhoneNumber, ConstraintValidatorContext constraintValidatorContext) {
 
-        if (checkPhoneNumber==null) return true;
+        if (checkPhoneNumber.isEmpty()) {
+            return true;
+        }
 
         if (checkPhoneNumber.startsWith("+7") && checkPhoneNumber.length()==12){
             checkPhoneNumber=checkPhoneNumber.substring(2);

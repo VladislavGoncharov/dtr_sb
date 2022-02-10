@@ -2,6 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="date" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -9,108 +10,112 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Новый пользователь</title>
+    <title>Мои данные</title>
     <link rel="shortcut icon" href="../../resources/images/clock.ico"/>
     <link rel="stylesheet" href="../../resources/style/style.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet">
-    <script src="../../resources/js/current_time.js"></script>
+    <script src="../../resources/js/main.js"></script>
 
 </head>
 <body>
-<header>
-    <br>
-    <div>
-        <a class="header_1" href="/">Добро пожаловать на DateTimeResult.ru</a>
-    </div>
-    <div id="current_date_time_block">
-    </div>
-</header>
+<jsp:include page="include/header.jsp"/>
 <main>
     <article>
-        <fieldset>
-            <legend>User info ${currentUsername}</legend>
-            <br>
-            <table>
-                <tr>
-                    <td>
-                        age
-                    </td>
-                    <td>
-                        ${userInfo.age}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        name
-                    </td>
-                    <td>
-                        ${userInfo.name}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        surname
-                    </td>
-                    <td>
-                        ${userInfo.surname}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        email
-                    </td>
-                    <td>
-                        ${userInfo.email}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        city
-                    </td>
+        <br>
 
-                    <td>
-                        ${userInfo.city}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        phone
-                    </td>
-
-                    <td>
-                        ${userInfo.phone}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        img
-                    </td>
-                    <td>
-                        ${userInfo.img}
-                    </td>
-                </tr>
-            </table>
-        </fieldset>
-        <input class="button" type="button" value="update" onclick="window.location.href='/updateUserInfo'"/>
-
+        <br>
+        <form>
+            <fieldset>
+                <legend>${username}</legend>
+                <br>
+                <table>
+                    <tr>
+                        <td rowspan="6">
+                            <img class="img_user" src="../../resources/images/smail/smail_${userInfo.img}.png"
+                                 alt="Изображение не найдено"/>
+                        </td>
+                        <td>
+                            Возраст
+                        </td>
+                        <td class="td_user_info">
+                            <c:if test="${userInfo.age==''}">
+                                ...
+                            </c:if>
+                            ${userInfo.age}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Имя
+                        </td>
+                        <td class="td_user_info">
+                            <c:if test="${userInfo.name==''}">
+                                ...
+                            </c:if>
+                            ${userInfo.name}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Фамилия
+                        </td>
+                        <td class="td_user_info">
+                            <c:if test="${userInfo.surname==''}">
+                                ...
+                            </c:if>
+                            ${userInfo.surname}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Email
+                        </td>
+                        <td class="td_user_info">
+                            <c:if test="${userInfo.email==''}">
+                                ...
+                            </c:if>
+                            ${userInfo.email}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Город
+                        </td>
+                        <td class="td_user_info">
+                            <c:if test="${userInfo.city==''}">
+                                ...
+                            </c:if>
+                            ${userInfo.city}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Номер телефона
+                        </td>
+                        <td class="td_user_info">
+                            <c:if test="${userInfo.phone==''}">
+                                ...
+                            </c:if>
+                            ${userInfo.phone}
+                        </td>
+                    </tr>
+                    <c:if test="${currentUsername==username}">
+                        <tr>
+                            <td colspan="3">
+                                <input class="button" type="button"
+                                       value="Изменить" onclick="window.location.href='/updateUserInfo'"/>
+                            </td>
+                        </tr>
+                    </c:if>
+                </table>
+                <br>
+            </fieldset>
+        </form>
         <br><br>
         <input class="button" type="button" value="Назад" onclick="history.back();return false;"/>
         <br>
     </article>
 </main>
+<jsp:include page="include/footer.jsp"/>
 </body>
-<footer>
-    <br>
-    <dl>
-        <dt>
-            Связь с разработчиком:
-        </dt>
-        <dd>
-            <a href="https://vk.com/veyvik87" target="_blank">Вконтакте</a>
-        </dd>
-        <dd>
-            <a href="mailto:veyvik87@gmail.com?subject=Приглашаю вас на работу Junior Java Developer" target="_blank">Gmail</a>
-        </dd>
-    </dl>
-</footer>
 </html>

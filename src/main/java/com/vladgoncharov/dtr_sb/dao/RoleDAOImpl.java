@@ -1,19 +1,15 @@
 package com.vladgoncharov.dtr_sb.dao;
 
-import com.vladgoncharov.dtr_sb.entity.AppRole;
 import com.vladgoncharov.dtr_sb.entity.UserRole;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
 
-
 @Repository
-public class RoleDAOImpl implements RoleDAO{
+public class RoleDAOImpl implements RoleDAO {
 
     @Autowired
     private EntityManager entityManager;

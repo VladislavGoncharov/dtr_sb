@@ -13,18 +13,11 @@
     <link rel="shortcut icon" href="../../resources/images/clock.ico"/>
     <link rel="stylesheet" href="../../resources/style/style.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet">
-    <script src="../../resources/js/current_time.js"></script>
+    <script src="../../resources/js/main.js"></script>
 
 </head>
 <body>
-<header>
-    <br>
-    <div>
-        <a class="header_1" href="/">Добро пожаловать на DateTimeResult.ru</a>
-    </div>
-    <div id="current_date_time_block">
-    </div>
-</header>
+<jsp:include page="include/header.jsp"/>
 <main>
     <article>
     <span class="header_2">
@@ -43,12 +36,12 @@
                         <label for="userName">Введите логин:</label>
                     </td>
                     <td>
-                        <form:input class="input" type="text" path="userName" name="userName" maxlength="36"/>
+                        <form:input class="input" type="text" path="username" name="userName" maxlength="36"/>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="textError">
-                        <form:errors path="userName"/>
+                    <td colspan="2" class="td_error">
+                        <form:errors path="username"/>
                         ${exceptionUserName}
                     </td>
                 </tr>
@@ -62,7 +55,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2"class="textError">
+                    <td colspan="2"class="td_error">
                         <form:errors path="encrytedPassword"/>
                     </td>
                 </tr>
@@ -76,15 +69,14 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="textError">
+                    <td colspan="2" class="td_error">
                                 ${exceptionPasswordCheck}
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">
                         <input class="button" type="submit" value="Добавить">
-                        <input class="button" type="reset" value="Очистить"
-                               onclick="window.location.href = 'registration'">
+                        <input class="button" type="reset" value="Очистить">
                     </td>
                 </tr>
             </table>
@@ -96,19 +88,6 @@
     <br>
     </article>
 </main>
+<jsp:include page="include/footer.jsp"/>
 </body>
-<footer>
-    <br>
-    <dl>
-        <dt>
-            Связь с разработчиком:
-        </dt>
-        <dd>
-            <a href="https://vk.com/veyvik87" target="_blank">Вконтакте</a>
-        </dd>
-        <dd>
-            <a href="mailto:veyvik87@gmail.com?subject=Приглашаю вас на работу Junior Java Developer" target="_blank">Gmail</a>
-        </dd>
-    </dl>
-</footer>
 </html>

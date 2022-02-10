@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+// Класс вычисляет знак зодиака
 @Data
 public class ZodiacSign {
 
@@ -46,7 +47,7 @@ public class ZodiacSign {
         zodiacSign = searchZodiacSing();
     }
 
-    public String searchZodiacSing() {
+    private String searchZodiacSing() {
         switch (month) {
             case 1:
                 if (day <= 20) return Capricorn();

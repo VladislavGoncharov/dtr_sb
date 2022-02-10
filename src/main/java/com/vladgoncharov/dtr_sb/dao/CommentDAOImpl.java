@@ -1,6 +1,7 @@
 package com.vladgoncharov.dtr_sb.dao;
 
 import com.vladgoncharov.dtr_sb.entity.Comment;
+import com.vladgoncharov.dtr_sb.service.UserServiceInterface;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,13 +18,15 @@ public class CommentDAOImpl implements CommentDAO{
     @Autowired
     private EntityManager entityManager;
 
+    @Autowired
+    private UserServiceInterface userServiceInterface;
+
     @Override
     public List<Comment> getAllComments() {
         Session session = entityManager.unwrap(Session.class);
 
-        List<Comment> getAllComments =
-                session.createQuery("from Comment",Comment.class).getResultList();
-        Collections.reverse(getAllComments);
+        List<Comment> getAllComments = session.createQuery("from Comment",Comment.class).getResultList();
+        Collections.reverse(getAllComments); //перевернул чтобы последние комменты были вверху
 
         return getAllComments;
     }
@@ -37,10 +40,13 @@ public class CommentDAOImpl implements CommentDAO{
     }
 
     @Override
-    public void addNewComment(Comment comment) {
+    public void addNewComment(Comment comment,String username,String role) {
         Session session = entityManager.unwrap(Session.class);
 
+        comment.setUsername(username);
+        comment.setRole(role.substring(6,role.length()-1));
         comment.setTime(String.valueOf(LocalDateTime.now()));
+        comment.setImg(userServiceInterface.getUserImg(username));
 
         session.save(comment);
     }

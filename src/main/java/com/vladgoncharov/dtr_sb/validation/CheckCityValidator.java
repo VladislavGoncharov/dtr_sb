@@ -10,12 +10,16 @@ public class CheckCityValidator implements ConstraintValidator<CheckCity, String
     @Override
     public boolean isValid(String checkCity, ConstraintValidatorContext constraintValidatorContext) {
 
-        if (checkCity==null)return true;
+        if (checkCity.isEmpty()) {
+            return true;
+        }
 
         for (int i = 0; i < checkCity.length(); i++) {
             Character symbol = checkCity.charAt(i);
 
+            //более 2 пробелов/тире/пробелов-тире быть не может
             if (spaceOrDash>2) {
+                spaceOrDash = 0;
                 return false;
             }
 
@@ -25,8 +29,11 @@ public class CheckCityValidator implements ConstraintValidator<CheckCity, String
             }
 
             if (!Character.isLetter(symbol)){
+                spaceOrDash = 0;
                 return false;}
         }
+
+        spaceOrDash = 0;
         return true;
     }
 }

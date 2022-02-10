@@ -5,6 +5,7 @@ import lombok.Data;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 // Класс конвертирует указанную единицу времени в различные единицы времени
@@ -23,20 +24,21 @@ public class TimeUnitConverter {
     private double amountOfTime;
     private byte UOM;
 
-    private final Map<Integer, String> unitsOfMeasurement = Map.of(
-            0, "секунда",
-            1, "минута",
-            2, "час",
-            3, "день",
-            4, "неделя",
-            5, "месяц",
-            6, "год");
+    private final Map<Integer, String> unitsOfMeasurement = new LinkedHashMap<>(){{
+        put(0, "секунда");
+        put(1, "минута");
+        put(2, "час");
+        put(3, "день");
+        put(4, "неделя");
+        put(5, "месяц");
+        put(6, "год");
+    }};
 
     public TimeUnitConverter() {
 
     }
     // Главный метод конвертирующий время
-    public void theResultOfWorkingWithTime(){
+    public void getResult(){
         methodOfMeasuringSeconds();
         methodOfMeasuringMinutes();
         methodOfMeasuringHours();
@@ -47,7 +49,7 @@ public class TimeUnitConverter {
     }
 
     // Метод вычисления секунд
-    public void methodOfMeasuringSeconds() {
+    private void methodOfMeasuringSeconds() {
         switch (UOM) {
             case 0:
                 setSeconds(numberSeparator(amountOfTime));
@@ -74,7 +76,7 @@ public class TimeUnitConverter {
     }
 
     // Метод вычисления минут
-    public void methodOfMeasuringMinutes() {
+    private void methodOfMeasuringMinutes() {
         switch (UOM) {
             case 0:
                 setMinutes(numberSeparator(amountOfTime / 60));
@@ -101,7 +103,7 @@ public class TimeUnitConverter {
     }
 
     // Метод вычисления часов
-    public void methodOfMeasuringHours() {
+    private void methodOfMeasuringHours() {
         switch (UOM) {
             case 0:
                 setHours(numberSeparator(amountOfTime / 60 / 60));
@@ -128,7 +130,7 @@ public class TimeUnitConverter {
     }
 
     // Метод вычисления дней
-    public void methodOfMeasuringDays() {
+    private void methodOfMeasuringDays() {
         switch (UOM) {
             case 0:
                 setDays(numberSeparator(amountOfTime / 24 / 60 / 60));
@@ -155,7 +157,7 @@ public class TimeUnitConverter {
     }
 
     // Метод вычисления недель
-    public void methodOfMeasuringWeeks() {
+    private void methodOfMeasuringWeeks() {
         switch (UOM) {
             case 0:
                 setWeeks(numberSeparator(amountOfTime / 7 / 24 / 60 / 60));
@@ -182,7 +184,7 @@ public class TimeUnitConverter {
     }
 
     // Метод вычисления месяцев
-    public void methodOfMeasuringMonths() {
+    private void methodOfMeasuringMonths() {
         switch (UOM) {
             case 0:
                 setMonths(numberSeparator(amountOfTime / 4.34524 / 7 / 24 / 60 / 60));
@@ -209,7 +211,7 @@ public class TimeUnitConverter {
     }
 
     // Метод вычисления лет
-    public void methodOfMeasuringYears() {
+    private void methodOfMeasuringYears() {
         switch (UOM) {
             case 0:
                 setYears(numberSeparator(amountOfTime / 12 / 4.34524 / 7 / 24 / 60 / 60));
@@ -236,7 +238,7 @@ public class TimeUnitConverter {
     }
 
     // Метод разделяет числа пробелом по тысячам (83 566 684 482)
-    public String numberSeparator(double number) {
+    private String numberSeparator(double number) {
         DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance();
         DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
         symbols.setGroupingSeparator(' ');

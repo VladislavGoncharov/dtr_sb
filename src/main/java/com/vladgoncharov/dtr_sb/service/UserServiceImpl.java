@@ -1,20 +1,14 @@
 package com.vladgoncharov.dtr_sb.service;
 
-import com.vladgoncharov.dtr_sb.dao.RoleDAO;
 import com.vladgoncharov.dtr_sb.dao.UserDAO;
 import com.vladgoncharov.dtr_sb.entity.AppUser;
 import com.vladgoncharov.dtr_sb.entity.AppUserInfo;
 import com.vladgoncharov.dtr_sb.entity.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,39 +18,14 @@ public class UserServiceImpl implements UserServiceInterface {
     @Autowired
     private UserDAO userDAO;
 
-    @Autowired
-    private RoleDAO roleDAO;
-
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        AppUser user = (AppUser) userDAO.findUserAccount(userName);
-        if (user == null){
-            System.out.println("User not found! "+userName);
-            throw new UsernameNotFoundException("User "+userName+
-                    " was not found in the database");
-        }
-
-        System.out.println("Found User: "+user);
-
-        List<String> roleNames = roleDAO.getRoleName(user.getUserId());
-
-        List<GrantedAuthority> grantList = new ArrayList<>();
-        if (roleNames != null) {
-            for (String role: roleNames){
-                GrantedAuthority authority = new SimpleGrantedAuthority(role);
-                grantList.add(authority);
-            }
-        }
-
-        UserDetails userDetails = (UserDetails) new User(user.getUserName(),
-                user.getEncrytedPassword(), grantList);
-
-        return userDetails;
+    public UserDetails loadUserByUsername(String userName) {
+        return userDAO.loadUserByUsername(userName);
     }
 
     @Override
-    public Object findUserAccount(String userName) {
-        return userDAO.findUserAccount(userName);
+    public Object findUserByAccount(String userName) {
+        return userDAO.findUserByAccount(userName);
     }
 
     @Override
@@ -65,8 +34,8 @@ public class UserServiceImpl implements UserServiceInterface {
     }
 
     @Override
-    public void saveUser(AppUser user){
-        userDAO.saveUser(user);
+    public void saveUser(AppUser user,String roleName){
+        userDAO.saveUser(user,roleName);
     }
 
     @Override
@@ -77,11 +46,6 @@ public class UserServiceImpl implements UserServiceInterface {
     @Override
     public void deleteUser(long id) {
         userDAO.deleteUser(id);
-    }
-
-    @Override
-    public void saveModerator(AppUser user) {
-        userDAO.saveModerator(user);
     }
 
     @Override
@@ -97,6 +61,11 @@ public class UserServiceImpl implements UserServiceInterface {
     @Override
     public void updateInfo(AppUserInfo userInfo) {
         userDAO.updateInfo(userInfo);
+    }
+
+    @Override
+    public int getUserImg(String username) {
+        return userDAO.getUserImg(username);
     }
 
 }

@@ -8,7 +8,7 @@ public interface CommentService {
 
     List<Comment> getAllComments();
 
-    void addNewComment(Comment comment);
+    void addNewComment(Comment comment,String username,String role);
 
     void deleteComment(long id);
 

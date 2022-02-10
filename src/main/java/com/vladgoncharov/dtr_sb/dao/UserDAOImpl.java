@@ -7,11 +7,17 @@ import com.vladgoncharov.dtr_sb.entity.UserRole;
 import com.vladgoncharov.dtr_sb.utility.EncrytedPasswordUtils;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,26 +27,50 @@ public class UserDAOImpl implements UserDAO{
     @Autowired
     private EntityManager entityManager;
 
+    @Autowired
+    private RoleDAO roleDAO;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        AppUser user = (AppUser) findUserByAccount(username);
+        if (user == null){
+            throw new UsernameNotFoundException("User "+username+
+                    " was not found in the database");
+        }
+
+        List<String> roleNames = roleDAO.getRoleName(user.getUserId());
+
+        List<GrantedAuthority> grantList = new ArrayList<>();
+        if (roleNames != null) {
+            for (String role: roleNames){
+                GrantedAuthority authority = new SimpleGrantedAuthority(role);
+                grantList.add(authority);
+            }
+        }
+
+        return (UserDetails) new User(user.getUsername(), user.getEncrytedPassword()
+                ,user.isEnabled(),user.isAccountNonExpired()
+                ,user.isCredentialsNonExpired(),user.isAccountNonLocked(), grantList);
+    }
+
     @Override
     public List<UserRole> getAllUsers(String roleName) {
         Session session = entityManager.unwrap(Session.class);
 
         String sql = "from UserRole where appRole.roleName='ROLE_"+ roleName +"'";
-        List<UserRole> allUsers = session.createQuery(sql, UserRole.class).getResultList();
 
-        return allUsers;
+        return session.createQuery(sql, UserRole.class).getResultList();
     }
 
-    // select e from vlade where
     @Override
-    public Object findUserAccount(String userName) {
+    public Object findUserByAccount(String username) {
 
         try{
             String sql = "Select e from " + AppUser.class.getName() + " e " //
-                    + " Where e.userName = :userName ";
+                    + " Where e.username = :username ";
 
             Query query = entityManager.createQuery(sql, AppUser.class);
-            query.setParameter("userName",userName);
+            query.setParameter("username", username);
 
             return query.getSingleResult();
         } catch (NoResultException e){
@@ -59,15 +89,15 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public void saveUser(AppUser user) {
+    public void saveUser(AppUser user, String roleName) {
         Session session = entityManager.unwrap(Session.class);
-        System.out.println(user.isAccountNonLocked());
+
         if (user.isAccountNonLocked()){
             session.update(user);
         }
         else {
             List<AppRole> getAllRole = session.createQuery("from AppRole ",AppRole.class).getResultList();
-            AppRole userRole = getAllRole.stream().filter(x->x.getRoleName().equals("ROLE_USER")).findFirst().get();
+            AppRole userRole = getAllRole.stream().filter(x->x.getRoleName().equals(roleName)).findFirst().get();
 
             user.setAccountNonLocked(true);
             user.setEncrytedPassword(new EncrytedPasswordUtils().encrytePassword(user.getEncrytedPassword()));
@@ -77,21 +107,6 @@ public class UserDAOImpl implements UserDAO{
             session.save(user);
             session.save(new UserRole(user,userRole));
         }
-    }
-
-    @Override
-    public void saveModerator(AppUser user) {
-        Session session = entityManager.unwrap(Session.class);
-
-        List<AppRole> getAllRole = session.createQuery("from AppRole ",AppRole.class).getResultList();
-        AppRole userRole = getAllRole.stream().filter(x->x.getRoleName().equals("ROLE_MODERATOR")).findFirst().get();
-
-        user.setAccountNonLocked(true);
-        user.setEncrytedPassword(new EncrytedPasswordUtils().encrytePassword(user.getEncrytedPassword()));
-        user.setRole(userRole.getRoleName());
-
-        session.save(user);
-        session.save(new UserRole(user,userRole));
     }
 
     @Override
@@ -123,5 +138,11 @@ public class UserDAOImpl implements UserDAO{
     public void updateInfo(AppUserInfo userInfo) {
         Session session = entityManager.unwrap(Session.class);
         session.update(userInfo);
+    }
+
+    @Override
+    public int getUserImg(String username) {
+        AppUser user = (AppUser) findUserByAccount(username);
+        return user.getAppUserInfo().getImg();
     }
 }

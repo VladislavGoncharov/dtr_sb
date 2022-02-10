@@ -5,15 +5,13 @@ import lombok.Data;
 import javax.validation.constraints.Pattern;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 // Класс подсчитывает количество нестандартных (2 через 2)
 // рабочий и выходных дней и показывает таблицу из 8 недель
 @Data
-public class WorkingDaysAndWeekends extends DateDifference {
+public class WorkingDaysAndWeekends {
 
     @Pattern(regexp = "\\d{2}.\\d{2}.\\d{4}", message = "Обрати внимание на формат ===> дд.мм.гггг")
     private String dateString;
@@ -33,14 +31,28 @@ public class WorkingDaysAndWeekends extends DateDifference {
     }
 
     // Метод конвертирует дату и запускает цикл подсчета дней
-    public void theResultOfWorkingWithTime() {
+    public void getResult() {
         localDate = dateConversionInLocalDate(dateString);
         mondayDate = getDayOfWeekMonday(localDate);
         starTheCycleOfCountingDays();
     }
 
+    // Метод преобразования таблицы в массив (используется в jsp, не удалять)
+    public int getDayFromList() {
+        return listWorkingDaysAndWeekends.remove();
+    }
+
+    // Метод преобразования даты из String в LocalDate
+    private LocalDate dateConversionInLocalDate(String newDate) {
+        int day = Integer.parseInt(newDate.substring(0, 2));
+        int month = Integer.parseInt(newDate.substring(3, 5));
+        int year = Integer.parseInt(newDate.substring(6, 10));
+
+        return LocalDate.of(year, month, day);
+    }
+
     // Метод получает первый прошедший понедельник из исходной даты, так как в таблице ровные 8 недель
-    public LocalDate getDayOfWeekMonday(LocalDate date) {
+    private LocalDate getDayOfWeekMonday(LocalDate date) {
         while (!(date.getDayOfWeek() == DayOfWeek.MONDAY)) {
             date = date.minusDays(1);
         }
@@ -51,7 +63,7 @@ public class WorkingDaysAndWeekends extends DateDifference {
     // а потом начинает подсчет рабочи и выходных дней в течение 8 недель.
     // В массиве цифрой "0" обозначаются не рабочие дни
     // В массиве цифрой "1" обозначаются выходные дни
-    public void starTheCycleOfCountingDays() {
+    private void starTheCycleOfCountingDays() {
         LocalDate stopTheCycle = localDate.plusWeeks(8);
         countingDaysBeforeLocalDate();
         while (localDate.isBefore(stopTheCycle)) {
@@ -62,7 +74,7 @@ public class WorkingDaysAndWeekends extends DateDifference {
 
     // Метод вносит даты с понедельника до исходного числа
     // (Таблица начинается с понедельника, а исходная дата не обязана быть понедельником)
-    public void countingDaysBeforeLocalDate() {
+    private void countingDaysBeforeLocalDate() {
         while (!(mondayDate.getDayOfYear() == localDate.getDayOfYear())) {
             listWorkingDaysAndWeekends.add(0);
             listWorkingDaysAndWeekends.add(mondayDate.getDayOfMonth());
@@ -70,7 +82,7 @@ public class WorkingDaysAndWeekends extends DateDifference {
         }
     }
     // Метод считает рабочие дни и заносит их в массив
-    public void countingWorkingDays() {
+    private void countingWorkingDays() {
         for (int i = 0; i < numberOfWorkingDays; i++) {
             listWorkingDaysAndWeekends.add( 1);
             listWorkingDaysAndWeekends.add(localDate.getDayOfMonth());
@@ -78,16 +90,12 @@ public class WorkingDaysAndWeekends extends DateDifference {
         }
     }
     // Метод считает выходные дни и заносит их в массив
-    public void countingWeekends() {
+    private void countingWeekends() {
         for (int i = 0; i < numberOfWeekends; i++) {
             listWorkingDaysAndWeekends.add( 0);
             listWorkingDaysAndWeekends.add(localDate.getDayOfMonth());
             localDate = localDate.plusDays(1);
         }
 
-    }
-    // Метод преобразования таблицы в массив
-    public int getDayFromList() {
-        return listWorkingDaysAndWeekends.remove();
     }
 }

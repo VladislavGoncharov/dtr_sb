@@ -10,17 +10,10 @@
     <link rel="shortcut icon" href="../../resources/images/clock.ico"/>
     <link rel="stylesheet" href="../../resources/style/style.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet">
-    <script src="../../resources/js/current_time.js"></script>
+    <script src="../../resources/js/main.js"></script>
 
 <body>
-<header>
-    <br>
-    <div>
-        <a  class="header_1" href="/" >Добро пожаловать на DateTimeResult.ru</a>
-    </div>
-    <div id="current_date_time_block">
-    </div>
-</header>
+<jsp:include page="include/header.jsp"/>
 <main>
     <article>
     <br>
@@ -79,19 +72,6 @@
     <br>
     </article>
 </main>
+<jsp:include page="include/footer.jsp"/>
 </body>
-<footer>
-    <br>
-    <dl>
-        <dt>
-            Связь с разработчиком:
-        </dt>
-        <dd>
-            <a href="https://vk.com/veyvik87" target="_blank">Вконтакте</a>
-        </dd>
-        <dd>
-            <a href="mailto:veyvik87@gmail.com?subject=Приглашаю вас на работу Junior Java Developer" target="_blank">Gmail</a>
-        </dd>
-    </dl>
-</footer>
 </html>

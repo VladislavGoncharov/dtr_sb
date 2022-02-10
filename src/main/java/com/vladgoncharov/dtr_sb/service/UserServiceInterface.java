@@ -13,21 +13,21 @@ public interface UserServiceInterface extends UserDetailsService{
 
     UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException;
 
-    Object findUserAccount(String userName);
+    Object findUserByAccount(String userName);
 
     UserRole findUserById(long id);
 
-    void saveUser(AppUser user);
+    void saveUser(AppUser user,String roleName);
 
     List<UserRole> getAllUsers(String roleName);
 
     void deleteUser(long id);
-
-    void saveModerator(AppUser user);
 
     void blockUser(long id);
 
     long getNumberOfUser(String roleName);
 
     void updateInfo(AppUserInfo userInfo);
+
+    int getUserImg(String username);
 }

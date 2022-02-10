@@ -56,3 +56,14 @@ function date_time() {
 setInterval(function () {
     document.getElementById('current_date_time_block').innerHTML = date_time();
 }, 10);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Разделитель//
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Показывает скрытое, скрывает видимое
+function flip_flop( id )
+{
+    element = document.getElementById( id );
+
+    element.style.display = element.style.display == "none" ? "" : "none";
+}

@@ -22,60 +22,55 @@ public class AdminController {
     @GetMapping(value = "/adminPage")
     public String adminPage(Model model) {
 
-        long NOM = userDetailsService.getNumberOfUser("MODERATOR");
-        long NOU = userDetailsService.getNumberOfUser("USER");
-
-        model.addAttribute("numberOfModerators",NOM);
-        model.addAttribute("numberOfUsers",NOU);
+        model.addAttribute("numberOfModerators", userDetailsService.getNumberOfUser("MODERATOR"));
+        model.addAttribute("numberOfUsers", userDetailsService.getNumberOfUser("USER"));
 
         return "admin_page";
     }
 
     @GetMapping("/registrationModerator")
     public String registrationModerator(Model model) {
-        model.addAttribute("user", new AppUser());
+        model.addAttribute("moderator", new AppUser());
         return "registration_moderator";
     }
 
     @PostMapping("/registrationModerator")
-    public String saveModerator(@Valid @ModelAttribute("user") AppUser user
+    public String saveModerator(@Valid @ModelAttribute("moderator") AppUser moderator
             , BindingResult bindingResult, Model model) {
 
-        AppUser appUser = (AppUser) userDetailsService.findUserAccount(user.getUserName());
+        AppUser appUser = (AppUser) userDetailsService.findUserByAccount(moderator.getUsername());
 
         if (bindingResult.hasErrors()) {
             return "registration_moderator";
         }
-        if (appUser != null){
-            model.addAttribute("exceptionUserName"," такой пользователь уже существует");
+        if (appUser != null) {
+            model.addAttribute("exceptionUsername", "такой пользователь уже существует");
             return "registration_moderator";
         }
-        if (!user.getEncrytedPassword().equals(user.getEncrytedPasswordCheck())) {
-            model.addAttribute("exceptionPasswordCheck"," пароли не совпадают");
+        if (!moderator.getEncrytedPassword().equals(moderator.getEncrytedPasswordCheck())) {
+            model.addAttribute("exceptionPasswordCheck", "пароли не совпадают");
             return "registration_moderator";
         }
-        userDetailsService.saveModerator(user);
 
+        userDetailsService.saveUser(moderator, "ROLE_MODERATOR");
         return "redirect:/admin/adminPage";
     }
 
-    @GetMapping("/showUSER")
-    public String showUser(Model model) {
+    @GetMapping("/show{roleName}")
+    public String showUser(@PathVariable("roleName") String roleName, Model model) {
 
-        List<UserRole> allUsers = userDetailsService.getAllUsers("USER");
+        List<UserRole> allUsers;
+
+        if (roleName.equals("MODERATOR")){
+            allUsers = userDetailsService.getAllUsers("MODERATOR");
+            model.addAttribute("text", "Количество модераторов: " + allUsers.size());
+        }
+        else {
+            allUsers = userDetailsService.getAllUsers("USER");
+            model.addAttribute("text", "Количество пользователей: " + allUsers.size());
+        }
+
         model.addAttribute("users", allUsers);
-        model.addAttribute("text", "Количество пользователей: "+allUsers.size());
-
-        return "show-user";
-    }
-
-    @GetMapping("/showMODERATOR")
-    public String showModerator(Model model) {
-
-        List<UserRole> allUsers = userDetailsService.getAllUsers("MODERATOR");
-        model.addAttribute("users", allUsers);
-        model.addAttribute("text", "Количество модераторов: "+allUsers.size());
-
         return "show-user";
     }
 
@@ -84,8 +79,8 @@ public class AdminController {
         UserRole user = userDetailsService.findUserById(id);
 
         userDetailsService.deleteUser(id);
-
-        return "redirect:/admin/show"+ user.getRoleName().substring(5);
+        //Чтобы не дублировать код: showUSER or showMODERATOR
+        return "redirect:/admin/show" + user.getRoleName().substring(5);
     }
 
     @RequestMapping("/showUser/blockUser/{id}")
@@ -93,7 +88,7 @@ public class AdminController {
         UserRole user = userDetailsService.findUserById(id);
 
         userDetailsService.blockUser(id);
-
-        return "redirect:/admin/show"+ user.getRoleName().substring(5);
+        //Чтобы не дублировать код: showUSER or showMODERATOR
+        return "redirect:/admin/show" + user.getRoleName().substring(5);
     }
 }

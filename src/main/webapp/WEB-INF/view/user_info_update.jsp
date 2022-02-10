@@ -9,120 +9,167 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Новый пользователь</title>
+    <title>Изменить данные</title>
     <link rel="shortcut icon" href="../../resources/images/clock.ico"/>
     <link rel="stylesheet" href="../../resources/style/style.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet">
-    <script src="../../resources/js/current_time.js"></script>
+    <script src="../../resources/js/main.js"></script>
 
 </head>
 <body>
-<header>
-    <br>
-    <div>
-        <a class="header_1" href="/">Добро пожаловать на DateTimeResult.ru</a>
-    </div>
-    <div id="current_date_time_block">
-    </div>
-</header>
+<jsp:include page="include/header.jsp"/>
 <main>
     <article>
-        <fieldset>
-            <legend>User info ${currentUsername}</legend>
             <br>
-            <%--@elvariable id="userInfo" type="com.vladgoncharov.dtr_sb.entity.AppUserInfo"--%>
-            <form:form action="userInfo_${currentUsername}" method="post" modelAttribute="userInfo">
+            <%--@elvariable id="appUserInfo" type="com.vladgoncharov.dtr_sb.entity.AppUserInfo"--%>
+            <form:form action="userInfo_${currentUsername}" method="post" modelAttribute="appUserInfo">
+            <fieldset>
+                <legend>${currentUsername}</legend>
+                <br>
                 <form:hidden path="id"/>
                 <form:hidden path="checkingEmail"/>
                 <table>
                     <tr>
-                        <td>
-                            Возраст:
+                        <td rowspan="12">
+                            <img class="img_user" src="../../resources/images/smail/smail_${appUserInfo.img}.png"
+                                 alt="Изображение не найдено"/>
                         </td>
                         <td>
-                            <form:input path="age"/>
+                            Возраст
+                        </td>
+                        <td>
+                            <form:input cssClass="input" path="age" placeholder="25"/>
                             <form:errors path="age"/>
                         </td>
                     </tr>
                     <tr>
-
+                        <td>
+                        </td>
+                        <td class="td_error">
+                            <form:errors path="age"/>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>
                             Имя
                         </td>
                         <td>
-                            <form:input path="name"/>
+                            <form:input cssClass="input" path="name" placeholder="Иван"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td class="td_error">
                             <form:errors path="name"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            surname
+                            Фамилия
                         </td>
                         <td>
-                            <form:input path="surname"/>
+                            <form:input cssClass="input" path="surname" placeholder="Иванов"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td class="td_error">
                             <form:errors path="surname"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            email
+                            Email
                         </td>
                         <td>
-                            <form:input path="email"/>
+                            <form:input cssClass="input" path="email" placeholder="ivanov_ivan@gmail.com"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td class="td_error">
                             <form:errors path="email"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            city
+                            Город
                         </td>
                         <td>
-                            <form:input path="city"/>
+                            <form:input cssClass="input" path="city" placeholder="Москва"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td class="td_error">
                             <form:errors path="city"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            phone
+                            Номер телефона
                         </td>
-
                         <td>
-                            <form:input path="phone"/>
-                            <form:errors path="phone"/>
+                            <form:input cssClass="input" path="phone" placeholder="+79991122333"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            img
                         </td>
-                        <td>
-                            <form:input path="img"/>
+                        <td class="td_error">
+                            <form:errors path="phone"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="2">
+                            <input type="button" class="button" value="Выбрать смайл" onclick="flip_flop('table_smail');"/>
+                            <div id="table_smail" class="table_smail" style="display: none;">
+                                <div>
+                                    <div class="radio_button_smail smail_small_1">
+                                        <form:radiobutton path="img" value="1" label=""/>
+                                    </div>
+                                    <div class="radio_button_smail smail_small_2">
+                                        <form:radiobutton path="img" value="2" label=""/>
+                                    </div>
+                                    <div class="radio_button_smail smail_small_3">
+                                        <form:radiobutton path="img" value="3" label=""/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="radio_button_smail smail_small_4">
+                                        <form:radiobutton path="img" value="4" label=""/>
+                                    </div>
+                                    <div class="radio_button_smail smail_small_5">
+                                        <form:radiobutton path="img" value="5" label=""/>
+                                    </div>
+                                    <div class="radio_button_smail smail_small_6">
+                                        <form:radiobutton path="img" value="6" label=""/>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <input class="button" type="submit" value="Сохранить">
+                            <input class="button" type="reset" value="Очистить"
+                                   onclick="window.location.href='updateUserInfo_clear'">
                         </td>
                     </tr>
                 </table>
-
-                <input type="submit" value="OK">
+                <br>
+            </fieldset>
             </form:form>
-
-        </fieldset>
         <br><br>
         <input class="button" type="button" value="Назад" onclick="history.back();return false;"/>
         <br>
     </article>
 </main>
+<jsp:include page="include/footer.jsp"/>
 </body>
-<footer>
-    <br>
-    <dl>
-        <dt>
-            Связь с разработчиком:
-        </dt>
-        <dd>
-            <a href="https://vk.com/veyvik87" target="_blank">Вконтакте</a>
-        </dd>
-        <dd>
-            <a href="mailto:veyvik87@gmail.com?subject=Приглашаю вас на работу Junior Java Developer" target="_blank">Gmail</a>
-        </dd>
-    </dl>
-</footer>
 </html>

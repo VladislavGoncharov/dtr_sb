@@ -37,6 +37,7 @@ section{
 footer {
     background: linear-gradient(#bdbad7 0%, #415190 85%);
     color: black;
+    font-size: calc(0.5vh + 1vw);
 
     padding: 3px 10vw;
 

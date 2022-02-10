@@ -3,7 +3,6 @@ package com.vladgoncharov.dtr_sb.working_with_a_date;
 import lombok.Data;
 
 import java.time.LocalTime;
-import java.util.Map;
 
 // Класс прибавляет/отнимает время
 @Data
@@ -29,7 +28,7 @@ public class TimeDifference {
 
     }
     // Метод преобразует время в LocalTime и прибавляет/отнимает время
-    public void theResultOfWorkingWithTime() {
+    public void getResult() {
         initialTime = LocalTime.of(hours, minutes, seconds);
 
         if (plusMinus == 0) {
@@ -57,8 +56,9 @@ public class TimeDifference {
         }
 
     }
+
     // Метод преобразует LocalDate в часы, минуты, секунды
-    public void addResultInAVariables(LocalTime time) {
+    private void addResultInAVariables(LocalTime time) {
         this.hours = (byte) time.getHour();
         this.minutes = (byte) time.getMinute();
         this.seconds = (byte) time.getSecond();
@@ -66,7 +66,7 @@ public class TimeDifference {
     }
 
     // Метод который правильно выдает текст единицы времени (час,часов и тд.)
-    public void methodCorrectSpellingOfTheTimeText() {
+    private void methodCorrectSpellingOfTheTimeText() {
         int lastDigitMinutes = Integer.parseInt(String.valueOf(minutes).substring(String.valueOf(minutes).length() - 1));
         int lastDigitSeconds = Integer.parseInt(String.valueOf(seconds).substring(String.valueOf(seconds).length() - 1));
 

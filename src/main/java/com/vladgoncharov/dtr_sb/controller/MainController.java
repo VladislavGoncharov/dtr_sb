@@ -1,6 +1,5 @@
 package com.vladgoncharov.dtr_sb.controller;
 
-import com.vladgoncharov.dtr_sb.dao.UserDAO;
 import com.vladgoncharov.dtr_sb.entity.AppUser;
 import com.vladgoncharov.dtr_sb.entity.Comment;
 import com.vladgoncharov.dtr_sb.service.CommentService;
@@ -10,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -29,21 +30,18 @@ public class MainController {
     @GetMapping("/")
     public String firstView(Model model, Principal principal) {
 
-        String currentUsername = "Гость";
+        if (principal != null) {
+            AppUser user = (AppUser) userServiceInterface.findUserByAccount(principal.getName());
 
-        if (principal!=null){
-            currentUsername = principal.getName();
-            AppUser user =
-                    (AppUser) userServiceInterface.findUserAccount(currentUsername);
-
-            model.addAttribute("theUserIsReadyToCheckEmail",user.getAppUserInfo().theUserIsReadyToCheckEmail());
+            model.addAttribute("theUserIsReadyToCheckEmail"
+                    , user.getAppUserInfo().theUserIsReadyToCheckEmail());
             model.addAttribute("comment", new Comment());
+            model.addAttribute("currentUsername", principal.getName());
         }
-
-        model.addAttribute("currentUsername", currentUsername);
 
         List<Comment> allComments = commentService.getAllComments();
         model.addAttribute("comments", allComments);
+        model.addAttribute("arrayRoleName", new String[]{"user", "moderator", "admin"});
 
         return "first-view";
     }
@@ -55,17 +53,20 @@ public class MainController {
     }
 
     @GetMapping("changeTheDateResult")
-    public String changeTheDateResult(@Valid @ModelAttribute("dateDifference") DateDifference date, BindingResult bindingResult) {
+    public String changeTheDateResult(@Valid @ModelAttribute("dateDifference") DateDifference dateDifference
+            , BindingResult bindingResult) {
+
         if (bindingResult.hasErrors()) {
             return "change-the-date";
-        } else {
-            try {
-                date.methodGetTheDateDifference();
-            } catch (Exception e) {
-                return "change-the-date-exception";
-            }
-            return "change-the-date-result";
         }
+
+        try {
+            dateDifference.getResult();
+        } catch (Exception e) {
+            return "change-the-date-exception";
+        }
+
+        return "change-the-date-result";
     }
 
     @PostMapping("changeTheDateException")
@@ -80,8 +81,8 @@ public class MainController {
     }
 
     @GetMapping("changeTheTimeResult")
-    public String changeTheTimeResult(@ModelAttribute("timeDifference") TimeDifference time) {
-        time.theResultOfWorkingWithTime();
+    public String changeTheTimeResult(@ModelAttribute("timeDifference") TimeDifference timeDifference) {
+        timeDifference.getResult();
         return "change-the-time-result";
     }
 
@@ -92,10 +93,11 @@ public class MainController {
     }
 
     @GetMapping("timeUnitConvertedResult")
-    public String timeUnitConvertedResult(@ModelAttribute("timeUnitConverted") TimeUnitConverter time) {
-        time.theResultOfWorkingWithTime();
+    public String timeUnitConvertedResult(@ModelAttribute("timeUnitConverted") TimeUnitConverter timeUnitConverted) {
+        timeUnitConverted.getResult();
         return "time-unit-converted-result";
     }
+
 
     @GetMapping("workingDaysAndWeekends")
     public String workingDaysAndWeekends(Model model) {
@@ -104,16 +106,21 @@ public class MainController {
     }
 
     @GetMapping("workingDaysAndWeekendsResult")
-    public String workingDaysAndWeekendsResult(@Valid @ModelAttribute("workingDaysAndWeekends")
-           WorkingDaysAndWeekends workingDaysAndWeekends, BindingResult bindingResult) {
+    public String workingDaysAndWeekendsResult(
+            @Valid @ModelAttribute("workingDaysAndWeekends") WorkingDaysAndWeekends workingDaysAndWeekends
+            , BindingResult bindingResult) {
+
         if (bindingResult.hasErrors()) {
             return "working-days-and-weekends";
-        } else try {
-            workingDaysAndWeekends.theResultOfWorkingWithTime();
+        }
+
+        try {
+            workingDaysAndWeekends.getResult();
         } catch (Exception e) {
             e.printStackTrace();
             return "change-the-date-exception";
         }
+
         return "working-days-and-weekends-result";
 
     }
@@ -125,11 +132,11 @@ public class MainController {
     }
 
     @PostMapping("zodiacSignResult")
-    public String zodiacSignResult(@ModelAttribute("zodiacSign")ZodiacSign zodiacSign) {
+    public String zodiacSignResult(@ModelAttribute("zodiacSign") ZodiacSign zodiacSign) {
 
-        try{
+        try {
             zodiacSign.getResult();
-        }catch (DateTimeException e){
+        } catch (DateTimeException e) {
             return "change-the-date-exception";
         }
 
@@ -143,15 +150,14 @@ public class MainController {
     }
 
     @PostMapping("chineseZodiacResult")
-    public String chineseZodiacResult(@ModelAttribute("chineseZodiac")ChineseZodiac ChineseZodiac) {
+    public String chineseZodiacResult(@ModelAttribute("chineseZodiac") ChineseZodiac chineseZodiac) {
 
-        try{
-            ChineseZodiac.getResult();
-        }catch(Exception e){
+        try {
+            chineseZodiac.getResult();
+        } catch (Exception e) {
             return "change-the-date-exception";
         }
 
         return "chinese-zodiac-result";
     }
-
 }

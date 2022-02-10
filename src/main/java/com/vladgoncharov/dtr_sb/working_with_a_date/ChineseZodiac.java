@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.text.DecimalFormat;
 
+// Класс вычисляет в год кого рожден пользователь
 @Data
 public class ChineseZodiac {
 
@@ -20,11 +21,11 @@ public class ChineseZodiac {
     }
 
     public void getResult() {
-        String difference = twoNumbersAfterTheComma();
+        String difference = getTwoNumbersAfterComma();
         chineseZodiac = searchChineseZodiac(difference);
     }
 
-    private String twoNumbersAfterTheComma() {
+    private String getTwoNumbersAfterComma() {
         double yearDouble = Double.parseDouble(year);
         double result = (yearDouble / 12) - Math.floor(yearDouble / 12);
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
@@ -32,6 +33,7 @@ public class ChineseZodiac {
         return decimalFormat.format(result);
     }
 
+    //  помощью остатка из 2 цифр после запятой совершаю поиск нужного животного
     private String searchChineseZodiac(String difference) {
         switch (difference) {
             case "0,0":

@@ -40,7 +40,7 @@ public class DateDifference {
 
     /* Метод, где даты преобразуются в тип LocalDate и определяется какая из дат раньше,
      а какая позже для уменьшения возможных ошибок */
-    public void methodGetTheDateDifference() {
+    public void getResult() {
 
         firstLocalDate = dateConversionInLocalDate(firstDateString);
         secondLocalDate = dateConversionInLocalDate(secondDateString);
@@ -52,7 +52,7 @@ public class DateDifference {
     }
 
     // Метод высчитывания разницы между датами в разный единицах измерения
-    public void dateConversions(LocalDate startDate, LocalDate endDate) {
+    private void dateConversions(LocalDate startDate, LocalDate endDate) {
         Period period = Period.between(startDate, endDate);
 
         this.year = period.getYears();
@@ -79,7 +79,7 @@ public class DateDifference {
     }
 
     // Метод преобразования даты из String в LocalDate
-    public LocalDate dateConversionInLocalDate(String newDate) {
+    private LocalDate dateConversionInLocalDate(String newDate) {
         int day = Integer.parseInt(newDate.substring(0, 2));
         int month = Integer.parseInt(newDate.substring(3, 5));
         int year = Integer.parseInt(newDate.substring(6, 10));
@@ -88,7 +88,7 @@ public class DateDifference {
     }
 
     // Метод подсчета количества дней в указанный период
-    public int methodCountTheDays(LocalDate startDate, LocalDate endDate) {
+    private int methodCountTheDays(LocalDate startDate, LocalDate endDate) {
         int getYearStartDate = startDate.getYear();
         int getDaysBeforeEndYear =
                 LocalDate.of(getYearStartDate, 12, 31).getDayOfYear() - startDate.getDayOfYear();
@@ -110,7 +110,7 @@ public class DateDifference {
     }
 
     // Метод который правильно выдает текст единицы времени (год,лет и тд.)
-    public void methodCorrectSpellingOfTheTimeText() {
+    private void methodCorrectSpellingOfTheTimeText() {
         int lastDigitYear = Integer.parseInt(String.valueOf(year).substring(String.valueOf(year).length() - 1));
 
         if (lastDigitYear == 1) setTextYear("год");
@@ -128,7 +128,7 @@ public class DateDifference {
     }
 
     // Метод разделяет числа пробелом по тысячам (83 566 684 482)
-    public String numberSeparator(long number) {
+    private String numberSeparator(long number) {
         DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance();
         DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
         symbols.setGroupingSeparator(' ');

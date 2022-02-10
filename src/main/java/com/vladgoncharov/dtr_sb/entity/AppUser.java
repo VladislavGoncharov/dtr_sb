@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "app_user", uniqueConstraints = { //
+@Table(name = "app_user", uniqueConstraints = {
         @UniqueConstraint(name = "APP_USER_UK", columnNames = "User_Name")})
 public class AppUser implements UserDetails{
 
@@ -23,7 +23,7 @@ public class AppUser implements UserDetails{
     @NotBlank(message = "не допустимые символы")
     @Size(min = 2, max = 36, message = "от 2 до 36 символов")
     @Column(name = "User_Name", length = 36, nullable = false)
-    private String userName;
+    private String username;
 
     @Size(min = 2, message = "от 2 символов")
     @Column(name = "Encryted_Password", length = 128, nullable = false)
@@ -31,7 +31,6 @@ public class AppUser implements UserDetails{
 
     @Transient
     private String encrytedPasswordCheck;
-
 
     @Column(name = "Enabled", length = 1, nullable = false)
     private boolean accountNonLocked;
@@ -47,7 +46,6 @@ public class AppUser implements UserDetails{
     }
 
 
-
     public Long getUserId() {
         return userId;
     }
@@ -56,12 +54,8 @@ public class AppUser implements UserDetails{
         this.userId = userId;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String userName) {
+        this.username = userName;
     }
 
     public String getEncrytedPassword() {
@@ -84,12 +78,12 @@ public class AppUser implements UserDetails{
 
     @Override
     public String getUsername() {
-        return userName;
+        return username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     public boolean isAccountNonLocked() {
@@ -98,12 +92,12 @@ public class AppUser implements UserDetails{
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     public void setAccountNonLocked(boolean accountNonLocked) {
@@ -141,7 +135,7 @@ public class AppUser implements UserDetails{
         AppUser appUser = (AppUser) o;
         return accountNonLocked == appUser.accountNonLocked
                 && Objects.equals(userId, appUser.userId)
-                && Objects.equals(userName, appUser.userName)
+                && Objects.equals(username, appUser.username)
                 && Objects.equals(encrytedPassword, appUser.encrytedPassword)
                 && Objects.equals(encrytedPasswordCheck, appUser.encrytedPasswordCheck)
                 && Objects.equals(appUserInfo, appUser.appUserInfo)

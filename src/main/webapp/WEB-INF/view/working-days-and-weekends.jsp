@@ -11,17 +11,11 @@
     <link rel="shortcut icon" href="../../resources/images/clock.ico"/>
     <link rel="stylesheet" href="../../resources/style/style.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet">
-    <script src="../../resources/js/current_time.js"></script>
+    <script src="../../resources/js/main.js"></script>
 
 </head>
-<header>
-    <br>
-    <div>
-        <a  class="header_1" href="/" >Добро пожаловать на DateTimeResult.ru</a>
-    </div>
-    <div id="current_date_time_block">
-    </div>
-</header>
+<body>
+<jsp:include page="include/header.jsp"/>
 <main>
     <article>
     <span class="header_2">
@@ -65,7 +59,7 @@
     <br>
     </article>
 </main>
-
+<jsp:include page="include/footer.jsp"/>
 </body>
 <footer>
     <br>

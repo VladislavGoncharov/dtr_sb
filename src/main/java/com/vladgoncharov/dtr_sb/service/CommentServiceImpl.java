@@ -21,8 +21,8 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    public void addNewComment(Comment comment) {
-        commentDAO.addNewComment(comment);
+    public void addNewComment(Comment comment,String username,String role) {
+        commentDAO.addNewComment(comment,username,role);
     }
 
     @Override

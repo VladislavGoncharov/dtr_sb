@@ -4,10 +4,8 @@ import com.vladgoncharov.dtr_sb.entity.AppUser;
 import com.vladgoncharov.dtr_sb.entity.AppUserInfo;
 import com.vladgoncharov.dtr_sb.service.EmailSenderService;
 import com.vladgoncharov.dtr_sb.service.UserServiceInterface;
-import com.vladgoncharov.dtr_sb.utility.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.mail.MailParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,7 +21,7 @@ public class UserController {
     private UserServiceInterface userServiceInterface;
 
     @Autowired
-    EmailSenderService emailSenderService;
+    private EmailSenderService emailSenderService;
 
 
     @GetMapping("/registration")
@@ -36,7 +34,7 @@ public class UserController {
     public String saveUser(@Valid @ModelAttribute("user") AppUser user
             , Model model, BindingResult bindingResult) {
 
-        AppUser appUser = (AppUser) userServiceInterface.findUserAccount(user.getUserName());
+        AppUser appUser = (AppUser) userServiceInterface.findUserByAccount(user.getUsername());
 
 
         if (bindingResult.hasErrors()) {
@@ -50,7 +48,7 @@ public class UserController {
             model.addAttribute("exceptionPasswordCheck", " пароли не совпадают");
             return "registration";
         }
-        userServiceInterface.saveUser(user);
+        userServiceInterface.saveUser(user, "ROLE_USER");
         return "redirect:/";
     }
 
@@ -61,121 +59,96 @@ public class UserController {
         return "login";
     }
 
-//    @RequestMapping(value="/logout", method = RequestMethod.POST)
-//    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        if (auth != null){
-//            new SecurityContextLogoutHandler().logout(request, response, auth);
-//        }
-//        return "redirect:/login?logout=true";
-//    }
+    @GetMapping("/userInfo_{username}")
+    public String userInfo(@PathVariable("username") String username
+            , Model model, Principal principal) {
 
-    @GetMapping("/userInfo_{currentUsername}")
-    public String userInfo(@PathVariable("currentUsername") String currentUsername, Model model) {
-
-        AppUser user = (AppUser) userServiceInterface.findUserAccount(currentUsername);
+        AppUser user = (AppUser) userServiceInterface.findUserByAccount(username);
         model.addAttribute("userInfo", user.getAppUserInfo());
-        model.addAttribute("username", currentUsername);
+        model.addAttribute("username", username);
 
-        return "user_info";
+        /* Конструкция служить для того, чтобы давать право изменять свои данные.
+         * Пользователь имеет право изменять только свои данные */
+        try {
+            model.addAttribute("currentUsername", principal.getName());
+        } finally {
+            return "user_info";
+        }
     }
 
-    @PostMapping("/userInfo_{currentUsername}")
-    public String userInfoSave(@PathVariable("currentUsername") String currentUsername,
-                               @Valid @ModelAttribute("userInfo") AppUserInfo userInfo,
-                               BindingResult bindingResult,
-                               Model model) {
-
+    @PostMapping("/userInfo_{username}")
+    public String userInfoSave(@PathVariable("username") String username,
+                               @Valid @ModelAttribute("appUserInfo") AppUserInfo userInfo,
+                               BindingResult bindingResult, Model model,
+                               Principal principal) {
+        System.out.println(bindingResult.hasErrors());
         if (bindingResult.hasErrors()) {
+
+            AppUser user = (AppUser) userServiceInterface.findUserByAccount(principal.getName());
+
+            model.addAttribute("userInfo", user.getAppUserInfo());
+            model.addAttribute("currentUsername", principal.getName());
+            System.out.println("return user_info_update");
             return "user_info_update";
         }
         userServiceInterface.updateInfo(userInfo);
 
-        model.addAttribute("userName", currentUsername);
+        model.addAttribute("username", username);
         model.addAttribute("userInfo", userInfo);
+        System.out.println("return user_info");
 
-        return "user_info";
+        /* Конструкция служить для того, чтобы давать право изменять свои данные.
+         * Пользователь имеет право изменять только свои данные */
+        try {
+            model.addAttribute("currentUsername", principal.getName());
+        } finally {
+            return "user_info";
+        }
     }
 
-    @GetMapping("/updateUserInfo")
-    public String userInfoUpdate(Model model, Principal principal) {
+    @GetMapping("/updateUserInfo{isClear}")
+    public String userInfoUpdate(@PathVariable String isClear,
+                                 Model model, Principal principal) {
 
-        String userName = principal.getName();
-        model.addAttribute("currentUsername", userName);
+        AppUser user = (AppUser) userServiceInterface.findUserByAccount(principal.getName());
 
-        AppUser user = (AppUser) userServiceInterface.findUserAccount(userName);
-        model.addAttribute("userInfo", user.getAppUserInfo());
+        if (!isClear.isEmpty()) {
+            long id = user.getAppUserInfo().getId();
+            user.setAppUserInfo(new AppUserInfo(id));
+        }
+
+        model.addAttribute("appUserInfo", user.getAppUserInfo());
+        model.addAttribute("currentUsername", principal.getName());
 
         return "user_info_update";
     }
-//
-//    @GetMapping("/userInfo")
-//    public String userInfo(Model model, Principal principal) {
-//        // After user login successfully.
-//        String userName = principal.getName();
-//        model.addAttribute("userName111", userName);
-//
-//        System.out.println("User Name: " + userName);
-//
-//        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-//
-//        String userInfo = WebUtils.toString(loginedUser);
-//        model.addAttribute("userInfo", userInfo);
-//
-//        return "userInfo";
-//    }
-
-    @GetMapping("/403")
-    public String accessDenied(Model model, Principal principal) {
-        if (principal != null) {
-            User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
-            String userInfo = WebUtils.toString(loginedUser);
-
-            model.addAttribute("userInfo", userInfo);
-
-            String message = "Hi " + principal.getName() //
-                    + "<br> You do not have permission to access this page!";
-            model.addAttribute("message", message);
-        }
-        return "403";
-    }
 
     @GetMapping("/checkingEmail_{currentUsername}")
-    public String checkingEmail(@PathVariable String currentUsername,Model model) {
+    public String checkingEmail(@PathVariable String currentUsername, Model model) {
 
+        AppUser user = (AppUser) userServiceInterface.findUserByAccount(currentUsername);
+        try {
 
-        AppUser user = (AppUser) userServiceInterface.findUserAccount(currentUsername);
-        try{
-            emailSenderService.sendEmail(
-                    "datetimeresult@gmail.com",
-                    user.getAppUserInfo().getEmail(),
-                    "Подтвердить email на сайте DateTimeResult.ru",
-                    "Здравствуйте " + currentUsername + ". \nЧтобы подтвердить свою почту нужно перейти по этой ссылке->" +
-                            "http://localhost:8080/confirmYourEmailAddress_"
-                            + currentUsername);
-        }catch (Exception e){
-            System.out.println(e);
-            model.addAttribute("isSuccessful",false);
+            emailSenderService.sendEmail(user.getAppUserInfo().getEmail(), currentUsername);
+
+        } catch (MailParseException exception) {
+            /* Если пользователь все таки ввел некорректный email,
+            * то выйдет ошибка, где будет ему об этом сказано */
+            exception.printStackTrace();
+            model.addAttribute("isSuccessful", false);
             return "email_response";
         }
-
 
         return "redirect:/";
     }
 
+    //Удачное подтверждение email
     @GetMapping("/confirmYourEmailAddress_{currentUsername}")
-    public String confirmYourEmailAddress(@PathVariable String currentUsername,Model model) {
+    public String confirmYourEmailAddress(@PathVariable String currentUsername, Model model) {
 
         emailSenderService.confirmYourEmailAddress(currentUsername);
-        model.addAttribute("isSuccessful",true);
+        model.addAttribute("isSuccessful", true);
 
         return "email_response";
     }
-    @GetMapping("/emailResponse")
-    public String emailException() {
-
-        return "email_response";
-    }
-
 }

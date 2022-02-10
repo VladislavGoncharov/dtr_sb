@@ -1,4 +1,4 @@
-@import "button-input_etc.css";
+@import "img.css";
 
 #current_date_time_block{
     color:black;
@@ -31,7 +31,7 @@ h1, .header_1 {
 
 legend {
     background: #bcb9d6;
-    font-size: calc(1.5vh + 1vw);
+    font-size: calc(1.5vh + 0.7vw);
     text-align: center;
 
     padding: 7px;
@@ -48,7 +48,7 @@ fieldset {
     background: #999bc2;
     text-align: center;
 
-    padding: 0 5vw;
+    padding: 0 1vw;
 
     border: 15px ridge #999bc2;
 }
@@ -57,11 +57,6 @@ form {
     text-align: center;
     width: fit-content;
     margin: auto;
-}
-.textError{
-    color: firebrick;
-    font-size: calc(1vh + 0.6vw);
-    text-shadow: black 0 0 8px;
 }
 
 mark {
@@ -79,12 +74,13 @@ caption {
 }
 
 footer a {
+    cursor: pointer;
     color: black;
 }
 
 footer a:hover {
     color: black;
-    text-shadow: 2px 2px 2px SlateBlue , -2px -2px 2px SlateBlue, 2px -2px 2px SlateBlue, -2px 2px 2px SlateBlue;;
+    text-shadow: 2px 2px 4px whitesmoke, -2px -2px 4px whitesmoke, 2px -2px 4px whitesmoke, -2px 2px 4px whitesmoke;
 }
 
 .login {
@@ -92,21 +88,21 @@ footer a:hover {
 }
 
 .header_comment{
-    background: #4e5c97;
+    background: linear-gradient( #41518f 80%, #a7a7ca 95%);
     font-size: calc(1vh + 0.5vw);
 
-    padding: 1vh 1.5vw 0.5vh 1.5vw;
+    padding: 1vh 1.5vw;
 
     border-radius: 10px 10px 0 0;
 }
 
 .body_comment{
-    background: linear-gradient(#4e5c97 5%, #b3b1d1 30%) ;
+    background: #a7a7ca;
     font-size: calc(0.8vh + 0.4vw);
 
-    padding: 2vh 4vw 1vh 4vw;
+    padding: 0 4vw 1vh 4vw;
 
-    border: 1px solid #4e5c97;
+    /*border-bottom: 1px solid #4e5c97;*/
     border-radius: 0 0 20px 20px;
 }
 
@@ -134,39 +130,18 @@ footer a:hover {
     color: transparent;
 }
 
-.span_comment{
+.span_comment_time{
     font-size: calc(0.7vh + 0.3vw);
     float: right;
 }
 
-.textarea{
-    background: transparent;
-
-    margin: 2vh 0;
-
-    width: inherit;
-    min-height: 15vh;
+.span_comment_username{
+    margin: calc(0.6vh + 0.6vw);
+    position: absolute;
 }
 
 .right{
     float: right;
-}
-
-.img_chinese_zodiac {
-    height: calc(16vh + 8vw);
-    margin: 2px 15px 5px 20px;
-    float: left;
-}
-
-.img_zodiac_sign {
-    height: calc(16vh + 8vw);
-
-    margin: 2px 15px 5px 20px;
-
-    float: left;
-
-    border-radius: 25px;
-    box-shadow: whitesmoke 3px 3px 5px, whitesmoke -3px 3px 5px, whitesmoke -3px -3px 5px, whitesmoke 3px -3px 5px;
 }
 
 .text_zodiacSing{
@@ -192,8 +167,7 @@ ul{
 ::marker{
     color: whitesmoke;
 }
+
 dt{
     text-align: center;
 }
-
-

@@ -15,13 +15,16 @@ public class EmailSenderService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public void sendEmail(String fromEmail, String toEMail, String subject, String body) {
+    public void sendEmail(String toEMail, String currentUsername) {
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setFrom(fromEmail);
+        mailMessage.setFrom("datetimeresult@gmail.com");
         mailMessage.setTo(toEMail);
-        mailMessage.setSubject(subject);
-        mailMessage.setText(body);
+        mailMessage.setSubject("Подтвердить email на сайте DateTimeResult.ru");
+        mailMessage.setText("Здравствуйте " + currentUsername + ". \nЧтобы подтвердить свою почту " +
+                "нужно перейти по этой ссылке->" +
+                "http://localhost:8080/confirmYourEmailAddress_"
+                + currentUsername);
 
         mailSender.send(mailMessage);
 
@@ -30,7 +33,7 @@ public class EmailSenderService {
     }
 
     public void confirmYourEmailAddress(String currentUsername) {
-        AppUser user = (AppUser) userServiceInterface.findUserAccount(currentUsername);
+        AppUser user = (AppUser) userServiceInterface.findUserByAccount(currentUsername);
 
         user.getAppUserInfo().setCheckingEmail(true);
 

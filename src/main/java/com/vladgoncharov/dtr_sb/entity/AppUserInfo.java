@@ -1,20 +1,14 @@
 package com.vladgoncharov.dtr_sb.entity;
 
 
-import com.vladgoncharov.dtr_sb.validation.CheckAge;
-import com.vladgoncharov.dtr_sb.validation.CheckCity;
-import com.vladgoncharov.dtr_sb.validation.CheckName;
-import com.vladgoncharov.dtr_sb.validation.CheckPhoneNumber;
+import com.vladgoncharov.dtr_sb.validation.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.util.Objects;
 
 @Entity
 @Table(name = "app_user_info")
 public class AppUserInfo {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +17,7 @@ public class AppUserInfo {
 
     @CheckAge
     @Column(name = "age")
-    private int age;
+    private String age;
 
     @CheckName(message = "В имени присутствуют некорректные символы")
     @Column(name = "name")
@@ -37,12 +31,10 @@ public class AppUserInfo {
     @Column(name = "city")
     private String city;
 
-    @Pattern(regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$"
-            ,message = "Не верно, попробуйте еще раз")
+    @CheckEmail
     @Column(name = "email")
     private String email;
 
-    @NotNull
     @Column(name = "checking_email")
     private boolean checkingEmail;
 
@@ -54,18 +46,29 @@ public class AppUserInfo {
     private int img;
 
     public AppUserInfo() {
-        age=5;
-        name=null;
-        surname=null;
-        city=null;
-        email=null;
-        checkingEmail=false;
-        phone=null;
-        img=0;
+        age = "";
+        name = "";
+        surname = "";
+        city = "";
+        email = "";
+        checkingEmail = false;
+        phone = "";
+        img = 1;
+    }
+    public AppUserInfo(long id) {
+        this.id = id;
+        age = "";
+        name = "";
+        surname = "";
+        city = "";
+        email = "";
+        checkingEmail = false;
+        phone = "";
+        img = 1;
     }
 
-    public boolean theUserIsReadyToCheckEmail(){
-        return !isCheckingEmail() && email!=null;
+    public boolean theUserIsReadyToCheckEmail() {
+        return !isCheckingEmail() && !email.isEmpty();
     }
 
     public long getId() {
@@ -76,11 +79,11 @@ public class AppUserInfo {
         this.id = id;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
@@ -157,18 +160,4 @@ public class AppUserInfo {
         // как у User только на 100 больше;
     }
 
-    @Override
-    public String toString() {
-        return "AppUserInfo{" +
-                "id=" + id +
-                ", age=" + age +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", city='" + city + '\'' +
-                ", email='" + email + '\'' +
-                ", checkingEmail=" + checkingEmail +
-                ", phone='" + phone + '\'' +
-                ", img=" + img +
-                '}';
-    }
 }

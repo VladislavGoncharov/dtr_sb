@@ -14,18 +14,11 @@
     <link rel="shortcut icon" href="../../resources/images/clock.ico"/>
     <link rel="stylesheet" href="../../resources/style/style.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet">
-    <script src="../../resources/js/current_time.js"></script>
+    <script src="../../resources/js/main.js"></script>
 
 </head>
 <body>
-<header>
-    <br>
-    <div>
-        <a class="header_1" href="/">Добро пожаловать на DateTimeResult.ru</a>
-    </div>
-    <div id="current_date_time_block">
-    </div>
-</header>
+<jsp:include page="include/header.jsp"/>
 <main>
     <article>
     <span class="header_2">
@@ -40,8 +33,8 @@
             <table>
                 <c:if test="${param.error != null}">
                     <tr>
-                        <td class="textError" colspan="2">
-                            Введенные данные ошибочны
+                        <td class="td_error" colspan="2">
+                            Неверный логин или пароль
                         </td>
                     </tr>
                 </c:if>
@@ -51,16 +44,15 @@
                         <label for='username'>Логин:</label>
                     </td>
                     <td>
-                        <input class="input" type='text' name='username' value=''>
+                        <input id="username" class="input" type='text' name='username' placeholder="Логин">
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <%--@declare id="password"--%>
                         <label for='password'>Пароль:</label>
                     </td>
                     <td>
-                        <input class="input" type='password' name='password'/>
+                        <input id="password" class="input" type='password' name='password' placeholder="Пароль"/>
                     </td>
                 </tr>
                 <tr>
@@ -80,10 +72,6 @@
             <br>
         </fieldset>
     </form>
-
-
-
-
     <br><br>
     <div>
         <input class="button" type="button" value="Назад" onclick="history.back();return false;"/>
@@ -93,19 +81,6 @@
     <br>
     </article>
 </main>
+<jsp:include page="include/footer.jsp"/>
 </body>
-<footer>
-    <br>
-    <dl>
-        <dt>
-            Связь с разработчиком:
-        </dt>
-        <dd>
-            <a href="https://vk.com/veyvik87" target="_blank">Вконтакте</a>
-        </dd>
-        <dd>
-            <a href="mailto:veyvik87@gmail.com?subject=Приглашаю вас на работу Junior Java Developer" target="_blank">Gmail</a>
-        </dd>
-    </dl>
-</footer>
 </html>
