@@ -81,9 +81,8 @@ public class UserDAOImpl implements UserDAO{
     @Override
     public UserRole findUserById(long id) {
         Session session = entityManager.unwrap(Session.class);
-        long i = id-20; // delete after refresh table UserRole
         String sql = "Select e from " + UserRole.class.getName() + " e " //
-                + " Where e.id =" + i;
+                + " Where e.id =" + id;
 
         return session.createQuery(sql, UserRole.class).getSingleResult();
     }
