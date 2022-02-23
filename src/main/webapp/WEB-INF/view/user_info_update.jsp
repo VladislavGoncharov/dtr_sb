@@ -156,9 +156,9 @@
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <input class="button" type="submit" value="Сохранить">
                             <input class="button" type="reset" value="Очистить"
                                    onclick="window.location.href='updateUserInfo_clear'">
+                            <input class="button" type="submit" value="Сохранить">
                         </td>
                     </tr>
                 </table>

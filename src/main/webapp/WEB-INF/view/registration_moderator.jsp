@@ -78,8 +78,8 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <input class="button" type="submit" value="Добавить" >
                         <input class="button" type="reset" value="Очистить">
+                        <input class="button" type="submit" value="Добавить" >
                     </td>
                 </tr>
             </table>

@@ -1,3 +1,4 @@
+<jsp:useBean id="dateDifference" scope="request" type="com.vladgoncharov.dtr_sb.working_with_a_date.DateDifference"/>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="ru">
@@ -20,7 +21,23 @@
     <table class="table_result">
         <tbody>
         <tr>
-        <td colspan="2">
+        <td>
+               Между
+        </td>
+        <td>
+                ${dateDifference.firstDateString}
+        </td>
+        </tr>
+        <tr>
+        <td>
+                И
+        </td>
+        <td>
+                ${dateDifference.secondDateString}
+        </td>
+        </tr>
+        <tr>
+        <td colspan="2" class="td_big_font_size">
                 ${dateDifference.year} ${dateDifference.textYear} ${dateDifference.month} ${dateDifference.textMonth}
             ${dateDifference.day} ${dateDifference.textDay}
         </td>

@@ -1,3 +1,5 @@
+<jsp:useBean id="timeDifference" scope="request" type="com.vladgoncharov.dtr_sb.working_with_a_date.TimeDifference"/>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="ru">
@@ -19,6 +21,32 @@
     <br>
     <br>
     <table class="table_result table_result_time">
+        <tr>
+            <td colspan="2">
+
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                ${timeDifference.initialTime}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <c:if test="${timeDifference.plusMinus}">   +    </c:if>
+                <c:if test="${!timeDifference.plusMinus}">   -    </c:if>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                ${timeDifference.amountOfTime} ${timeDifference.textHMS}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                =
+            </td>
+        </tr>
         <tr>
             <td colspan="2">
                 ${timeDifference.hours} ${timeDifference.textHours} ${timeDifference.minutes} ${timeDifference.textMinutes}

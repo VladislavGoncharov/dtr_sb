@@ -37,7 +37,7 @@ public class WorkingDaysAndWeekends {
         starTheCycleOfCountingDays();
     }
 
-    // Метод преобразования таблицы в массив (используется в jsp, не удалять)
+    // Метод преобразования листа в таблицу (используется в jsp, не удалять)
     public int getDayFromList() {
         return listWorkingDaysAndWeekends.remove();
     }

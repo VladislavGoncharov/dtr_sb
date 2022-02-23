@@ -45,10 +45,10 @@
             </div>
             <br>
             <div class="radio_button">
-                <form:radiobutton path="plusMinus" value="0" label="Прибавить ( + )"/>
+                <form:radiobutton path="plusMinus" value="true" label="Прибавить ( + )"/>
             </div>
             <div class="radio_button">
-                <form:radiobutton path="plusMinus" value="1" label="Отнять ( - )"/>
+                <form:radiobutton path="plusMinus" value="false" label="Отнять ( - )"/>
             </div>
             <br>
             <br>
@@ -63,8 +63,8 @@
                 </form:select>
             </div>
             <br>
-            <input class="button" type="submit" value="Посчитать">
             <input class="button" type="reset" value="Очистить" onclick="window.location.href = 'changeTheTime'">
+            <input class="button" type="submit" value="Посчитать">
         </fieldset>
     </form:form>
     <br><br>

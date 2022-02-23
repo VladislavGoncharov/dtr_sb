@@ -27,7 +27,6 @@
     <br>
     <%--@elvariable id="chineseZodiac" type="com.vladgoncharov.dtr_sb.working_with_a_date.ChineseZodiac"--%>
     <form:form action="chineseZodiacResult" method="post" modelAttribute="chineseZodiac">
-
         <fieldset>
             <legend>Заполните формы по шаблону</legend>
             <br>
@@ -46,17 +45,15 @@
                 <tfoot>
                 <tr>
                     <td colspan="2">
-                        <input class="button" type="submit" value="Посчитать">
                         <input class="button" type="reset" value="Очистить"
                                onclick="window.location.href = 'chineseZodiac'">
+                        <input class="button" type="submit" value="Посчитать">
                     </td>
                 </tr>
                 </tfoot>
-
             </table>
             <br>
         </fieldset>
-
     </form:form>
     <br><br>
     <input class="button" type="button" value="Назад" onclick="history.back();return false;"/>

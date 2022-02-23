@@ -160,4 +160,17 @@ public class MainController {
 
         return "chinese-zodiac-result";
     }
+
+    @GetMapping("pharmacyCalculation")
+    public String pharmacyCalculation(Model model) {
+        model.addAttribute("pharmacyCalculation", new PharmacyCalculation());
+        return "pharmacy-calculation";
+    }
+
+    @GetMapping("pharmacyCalculationResult")
+    public String pharmacyCalculationResult(@ModelAttribute("pharmacyCalculation")
+                                                        PharmacyCalculation pharmacyCalculation) {
+        pharmacyCalculation.getResult();
+        return "pharmacy-calculation-result";
+    }
 }

@@ -1,6 +1,7 @@
 @import "table.css";
 
 .button_first_view {
+    color: black;
     background:linear-gradient(35deg, #a5a6c9 12%, #bebbd7 50%, #a5a6c9 88%);
     font-family: inherit;
     font-size: calc(1vh + 0.5vw);
@@ -44,6 +45,7 @@
 }
 
 .button {
+    color: black;
     background:linear-gradient(35deg, #a5a6c9 12%, #bebbd7 50%, #a5a6c9 88%);
     font-family: inherit;
     font-size: calc(1.2vh + 0.6vw);
@@ -212,6 +214,7 @@
 }
 
 .dropdown_list {
+    color: black;
     font-family: inherit;
     font-size: calc(0.6vh + 0.6vw);
 

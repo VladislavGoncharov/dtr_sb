@@ -29,16 +29,16 @@
             <br>
             <div>
                 <label> Введите число и выберите единицу измерения:
-                    <form:input class="input" path="amountOfTime" type="number" min="1" max="1000000000" value="0" placeholder="8728"/>
+                    <form:input class="input" path="amountOfTimeDouble" type="number" min="1" max="1000000000" value="0" placeholder="8728"/>
                 </label>
-                    <form:select class="dropdown_list" path="UOM">
+                    <form:select class="dropdown_list" path="unitsOfMeasurementText">
                         <form:options class="dropdown_list_options" items="${timeUnitConverted.unitsOfMeasurement}"/>
                     </form:select>
 
             </div>
             <br>
-            <input class="button" type="submit" name="Посчитать">
-            <input class="button" type="reset" name="Очистить" onclick="window.location.href = 'timeUnitConverted'">
+            <input class="button" type="reset" value="Очистить" onclick="window.location.href = 'timeUnitConverted'">
+            <input class="button" type="submit" value="Посчитать">
         </fieldset>
 
     </form:form>

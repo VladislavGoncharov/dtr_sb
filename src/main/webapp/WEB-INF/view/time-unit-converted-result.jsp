@@ -1,3 +1,4 @@
+<jsp:useBean id="timeUnitConverted" scope="request" type="com.vladgoncharov.dtr_sb.working_with_a_date.TimeUnitConverter"/>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="ru">
@@ -22,7 +23,7 @@
         <tbody>
         <tr>
             <td colspan="2">
-                Результат в
+                ${timeUnitConverted.amountOfTimeInt} ${timeUnitConverted.unitsOfMeasurementText} в
             </td>
         </tr>
         <tr>
@@ -31,6 +32,14 @@
             </td>
             <td>
                 ${timeUnitConverted.years}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                месяцах:
+            </td>
+            <td>
+                ${timeUnitConverted.months}
             </td>
         </tr>
         <tr>

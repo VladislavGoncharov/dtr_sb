@@ -57,9 +57,9 @@
                 <tfoot>
                 <tr>
                     <td colspan="2">
-                        <input class="button" type="submit" value="Посчитать">
                         <input class="button" type="reset" value="Очистить"
                                onclick="window.location.href = 'zodiacSign'">
+                        <input class="button" type="submit" value="Посчитать">
                     </td>
                 </tr>
                 </tfoot>

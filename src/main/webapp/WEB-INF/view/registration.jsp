@@ -70,13 +70,13 @@
                 </tr>
                 <tr>
                     <td colspan="2" class="td_error">
-                                ${exceptionPasswordCheck}
+                            ${exceptionPasswordCheck}
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <input class="button" type="submit" value="Добавить">
                         <input class="button" type="reset" value="Очистить">
+                        <input class="button" type="submit" value="Добавить">
                     </td>
                 </tr>
             </table>

@@ -36,29 +36,29 @@ public class ChineseZodiac {
     //  помощью остатка из 2 цифр после запятой совершаю поиск нужного животного
     private String searchChineseZodiac(String difference) {
         switch (difference) {
-            case "0,0":
+            case "0.0":
                 return Monkey();
-            case "0,08":
+            case "0.08":
                 return Rooster();
-            case "0,17":
+            case "0.17":
                 return Dog();
-            case "0,25":
+            case "0.25":
                 return Pig();
-            case "0,33":
+            case "0.33":
                 return Rat();
-            case "0,42":
+            case "0.42":
                 return Ox();
-            case "0,5":
+            case "0.5":
                 return Tiger();
-            case "0,58":
+            case "0.58":
                 return Rabbit();
-            case "0,67":
+            case "0.67":
                 return Dragon();
-            case "0,75":
+            case "0.75":
                 return Snake();
-            case "0,83":
+            case "0.83":
                 return Horse();
-            case "0,92":
+            case "0.92":
                 return Ram();
             default:
                 return "Неизвестная дата";

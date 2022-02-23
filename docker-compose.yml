@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+  app:
+    image: veyvik87/datetimeresult-1.04
+    restart: always
+    ports:
+      - "443:443"
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
+      - ./server.xml:/usr/local/tomcat/conf/server.xml

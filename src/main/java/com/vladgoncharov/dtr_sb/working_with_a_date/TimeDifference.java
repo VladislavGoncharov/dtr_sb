@@ -10,17 +10,19 @@ public class TimeDifference {
 
     private LocalTime initialTime;
 
-    private byte hours = 12;
-    private byte minutes = 30;
-    private byte seconds;
+    private int hours = 12;
+    private int minutes = 30;
+    private int seconds = 0;
+    private String initialTimeText;
 
-    private byte plusMinus;
+    private boolean plusMinus = true;
     private String HMS;
     private int amountOfTime;
 
     private String textHours;
     private String textMinutes;
     private String textSeconds;
+    private String textHMS;
 
     private final String[] arrayHMS = {"час","минута","секунда"};
 
@@ -31,57 +33,79 @@ public class TimeDifference {
     public void getResult() {
         initialTime = LocalTime.of(hours, minutes, seconds);
 
-        if (plusMinus == 0) {
-            if (HMS.equals("час")) {
-                initialTime = initialTime.plusHours(amountOfTime);
-                addResultInAVariables(initialTime);
-            } else if (HMS.equals("минута")) {
-                initialTime = initialTime.plusMinutes(amountOfTime);
-                addResultInAVariables(initialTime);
-            } else if (HMS.equals("секунда")) {
-                initialTime = initialTime.plusSeconds(amountOfTime);
-                addResultInAVariables(initialTime);
+        if (plusMinus) {
+            switch (HMS) {
+                case "час":
+                    addResultInAVariables(initialTime.plusHours(amountOfTime));
+                    break;
+                case "минута":
+                    addResultInAVariables(initialTime.plusMinutes(amountOfTime));
+                    break;
+                case "секунда":
+                    addResultInAVariables(initialTime.plusSeconds(amountOfTime));
+                    break;
             }
-        } else if (plusMinus == 1) {
-            if (HMS.equals("час")) {
-                initialTime = initialTime.minusHours(amountOfTime);
-                addResultInAVariables(initialTime);
-            } else if (HMS.equals("минута")) {
-                initialTime = initialTime.minusMinutes(amountOfTime);
-                addResultInAVariables(initialTime);
-            } else if (HMS.equals("секунда")) {
-                initialTime = initialTime.minusSeconds(amountOfTime);
-                addResultInAVariables(initialTime);
+        } else {
+            switch (HMS) {
+                case "час":
+                    addResultInAVariables(initialTime.minusHours(amountOfTime));
+                    break;
+                case "минута":
+                    addResultInAVariables(initialTime.minusMinutes(amountOfTime));
+                    break;
+                case "секунда":
+                    addResultInAVariables(initialTime.minusSeconds(amountOfTime));
+                    break;
             }
         }
-
     }
 
     // Метод преобразует LocalDate в часы, минуты, секунды
     private void addResultInAVariables(LocalTime time) {
-        this.hours = (byte) time.getHour();
-        this.minutes = (byte) time.getMinute();
-        this.seconds = (byte) time.getSecond();
-        methodCorrectSpellingOfTheTimeText();
+        this.hours = time.getHour();
+        this.minutes = time.getMinute();
+        this.seconds = time.getSecond();
+        correctSpellingOfTheTimeTextName();
     }
 
     // Метод который правильно выдает текст единицы времени (час,часов и тд.)
-    private void methodCorrectSpellingOfTheTimeText() {
-        int lastDigitMinutes = Integer.parseInt(String.valueOf(minutes).substring(String.valueOf(minutes).length() - 1));
-        int lastDigitSeconds = Integer.parseInt(String.valueOf(seconds).substring(String.valueOf(seconds).length() - 1));
+    private void correctSpellingOfTheTimeTextName() {
+        char[] lastDigitHours = String.valueOf(hours).toCharArray();
+        char[] lastDigitMinutes = String.valueOf(minutes).toCharArray();
+        char[] lastDigitSeconds = String.valueOf(seconds).toCharArray();
+        char[] lastDigitHMS = String.valueOf(amountOfTime).toCharArray();
 
-        if (hours == 1 || hours == 21) setTextHours("час");
-        else if (hours == 2 || hours == 3 || hours == 4 || hours == 22 || hours == 23) setTextHours("часа");
-        else setTextHours("часов");
+        setTextHours(changeTextTime(lastDigitHours[lastDigitHours.length-1],hours,"час"));
+        setTextMinutes(changeTextTime(lastDigitMinutes[lastDigitMinutes.length-1],minutes,"минут"));
+        setTextSeconds(changeTextTime(lastDigitSeconds[lastDigitSeconds.length-1],seconds,"секунд"));
 
-        if (lastDigitMinutes == 1 && minutes!=11) setTextMinutes("минута");
-        else if (lastDigitMinutes > 1 && lastDigitMinutes < 5 && minutes!=12 && minutes!=13 && minutes!=14) setTextMinutes("минуты");
-        else setTextMinutes("минут");
+        switch (HMS){
+            case "час":
+                setTextHMS(changeTextTime(lastDigitHMS[lastDigitHMS.length-1],amountOfTime,"час"));
+                break;
+            case "минута":
+                setTextHMS(changeTextTime(lastDigitHMS[lastDigitHMS.length-1],amountOfTime,"минут"));
+                break;
+            case "секунда":
+                setTextHMS(changeTextTime(lastDigitHMS[lastDigitHMS.length-1],amountOfTime,"секунд"));
+                break;
+        }
 
-        if (lastDigitSeconds == 1 && seconds!=11) setTextSeconds("секунда");
-        else if (lastDigitSeconds > 1 && lastDigitSeconds < 5 && seconds!=12 && seconds!=13 && seconds!=14) setTextSeconds("секунды");
-        else setTextSeconds("секунд");
+    }
 
+    private String changeTextTime(char lastDigitOfTime, int fullTime, String textTime){
+
+        if (textTime.equals("час")){
+            if (lastDigitOfTime == '1' && fullTime!=11) return(textTime);
+            else if (lastDigitOfTime > '1' && lastDigitOfTime < '5' && fullTime!=12
+                    && fullTime!=13 && fullTime!=14) return(textTime + "а");
+            else return(textTime+"ов");
+        }else {
+            if (lastDigitOfTime == '1' && fullTime!=11) return(textTime + "а");
+            else if (lastDigitOfTime > '1' && lastDigitOfTime < '5' && fullTime!=12
+                    && fullTime!=13 && fullTime!=14) return(textTime + "ы");
+            else return(textTime);
+        }
     }
 }
 

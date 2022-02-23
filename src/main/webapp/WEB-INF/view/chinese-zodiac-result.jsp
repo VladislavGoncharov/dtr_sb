@@ -1,3 +1,4 @@
+<jsp:useBean id="chineseZodiac" scope="request" type="com.vladgoncharov.dtr_sb.working_with_a_date.ChineseZodiac"/>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="ru">

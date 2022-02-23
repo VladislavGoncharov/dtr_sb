@@ -23,13 +23,12 @@ public class EmailSenderService {
         mailMessage.setSubject("Подтвердить email на сайте DateTimeResult.ru");
         mailMessage.setText("Здравствуйте " + currentUsername + ". \nЧтобы подтвердить свою почту " +
                 "нужно перейти по этой ссылке->" +
-                "http://localhost:8080/confirmYourEmailAddress_"
+                "https://datetimeresult.ru/confirmYourEmailAddress_"
                 + currentUsername);
 
         mailSender.send(mailMessage);
 
-        System.out.println("Email Sent Successfully!!");
-
+        System.out.println("Email Sent Successfully!! " + toEMail);
     }
 
     public void confirmYourEmailAddress(String currentUsername) {

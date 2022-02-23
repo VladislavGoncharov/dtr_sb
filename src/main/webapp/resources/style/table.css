@@ -20,6 +20,10 @@
         , whitesmoke -10px -10px 10px, whitesmoke 10px -10px 10px;
 }
 
+.table_pharmacy{
+    border-spacing: 0 3px;
+}
+
 .table_result_time{
     height: calc(10 * (1.2vh + 0.6vw));
 }
@@ -108,5 +112,17 @@ th {
 
 .td_user_info{
     padding: 0 7px;
+}
+
+.td_big_font_size{
+    font-size: calc(2vh + 1vw)
+}
+
+.tr_0{
+    /*background: rgba(0, 0, 0, 0.25);*/
+}
+
+.tr_1{
+    background: rgba(245, 245, 245, 0.25);
 }
 

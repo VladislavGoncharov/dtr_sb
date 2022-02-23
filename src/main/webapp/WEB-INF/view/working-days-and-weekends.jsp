@@ -37,20 +37,20 @@
                 <form:errors path="dateString"/>
             </label>
             <br><br>
-            <label>Введите количество ваших рабочих дней:
+            <label>Введите количество рабочих дней:
                <form:select class="dropdown_list" path="numberOfWorkingDays">
                    <form:options class="dropdown_list_options" items="${workingDaysAndWeekends.numbersFromOneToFifteen_1}"/>
                </form:select>
             </label>
             <br><br>
-            <label>Введите количество ваших выходных дней:
+            <label>Введите количество выходных дней:
                 <form:select class="dropdown_list" path="numberOfWeekends">
                     <form:options class="dropdown_list_options" items="${workingDaysAndWeekends.numbersFromOneToFifteen_2}"/>
                 </form:select>
             </label>
             <br><br>
-            <input class="button" type="submit" value="Посчитать">
             <input class="button" type="reset" value="Очистить" onclick="window.location.href = 'workingDaysAndWeekends'">
+            <input class="button" type="submit" value="Посчитать">
         </fieldset>
 
     </form:form>
@@ -61,18 +61,4 @@
 </main>
 <jsp:include page="include/footer.jsp"/>
 </body>
-<footer>
-    <br>
-    <dl>
-        <dt>
-            Связь с разработчиком:
-        </dt>
-        <dd>
-            <a href="https://vk.com/veyvik87" target="_blank">Вконтакте</a>
-        </dd>
-        <dd>
-            <a href="mailto:veyvik87@gmail.com?subject=Приглашаю вас на работу Junior Java Developer" target="_blank">Gmail</a>
-        </dd>
-    </dl>
-</footer>
 </html>

@@ -21,7 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserServiceImpl UserServiceImpl;
 
     @Autowired
-    private DataSource dataSource;
+    public DataSource dataSource;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {

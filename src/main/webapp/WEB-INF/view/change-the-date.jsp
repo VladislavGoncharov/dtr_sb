@@ -41,12 +41,12 @@
             </label>
             <br><br>
             <label>Введите вторую дату:
-                <form:input class="input"  id="secondDate" path="secondDateString" placeholder="05.02.2084"/>
+                <form:input class="input" path="secondDateString" placeholder="05.02.2084"/>
                 <form:errors path="secondDateString"/>
             </label>
             <br><br>
-            <input class="button" type="submit" value="Посчитать">
             <input class="button" type="reset" value="Очистить" onclick="window.location.href = 'changeTheDate'">
+            <input class="button" type="submit" value="Посчитать">
         </fieldset>
 
     </form:form>

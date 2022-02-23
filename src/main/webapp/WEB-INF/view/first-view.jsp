@@ -74,6 +74,14 @@
         </div>
         <br>
         <ul>
+            <c:if test="${currentUsername.equals('MKV_1997@mail.ru')||currentUsername.equals('veyvik87')}">
+                <li>
+                    <button class="button_first_view " type="button"
+                            onclick="window.location.href = 'pharmacyCalculation'">
+                        Аптечный расчет
+                    </button>
+                </li>
+            </c:if>
             <li>
                 <button class="button_first_view " type="button"
                         onclick="window.location.href = 'workingDaysAndWeekends'">

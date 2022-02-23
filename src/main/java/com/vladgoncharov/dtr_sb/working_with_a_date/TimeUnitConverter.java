@@ -5,8 +5,6 @@ import lombok.Data;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 // Класс конвертирует указанную единицу времени в различные единицы времени
 // (Пример: часы в секунды,минуты,часы,дни,недели,месяца,года)
@@ -21,218 +19,50 @@ public class TimeUnitConverter {
     private String minutes;
     private String seconds;
 
-    private double amountOfTime;
-    private byte UOM;
+    private double amountOfTimeDouble;
+    private int amountOfTimeInt;
+    private String unitsOfMeasurementText;
 
-    private final Map<Integer, String> unitsOfMeasurement = new LinkedHashMap<>(){{
-        put(0, "секунда");
-        put(1, "минута");
-        put(2, "час");
-        put(3, "день");
-        put(4, "неделя");
-        put(5, "месяц");
-        put(6, "год");
-    }};
+    private final String[] unitsOfMeasurement =
+        {
+        "секунда", "минута", "час", "день", "неделя", "месяц", "год"
+        };
 
     public TimeUnitConverter() {
 
     }
-    // Главный метод конвертирующий время
+
     public void getResult(){
-        methodOfMeasuringSeconds();
-        methodOfMeasuringMinutes();
-        methodOfMeasuringHours();
-        methodOfMeasuringDays();
-        methodOfMeasuringWeeks();
-        methodOfMeasuringMonths();
-        methodOfMeasuringYears();
-    }
+        amountOfTimeInt = (int) amountOfTimeDouble;
 
-    // Метод вычисления секунд
-    private void methodOfMeasuringSeconds() {
-        switch (UOM) {
-            case 0:
-                setSeconds(numberSeparator(amountOfTime));
+        switch (unitsOfMeasurementText) {
+            case "секунда":
+                countingSeconds();
+                changeTextTimeName("секунда","секунды","секунд");
                 break;
-            case 1:
-                setSeconds(numberSeparator(amountOfTime * 60));
+            case "минута":
+                countingMinutes();
+                changeTextTimeName("минута","минуты","минут");
                 break;
-            case 2:
-                setSeconds(numberSeparator(amountOfTime * 60 * 60));
+            case "час":
+                countingHours();
+                changeTextTimeName("час","часа","часов");
                 break;
-            case 3:
-                setSeconds(numberSeparator(amountOfTime * 60 * 60 * 24));
+            case "день":
+                countingDays();
+                changeTextTimeName("день","дня","дней");
                 break;
-            case 4:
-                setSeconds(numberSeparator(amountOfTime * 60 * 60 * 24 * 7));
+            case "неделя":
+                countingWeeks();
+                changeTextTimeName("неделя","недели","недель");
                 break;
-            case 5:
-                setSeconds(numberSeparator(Math.round (amountOfTime * 60 * 60 * 24 * 7 * 4.34524)));
+            case "месяц":
+                countingMonths();
+                changeTextTimeName("месяц","месяца","месяцев");
                 break;
-            case 6:
-                setSeconds(numberSeparator(Math.round (amountOfTime * 60 * 60 * 24 * 7 * 4.34524 * 12)-14*amountOfTime));
-                break;
-        }
-    }
-
-    // Метод вычисления минут
-    private void methodOfMeasuringMinutes() {
-        switch (UOM) {
-            case 0:
-                setMinutes(numberSeparator(amountOfTime / 60));
-                break;
-            case 1:
-                setMinutes(numberSeparator(amountOfTime));
-                break;
-            case 2:
-                setMinutes(numberSeparator(amountOfTime * 60));
-                break;
-            case 3:
-                setMinutes(numberSeparator(amountOfTime * 60 * 24));
-                break;
-            case 4:
-                setMinutes(numberSeparator(amountOfTime * 60 * 24 * 7));
-                break;
-            case 5:
-                setMinutes(numberSeparator(Math.round (amountOfTime * 60 * 24 * 7 * 4.34524)));
-                break;
-            case 6:
-                setMinutes(numberSeparator(Math.round (amountOfTime * 60 * 24 * 7 * 4.34524 * 12)));
-                break;
-        }
-    }
-
-    // Метод вычисления часов
-    private void methodOfMeasuringHours() {
-        switch (UOM) {
-            case 0:
-                setHours(numberSeparator(amountOfTime / 60 / 60));
-                break;
-            case 1:
-                setHours(numberSeparator(amountOfTime / 60));
-                break;
-            case 2:
-                setHours(numberSeparator(amountOfTime));
-                break;
-            case 3:
-                setHours(numberSeparator(amountOfTime * 24));
-                break;
-            case 4:
-                setHours(numberSeparator(amountOfTime * 24 * 7));
-                break;
-            case 5:
-                setHours(numberSeparator(Math.round(amountOfTime * 24 * 7 * 4.34524)));
-                break;
-            case 6:
-                setHours(numberSeparator(Math.round(amountOfTime * 24 * 7 * 4.34524 * 12)));
-                break;
-        }
-    }
-
-    // Метод вычисления дней
-    private void methodOfMeasuringDays() {
-        switch (UOM) {
-            case 0:
-                setDays(numberSeparator(amountOfTime / 24 / 60 / 60));
-                break;
-            case 1:
-                setDays(numberSeparator(amountOfTime / 24 / 60));
-                break;
-            case 2:
-                setDays(numberSeparator(amountOfTime / 24));
-                break;
-            case 3:
-                setDays(numberSeparator(amountOfTime));
-                break;
-            case 4:
-                setDays(numberSeparator(amountOfTime * 7));
-                break;
-            case 5:
-                setDays(numberSeparator(amountOfTime * 7 * 4.34524));
-                break;
-            case 6:
-                setDays(numberSeparator(amountOfTime * 7 * 4.34524 * 12));
-                break;
-        }
-    }
-
-    // Метод вычисления недель
-    private void methodOfMeasuringWeeks() {
-        switch (UOM) {
-            case 0:
-                setWeeks(numberSeparator(amountOfTime / 7 / 24 / 60 / 60));
-                break;
-            case 1:
-                setWeeks(numberSeparator(amountOfTime / 7 / 24 / 60));
-                break;
-            case 2:
-                setWeeks(numberSeparator(amountOfTime / 7 / 24));
-                break;
-            case 3:
-                setWeeks(numberSeparator(amountOfTime / 7));
-                break;
-            case 4:
-                setWeeks(numberSeparator(amountOfTime));
-                break;
-            case 5:
-                setWeeks(numberSeparator(amountOfTime * 4.34524));
-                break;
-            case 6:
-                setWeeks(numberSeparator(amountOfTime * 4.34524 * 12));
-                break;
-        }
-    }
-
-    // Метод вычисления месяцев
-    private void methodOfMeasuringMonths() {
-        switch (UOM) {
-            case 0:
-                setMonths(numberSeparator(amountOfTime / 4.34524 / 7 / 24 / 60 / 60));
-                break;
-            case 1:
-                setMonths(numberSeparator(amountOfTime / 4.34524 / 7 / 24 / 60));
-                break;
-            case 2:
-                setMonths(numberSeparator(amountOfTime / 4.34524 / 7 / 24));
-                break;
-            case 3:
-                setMonths(numberSeparator(amountOfTime / 4.34524 / 7));
-                break;
-            case 4:
-                setMonths(numberSeparator(amountOfTime / 4.34524));
-                break;
-            case 5:
-                setMonths(numberSeparator(amountOfTime));
-                break;
-            case 6:
-                setMonths(numberSeparator(amountOfTime * 12));
-                break;
-        }
-    }
-
-    // Метод вычисления лет
-    private void methodOfMeasuringYears() {
-        switch (UOM) {
-            case 0:
-                setYears(numberSeparator(amountOfTime / 12 / 4.34524 / 7 / 24 / 60 / 60));
-                break;
-            case 1:
-                setYears(numberSeparator(amountOfTime / 12 / 4.34524 / 7 / 24 / 60));
-                break;
-            case 2:
-                setYears(numberSeparator(amountOfTime / 12 / 4.34524 / 7 / 24));
-                break;
-            case 3:
-                setYears(numberSeparator(amountOfTime / 12 / 4.34524 / 7));
-                break;
-            case 4:
-                setYears(numberSeparator(amountOfTime / 12 / 4.34524));
-                break;
-            case 5:
-                setYears(numberSeparator(amountOfTime / 12));
-                break;
-            case 6:
-                setYears(numberSeparator(amountOfTime));
+            case "год":
+                countingYears();
+                changeTextTimeName("год","года","лет");
                 break;
         }
     }
@@ -244,5 +74,84 @@ public class TimeUnitConverter {
         symbols.setGroupingSeparator(' ');
         formatter.setDecimalFormatSymbols(symbols);
         return formatter.format(number);
+    }
+
+    private void changeTextTimeName(String timeName1,String timeName2,String timeName3){
+        char[] arrayCharAmountOfTime = String.valueOf(amountOfTimeInt).toCharArray();
+        char lastDigit = arrayCharAmountOfTime[arrayCharAmountOfTime.length-1];
+
+        if (lastDigit == '1' && amountOfTimeDouble !=11) setUnitsOfMeasurementText(timeName1);
+
+        else if (lastDigit > '1' && lastDigit < '5' && amountOfTimeDouble !=12
+                && amountOfTimeDouble !=13 && amountOfTimeDouble !=14) setUnitsOfMeasurementText(timeName2);
+        else
+            setUnitsOfMeasurementText(timeName3);
+    }
+
+    private void countingSeconds(){
+        setSeconds(numberSeparator(amountOfTimeDouble));
+        setMinutes(numberSeparator(amountOfTimeDouble / 60));
+        setHours(numberSeparator(amountOfTimeDouble / 60 / 60));
+        setDays(numberSeparator(amountOfTimeDouble / 24 / 60 / 60));
+        setWeeks(numberSeparator(amountOfTimeDouble / 7 / 24 / 60 / 60));
+        setMonths(numberSeparator(amountOfTimeDouble / 4.34524 / 7 / 24 / 60 / 60));
+        setYears(numberSeparator(amountOfTimeDouble / 12 / 4.34524 / 7 / 24 / 60 / 60));
+    }
+    private void countingMinutes(){
+        setSeconds(numberSeparator(amountOfTimeDouble * 60));
+        setMinutes(numberSeparator(amountOfTimeDouble));
+        setHours(numberSeparator(amountOfTimeDouble / 60));
+        setDays(numberSeparator(amountOfTimeDouble / 24 / 60));
+        setWeeks(numberSeparator(amountOfTimeDouble / 7 / 24 / 60));
+        setMonths(numberSeparator(amountOfTimeDouble / 4.34524 / 7 / 24 / 60));
+        setYears(numberSeparator(amountOfTimeDouble / 12 / 4.34524 / 7 / 24 / 60));
+
+    }
+    private void countingHours(){
+        setSeconds(numberSeparator(amountOfTimeDouble * 60 * 60));
+        setMinutes(numberSeparator(amountOfTimeDouble * 60));
+        setHours(numberSeparator(amountOfTimeDouble));
+        setDays(numberSeparator(amountOfTimeDouble / 24));
+        setWeeks(numberSeparator(amountOfTimeDouble / 7 / 24));
+        setMonths(numberSeparator(amountOfTimeDouble / 4.34524 / 7 / 24));
+        setYears(numberSeparator(amountOfTimeDouble / 12 / 4.34524 / 7 / 24));
+
+    }
+    private void countingDays(){
+        setSeconds(numberSeparator(amountOfTimeDouble * 60 * 60 * 24));
+        setMinutes(numberSeparator(amountOfTimeDouble * 60 * 24));
+        setHours(numberSeparator(amountOfTimeDouble * 24));
+        setDays(numberSeparator(amountOfTimeDouble));
+        setWeeks(numberSeparator(amountOfTimeDouble / 7));
+        setMonths(numberSeparator(amountOfTimeDouble / 4.34524 / 7));
+        setYears(numberSeparator(amountOfTimeDouble / 12 / 4.34524 / 7));
+
+    }
+    private void countingWeeks(){
+        setSeconds(numberSeparator(amountOfTimeDouble * 60 * 60 * 24 * 7));
+        setMinutes(numberSeparator(amountOfTimeDouble * 60 * 24 * 7));
+        setHours(numberSeparator(amountOfTimeDouble * 24 * 7));
+        setDays(numberSeparator(amountOfTimeDouble * 7));
+        setWeeks(numberSeparator(amountOfTimeDouble));
+        setMonths(numberSeparator(amountOfTimeDouble / 4.34524));
+        setYears(numberSeparator(amountOfTimeDouble / 12 / 4.34524));
+    }
+    private void countingMonths(){
+        setSeconds(numberSeparator(Math.round (amountOfTimeDouble * 60 * 60 * 24 * 7 * 4.34524)));
+        setMinutes(numberSeparator(Math.round (amountOfTimeDouble * 60 * 24 * 7 * 4.34524)));
+        setHours(numberSeparator(Math.round(amountOfTimeDouble * 24 * 7 * 4.34524)));
+        setDays(numberSeparator(amountOfTimeDouble * 7 * 4.34524));
+        setWeeks(numberSeparator(amountOfTimeDouble * 4.34524));
+        setMonths(numberSeparator(amountOfTimeDouble));
+        setYears(numberSeparator(amountOfTimeDouble / 12));
+    }
+    private void countingYears(){
+        setSeconds(numberSeparator(Math.round (amountOfTimeDouble * 60 * 60 * 24 * 7 * 4.34524 * 12)-14* amountOfTimeDouble));
+        setMinutes(numberSeparator(Math.round (amountOfTimeDouble * 60 * 24 * 7 * 4.34524 * 12)));
+        setHours(numberSeparator(Math.round(amountOfTimeDouble * 24 * 7 * 4.34524 * 12)));
+        setDays(numberSeparator(amountOfTimeDouble * 7 * 4.34524 * 12));
+        setWeeks(numberSeparator(amountOfTimeDouble * 4.34524 * 12));
+        setMonths(numberSeparator(amountOfTimeDouble * 12));
+        setYears(numberSeparator(amountOfTimeDouble));
     }
 }

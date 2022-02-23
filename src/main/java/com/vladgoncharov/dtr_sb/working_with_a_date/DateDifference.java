@@ -8,6 +8,7 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 // Класс высчитывает разницу в датах
 @Data
@@ -23,17 +24,15 @@ public class DateDifference {
     private int year;
     private int month;
     private int day;
+    private String textYear;
+    private String textMonth;
+    private String textDay;
 
     private String resultInMonths;
     private String resultInDays;
     private String resultInHours;
     private String resultInMinutes;
     private String resultInSeconds;
-
-    private String textYear;
-    private String textMonth;
-    private String textDay;
-
 
     public DateDifference() {
     }
@@ -49,31 +48,34 @@ public class DateDifference {
             dateConversions(secondLocalDate, firstLocalDate);
         else
             dateConversions(firstLocalDate, secondLocalDate);
+
+
+        firstDateString = firstLocalDate.format(DateTimeFormatter.ofPattern("dd MMMM yyyy"));
+        secondDateString = secondLocalDate.format(DateTimeFormatter.ofPattern("dd MMMM yyyy"));
     }
 
     // Метод высчитывания разницы между датами в разный единицах измерения
     private void dateConversions(LocalDate startDate, LocalDate endDate) {
         Period period = Period.between(startDate, endDate);
 
-        this.year = period.getYears();
-        this.month = period.getMonths();
-        this.day = period.getDays();
-
+        setYear(period.getYears());
+        setMonth(period.getMonths());
+        setDay(period.getDays());
 
         int resInMonths = year * 12 + month;
-        this.resultInMonths = numberSeparator(resInMonths);
+        setResultInMonths(numberSeparator(resInMonths));
 
         int resInDays = methodCountTheDays(startDate, endDate);
-        this.resultInDays = numberSeparator(resInDays);
+        setResultInDays(numberSeparator(resInDays));
 
         int resInHours = resInDays * 24;
-        this.resultInHours = numberSeparator(resInHours);
+        setResultInHours(numberSeparator(resInHours));
 
         long resInMinutes = resInHours * 60L;
-        this.resultInMinutes = numberSeparator(resInMinutes);
+        setResultInMinutes(numberSeparator(resInMinutes));
 
         long resInSeconds = resInMinutes * 60L;
-        this.resultInSeconds = numberSeparator(resInSeconds);
+        setResultInSeconds(numberSeparator(resInSeconds));
 
         methodCorrectSpellingOfTheTimeText();
     }
@@ -89,19 +91,26 @@ public class DateDifference {
 
     // Метод подсчета количества дней в указанный период
     private int methodCountTheDays(LocalDate startDate, LocalDate endDate) {
-        int getYearStartDate = startDate.getYear();
-        int getDaysBeforeEndYear =
-                LocalDate.of(getYearStartDate, 12, 31).getDayOfYear() - startDate.getDayOfYear();
+        int yearStartDate = startDate.getYear();
+        int yearEndDate = endDate.getYear();
 
-        int getYearEndDate = endDate.getYear();
+        //количество дней до конца начального года
+        int daysBeforeEndYear =
+                LocalDate.of(yearStartDate, 12, 31).getDayOfYear() - startDate.getDayOfYear();
+        //количество дней до конца конечного года
         int daysOfEndDate = endDate.getDayOfYear();
-        if (getYearStartDate == getYearEndDate) {
+
+        //если начальный и конечный год одинаковый
+        if (yearStartDate == yearEndDate) {
             return endDate.getDayOfYear() - startDate.getDayOfYear();
-        } else if (getYearEndDate - getYearStartDate == 1) {
-            return getDaysBeforeEndYear + daysOfEndDate;
-        } else {
-            int totalDays = getDaysBeforeEndYear + daysOfEndDate;
-            for (int i = getYearStartDate + 1; i < getYearEndDate; i++) {
+        }
+        //если конечный год больше на один, чем начальный год
+        else if (yearEndDate - yearStartDate == 1) {
+            return daysBeforeEndYear + daysOfEndDate;
+        }
+        else {
+            int totalDays = daysBeforeEndYear + daysOfEndDate;
+            for (int i = yearStartDate + 1; i < yearEndDate; i++) {
                 int dayOfYear = LocalDate.of(i, 12, 31).getDayOfYear();
                 totalDays += dayOfYear;
             }
