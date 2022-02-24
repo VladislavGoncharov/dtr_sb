@@ -45,7 +45,7 @@
                    target="_blank">Gmail</a>
             </td>
             <td colspan="2">
-                <a onclick="window.location.href='changeTheDate'" >Посчитать количество дней в промежутке</a>
+                <a onclick="window.location.href='dateDifference'" >Посчитать количество дней в промежутке</a>
             </td>
             <td class="td_footer_text_center">
 
@@ -64,7 +64,7 @@
         <tr>
             <td></td>
             <td colspan="2">
-                <a onclick="window.location.href='changeTheTime'" >Прибавить (отнять) время</a>
+                <a onclick="window.location.href='timeDifference'" >Прибавить (отнять) время</a>
             </td>
             <td class="td_footer_text_center">
                 <security:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR')">

@@ -171,3 +171,9 @@ ul{
 dt{
     text-align: center;
 }
+
+.info_first_view{
+    color: whitesmoke;
+    font-size: calc(0.8vh + 0.6vw);
+    text-shadow: 2px 2px 3px black,-2px 2px 3px black,0 -2px 3px black;
+}

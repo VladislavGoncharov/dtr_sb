@@ -2,6 +2,8 @@ package com.vladgoncharov.dtr_sb.controller;
 
 import com.vladgoncharov.dtr_sb.entity.AppUser;
 import com.vladgoncharov.dtr_sb.entity.AppUserInfo;
+import com.vladgoncharov.dtr_sb.entity.Comment;
+import com.vladgoncharov.dtr_sb.service.CommentService;
 import com.vladgoncharov.dtr_sb.service.EmailSenderService;
 import com.vladgoncharov.dtr_sb.service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +15,16 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class UserController {
 
     @Autowired
     private UserServiceInterface userServiceInterface;
+
+    @Autowired
+    private CommentService commentService;
 
     @Autowired
     private EmailSenderService emailSenderService;
@@ -49,7 +55,14 @@ public class UserController {
             return "registration";
         }
         userServiceInterface.saveUser(user, "ROLE_USER");
-        return "redirect:/";
+
+
+        List<Comment> allComments = commentService.getAllComments();
+        model.addAttribute("comments", allComments);
+        model.addAttribute("arrayRoleName", new String[]{"user", "moderator", "admin"});
+        model.addAttribute("info","Входи,кликай на имя и редактируй свой профиль ;)");
+
+        return "first-view";
     }
 
 

@@ -41,6 +41,7 @@
                         </span>
                         </td>
                     </tr>
+                    <tr>    <td colspan="2" class="info_first_view">${info}</td>     </tr>
                 </security:authorize>
                 <security:authorize access="isAnonymous()==false">
                     <tr>
@@ -89,7 +90,7 @@
                 </button>
             </li>
             <li>
-                <button class="button_first_view " type="button" onclick="window.location.href = 'changeTheTime'">
+                <button class="button_first_view " type="button" onclick="window.location.href = 'timeDifference'">
                     Прибавить (отнять) время
                 </button>
             </li>
@@ -99,7 +100,7 @@
                 </button>
             </li>
             <li>
-                <button class="button_first_view " type="button" onclick="window.location.href = 'changeTheDate'">
+                <button class="button_first_view " type="button" onclick="window.location.href = 'dateDifference'">
                     Посчитать количество дней в промежутке
                 </button>
             </li>

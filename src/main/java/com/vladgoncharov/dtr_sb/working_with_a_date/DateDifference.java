@@ -7,8 +7,10 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 // Класс высчитывает разницу в датах
 @Data
@@ -18,6 +20,7 @@ public class DateDifference {
     private String firstDateString;
     @Pattern(regexp = "\\d{2}.\\d{2}.\\d{4}", message = "Обрати внимание на формат ===> дд.мм.гггг")
     private String secondDateString;
+
     private LocalDate firstLocalDate;
     private LocalDate secondLocalDate;
 
@@ -49,9 +52,7 @@ public class DateDifference {
         else
             dateConversions(firstLocalDate, secondLocalDate);
 
-
-        firstDateString = firstLocalDate.format(DateTimeFormatter.ofPattern("dd MMMM yyyy"));
-        secondDateString = secondLocalDate.format(DateTimeFormatter.ofPattern("dd MMMM yyyy"));
+        dateStringFormat();
     }
 
     // Метод высчитывания разницы между датами в разный единицах измерения
@@ -143,6 +144,13 @@ public class DateDifference {
         symbols.setGroupingSeparator(' ');
         formatter.setDecimalFormatSymbols(symbols);
         return formatter.format(number);
+    }
+
+    private void dateStringFormat(){
+        firstDateString = firstLocalDate
+                .format(DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.forLanguageTag("ru")));
+        secondDateString = secondLocalDate
+                .format(DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.forLanguageTag("ru")));
     }
 
 }

@@ -30,7 +30,7 @@
 
     <br>
     <%--@elvariable id="dateDifference" type="com.vladgoncharov.dtr_sb.working_with_a_date.DateDifference"--%>
-    <form:form action="changeTheDateResult" method="get" modelAttribute="dateDifference">
+    <form:form action="dateDifferenceResult" method="get" modelAttribute="dateDifference">
 
         <fieldset>
             <legend>Заполните формы по шаблону</legend>
@@ -45,7 +45,7 @@
                 <form:errors path="secondDateString"/>
             </label>
             <br><br>
-            <input class="button" type="reset" value="Очистить" onclick="window.location.href = 'changeTheDate'">
+            <input class="button" type="reset" value="Очистить" onclick="window.location.href = 'dateDifference'">
             <input class="button" type="submit" value="Посчитать">
         </fieldset>
 

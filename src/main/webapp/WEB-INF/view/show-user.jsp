@@ -21,7 +21,6 @@
 <jsp:include page="include/header.jsp"/>
 <main>
     <article>
-        <br>
         <table class="table_result table_result_user">
             <caption><h2>${text}</h2></caption>
             <thead>
@@ -56,18 +55,18 @@
                             <c:if test="${!user.accountNonLocked}">Да</c:if>
                         </td>
                         <td>
-                            <input class="button_admin_page delete" type="button" value="Удалить"
+                            <input class="button_admin_page delete" type="button" value="Уд."
                                    onclick="window.location.href='${deleteButton}'">
                         </td>
                         <td>
                             <c:if test="${user.accountNonLocked}" >
                                 <input class="button_admin_page block" type="button"
-                                   value="Заблокировать"
+                                   value="Забл."
                                    onclick="window.location.href='${blockButton}'">
                             </c:if>
                             <c:if test="${!user.accountNonLocked}" >
                                 <input class="button_admin_page block" type="button"
-                                   value="Разблокировать"
+                                   value="Разбл."
                                    onclick="window.location.href='${blockButton}'">
                             </c:if>
                         </td>

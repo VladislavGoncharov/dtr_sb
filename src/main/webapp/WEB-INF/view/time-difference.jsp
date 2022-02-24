@@ -25,7 +25,7 @@
 
     <br>
     <%--@elvariable id="timeDifference" type="com.vladgoncharov.dtr_sb.working_with_a_date.TimeDifference"--%>
-    <form:form action="changeTheTimeResult" method="get" modelAttribute="timeDifference">
+    <form:form action="timeDifferenceResult" method="get" modelAttribute="timeDifference">
 
         <fieldset>
             <legend>Заполните форму</legend>
@@ -63,7 +63,7 @@
                 </form:select>
             </div>
             <br>
-            <input class="button" type="reset" value="Очистить" onclick="window.location.href = 'changeTheTime'">
+            <input class="button" type="reset" value="Очистить" onclick="window.location.href = 'timeDifference'">
             <input class="button" type="submit" value="Посчитать">
         </fieldset>
     </form:form>

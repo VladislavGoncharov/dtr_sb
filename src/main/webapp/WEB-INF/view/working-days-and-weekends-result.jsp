@@ -19,7 +19,6 @@
 <jsp:include page="include/header.jsp"/>
 <main>
     <article>
-        <br>
         <table class="table_result">
             <caption><h2>Календарь рабочих и выходных дней</h2></caption>
             <thead>

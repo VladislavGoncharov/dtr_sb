@@ -11,29 +11,29 @@ function zero_first_format(value) {
 function name_month(value) {
     switch (value) {
         case 1:
-            return "Январь";
+            return "Января";
         case 2:
-            return "Февраль";
+            return "Февраля";
         case 3:
-            return "Март";
+            return "Марта";
         case 4:
-            return "Апрель";
+            return "Апреля";
         case 5:
-            return "Май";
+            return "Мая";
         case 6:
-            return "Июнь";
+            return "Июня";
         case 7:
-            return "Июль";
+            return "Июля";
         case 8:
-            return "Август";
+            return "Августа";
         case 9:
-            return "Сентябрь";
+            return "Сентября";
         case 10:
-            return "Октябрь";
+            return "Октября";
         case 11:
-            return "Ноябрь";
+            return "Ноября";
         case 12:
-            return "Декабрь";
+            return "Декабря";
     }
 }
 

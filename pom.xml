@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.vladgoncharov</groupId>
     <artifactId>dtr_sb</artifactId>
-    <version>1.05</version>
+    <version>1.06</version>
     <name>dtr_spring_boot</name>
     <description>dtr_spring_boot</description>
     <properties>

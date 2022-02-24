@@ -46,18 +46,18 @@ public class MainController {
         return "first-view";
     }
 
-    @GetMapping("changeTheDate")
+    @GetMapping("dateDifference")
     public String changeTheDate(Model model) {
         model.addAttribute("dateDifference", new DateDifference());
-        return "change-the-date";
+        return "date-difference";
     }
 
-    @GetMapping("changeTheDateResult")
+    @GetMapping("dateDifferenceResult")
     public String changeTheDateResult(@Valid @ModelAttribute("dateDifference") DateDifference dateDifference
             , BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return "change-the-date";
+            return "date-difference-result";
         }
 
         try {
@@ -66,24 +66,19 @@ public class MainController {
             return "change-the-date-exception";
         }
 
-        return "change-the-date-result";
+        return "date-difference-result";
     }
 
-    @PostMapping("changeTheDateException")
-    public String changeTheDateException() {
-        return "change-the-date-exception";
-    }
-
-    @GetMapping("changeTheTime")
+    @GetMapping("timeDifference")
     public String changeTheTime(Model model) {
         model.addAttribute("timeDifference", new TimeDifference());
-        return "change-the-time";
+        return "time-difference";
     }
 
-    @GetMapping("changeTheTimeResult")
+    @GetMapping("timeDifferenceResult")
     public String changeTheTimeResult(@ModelAttribute("timeDifference") TimeDifference timeDifference) {
         timeDifference.getResult();
-        return "change-the-time-result";
+        return "time-difference-result";
     }
 
     @GetMapping("timeUnitConverted")
